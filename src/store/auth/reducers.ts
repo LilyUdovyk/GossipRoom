@@ -10,15 +10,6 @@ const initialState: AuthState = {
     }
 }
 
-// actions.authByCreds.success("dawadawdwada")
-/**
- * {
- * 
- *      type: "auth/AUTH_BY_CREDS_SUCCESS"
- *      payload: "dawadawdwada"
- * }
- */
-
 export default (state: AuthState = initialState, action: AuthAction): AuthState => {
     switch (action.type) {
         case getType(actions.authByCreds.success):

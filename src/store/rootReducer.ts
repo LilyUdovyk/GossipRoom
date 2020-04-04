@@ -7,11 +7,15 @@ import { AuthAction } from "./auth/types";
 import authReducer from './auth/reducers'
 import { RegAction } from "./registration/types";
 import regReducer from './registration/reducers'
+// import { ChatsAction } from "./chats/types";
+import chatsReducer from './chats/reducers'
+
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
     auth: authReducer,
-    registration: regReducer
+    registration: regReducer,
+    chats: chatsReducer
 })
 
 export type IRootState = StateType<typeof rootReducer>

@@ -17,12 +17,3 @@ export interface RegCreds {
     readonly login: string
     readonly password: string
 }
-
-export interface tokenData {
-    method: string;
-    headers: {
-        'Content-Type': string;
-        'Accept': string;
-    };
-    body: string;
-}

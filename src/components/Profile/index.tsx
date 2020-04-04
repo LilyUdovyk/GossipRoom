@@ -9,6 +9,7 @@ import { push } from "connected-react-router";
 import style from './style.module.css'
 import Sidebar from '../Sidebar';
 import Main from "../Main";
+import { store } from '../../App'
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
@@ -21,12 +22,14 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 
 type ProfileProps = ReturnType<typeof mapDispatchToProps>;
 
-const Profile: React.FC<ProfileProps> = ({ authByCreds, pushRouter }) => {
+const Profile: React.FC<ProfileProps> = () => {
+  // const { contacts } = store.getState();
   return (
     <div className={style.profile}>
-      {/* <Sidebar contacts ={_.values(contacts)}/>
-      <Main user = {user} activeUserId ={activeUserId}/> */}
-      <Sidebar />
+      {/* <Sidebar contacts ={_.values(contacts)}/> */}
+      {/* <Main user = {user} activeUserId ={activeUserId}/> */}
+      {/* <Sidebar contacts={contacts} /> */}
+      <Sidebar  />
       <Main />
     </div>
   );

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
 
-
 import rootReducer from './store/rootReducer';
 import rootSaga from './store/rootSaga';
 import { history } from './history';
@@ -13,7 +12,7 @@ import Routes from './Routes';
 
 const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(rootReducer, applyMiddleware(
+export const store = createStore(rootReducer, applyMiddleware(
   routerMiddleware(history),
   sagaMiddleware,
 ))

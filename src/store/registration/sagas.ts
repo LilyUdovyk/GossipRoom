@@ -2,7 +2,7 @@ import { take, call, put, putResolve } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import * as actions from './actions'
-import { tokenData } from './types'
+import { queryData } from '../types'
 
 export function* regByCredsSaga() {
     const token = localStorage.getItem('token')
@@ -31,7 +31,7 @@ const getRegAuthToken = async (nick: string, login: string, password: string) =>
     return registration(nick, login, password)
 }
 
-const dataPost = async (url: string, data: tokenData) => {
+const dataPost = async (url: string, data: queryData) => {
     try {
         const response = await fetch(url, data);
         const result = response.json();

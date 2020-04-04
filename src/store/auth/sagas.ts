@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 // import axios from 'axios'
 
 import * as actions from './actions'
-import { tokenData } from './types'
+import { queryData } from '../types'
 
 export function* authByCredsSaga() {
     const token = localStorage.getItem('token')
@@ -32,7 +32,7 @@ const getAuthToken = async (login: string, password: string) => {
     return authorization(login, password)
 }
 
-const dataPost = async (url: string, data: tokenData) => {
+const dataPost = async (url: string, data: queryData) => {
     try {
         const response = await fetch(url, data);
         const result = response.json();
