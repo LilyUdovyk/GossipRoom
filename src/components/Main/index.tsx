@@ -1,13 +1,26 @@
 import React from 'react';
 import './Main.css';
 import Empty from "../Empty";
-// import ChatWindow from "../containers/ChatWindow";
+import ChatWindow from "../ChatWindow";
+import avatar2 from '../../img/avatar2.jpg'
 
-const Main = () => {
+type activeUserData = {
+	name: string,
+	avatarSrc: string,
+	status: string
+}
+
+const Main = () => { 
+  const activeUser: activeUserData = {
+    name: "Lily",
+    avatarSrc: avatar2,
+    status: "The apple is a monkey."
+  }
+
   return (
     <main className="Main">
-      <Empty />
-      {/* <ChatWindow activeUserId={activeUserId} />; */}
+      {/* <Empty name={activeUser.name} avatarSrc={activeUser.avatarSrc} /> */}
+      <ChatWindow name={activeUser.name} />;
     </main>
   )
     
