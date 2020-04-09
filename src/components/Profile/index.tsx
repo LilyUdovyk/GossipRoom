@@ -1,39 +1,48 @@
 import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-
-import { IRootAction } from "../../store/rootReducer";
-import * as authActions from "../../store/auth/actions";
 import { push } from "connected-react-router";
+import jwtDecode from "jwt-decode";
+
+import { IRootAction, IRootState } from "../../store/rootReducer";
+import * as activeUserAction from "../../store/user/actions";
 
 import style from './style.module.css'
 import Sidebar from '../Sidebar';
 import Main from "../Main";
-import { store } from '../../App'
+
+const mapStateToProps = (state: IRootState) => ({
+  id: state.auth.authData.id,
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      authByCreds: authActions.authByCreds.request,
+      getUser: activeUserAction.getUser.request,
       pushRouter: push
     },
     dispatch
   );
 
-type ProfileProps = ReturnType<typeof mapDispatchToProps>;
+type ProfileProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
 
-const Profile: React.FC<ProfileProps> = () => {
-  // const { contacts } = store.getState();
+const Profile: React.FC<ProfileProps> = (props) => {
+  React.useEffect(() => {
+    const authToken = localStorage.getItem('authToken')
+    if (!authToken) {
+      return
+    }
+    props.getUser()
+  },[])
+
   return (
     <div className={style.profile}>
-      {/* <Sidebar contacts ={_.values(contacts)}/> */}
-      {/* <Main user = {user} activeUserId ={activeUserId}/> */}
-      {/* <Sidebar contacts={contacts} /> */}
       <Sidebar  />
       <Main />
     </div>
   );
 };
 
-export default connect(null, mapDispatchToProps)(React.memo(Profile));
+export default connect( mapStateToProps, mapDispatchToProps)(React.memo(Profile));
 

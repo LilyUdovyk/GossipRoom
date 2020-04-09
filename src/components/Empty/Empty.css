@@ -19,6 +19,7 @@
 .Empty__img {
   border-radius: 50%;
   margin: 2rem 0;
+  width: 16rem;
 }
 .Empty__btn {
   padding: 1rem;

@@ -7,9 +7,6 @@ interface Props {
 }
 
 const Empty = (props: Props) => {
-  // const { name, profile_pic, status } = user;
-  // const first_name = name.split(" ")[0];
-
   return (
     <div className="Empty">
       <h1 className="Empty__name">Welcome, {props.name} </h1>

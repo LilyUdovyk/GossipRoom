@@ -13,9 +13,9 @@ export interface UserData {
     readonly createdAt: string
     readonly login: string
     readonly nick : string
-    readonly acl: [string]
+    // readonly acl: [string]
     readonly avatar: MediaData
-    readonly chats: [ChatData]
+    // readonly chats: [ChatData]
 }
 
 export interface MessageData {
@@ -33,22 +33,13 @@ export interface MessageData {
 
 export interface MediaData {
     readonly id: string
-    readonly createdAt: string
-    readonly owner: UserData
-    readonly text: string,
+    // readonly createdAt: string
+    // readonly owner: UserData
+    // readonly text: string,
     readonly url: string,
-    readonly originalFileName: string,
-    readonly type: string
-    readonly userAvatar: UserData
-    readonly chatAvatar: [ChatData]
-    readonly messages: [MessageData]
-}
-
-export interface queryData {
-    method: string;
-    headers: {
-        'Content-Type': string;
-        'Accept': string;
-    };
-    body: string;
+    // readonly originalFileName: string,
+    // readonly type: string
+    // readonly userAvatar: UserData
+    // readonly chatAvatar: [ChatData]
+    // readonly messages: [MessageData]
 }

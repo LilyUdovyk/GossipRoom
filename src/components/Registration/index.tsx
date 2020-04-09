@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom"
 
 import { IRootAction } from "../../store/rootReducer";
-import * as regActions from "../../store/registration/actions";
+import * as authActions from "../../store/auth/actions";
 
 import style from './style.module.scss'
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      regByCreds: regActions.regByCreds.request
+      regByCreds: authActions.regByCreds.request
     },
     dispatch
   );

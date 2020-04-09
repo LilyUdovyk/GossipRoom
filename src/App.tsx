@@ -26,7 +26,7 @@ function App() {
         <Routes />
       </ConnectedRouter>
     </Provider>
-  );
+  )
 }
 
 export default App;
