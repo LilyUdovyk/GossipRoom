@@ -6,7 +6,7 @@ import { dataPost } from '../../dataPost'
 
 export function* getUserSaga() {
   while (true) {
-    const { userId } = yield take(actions.getUser.request)
+    yield take(actions.getUser.request)
     console.log("getUserSaga")
     try {
       const userId = yield select(state => state.auth.authData.id)

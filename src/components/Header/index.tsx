@@ -3,15 +3,13 @@ import "./Header.css";
 
 interface Props {
 	userName: string,
-	// status: string
   }
 
 function Header(props: Props){
 
 	return (
 		<header className = "Header">
-			<h1 className = "Header__name">{props.userName}</h1>
-			{/* <p className = "Header__status">{props.status}</p> */}
+			<h1 className = "HeaderName">{props.userName}</h1>
 		</header>
 	);
 }

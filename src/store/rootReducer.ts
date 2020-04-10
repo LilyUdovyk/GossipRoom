@@ -10,6 +10,8 @@ import authReducer from './auth/reducers'
 // import regReducer from './registration/reducers'
 import { UserAction } from "./user/types";
 import userReducer from './user/reducers'
+import { ContactsAction } from "./contacts/types";
+import contactsReducer from './contacts/reducers'
 // import { ChatsAction } from "./chats/types";
 // import chatsReducer from './chats/reducers'
 
@@ -18,10 +20,11 @@ const rootReducer = combineReducers({
     auth: authReducer,
     // registration: regReducer,
     user: userReducer,
+    contacts: contactsReducer,
     // chats: chatsReducer
 })
 
 export type IRootState = StateType<typeof rootReducer>
-export type IRootAction = AuthAction | UserAction | EmptyAction<string>
+export type IRootAction = AuthAction | UserAction | ContactsAction | EmptyAction<string>
 
 export default rootReducer

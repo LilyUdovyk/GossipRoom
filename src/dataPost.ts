@@ -5,7 +5,7 @@ interface variablesData {
     "userQuery"?: string
 }
 
-export const dataPost = async (url: string, Authorization: string, query: string, variables: variablesData) => {
+export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {
     try {
         const response = await fetch(url, {
             method: 'post',

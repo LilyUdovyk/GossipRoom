@@ -9,20 +9,20 @@
 	cursor: pointer;
 }
 
-.User__pic{
+.UserImg{
 	width: 50px;
 	border-radius: 50%;
 }
-.User__details{
+.UserDetails{
 	display: none;
 }
-/* not small devices  */
+
 @media (min-width: 576px) {
-  .User__details {
+  .UserDetails {
     display: block;
     padding: 0 0 0 1rem;
   }
-  .User__details-name {
+  .UserDetailsName {
     margin: 0;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;

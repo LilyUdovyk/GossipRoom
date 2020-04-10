@@ -9,9 +9,9 @@ interface Props {
 const Empty = (props: Props) => {
   return (
     <div className="Empty">
-      <h1 className="Empty__name">Welcome, {props.name} </h1>
-      <img src={props.avatarSrc} alt={props.name} className="Empty__img" />
-      <p className="Empty__status">
+      <h1 className="EmptyName">Welcome, {props.name} </h1>
+      <img src={props.avatarSrc} alt={props.name} className="EmptyImg" />
+      <p className="EmptyInfo">
         Please select a chat to start messaging
       </p>
     </div>

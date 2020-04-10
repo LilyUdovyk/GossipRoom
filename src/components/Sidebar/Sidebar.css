@@ -1,4 +1,4 @@
-.Sidebar{
+.Sidebar {
 	width: 80px;
 	background-color: rgba(32,32,35,1);
 	height:100%;
@@ -27,7 +27,6 @@
 .Sidebar::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/*not small devices*/
 
 @media (min-width:576px){
 	.Sidebar{

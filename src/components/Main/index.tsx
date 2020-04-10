@@ -13,6 +13,7 @@ import userAvatar from '../../img/user_avatar.png'
 
 const mapStateToProps = (state: IRootState) => ({
   nick: state.user.userData.nick,
+  login: state.user.userData.login,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar 
 });
 
@@ -31,21 +32,13 @@ type MainProps = ReturnType<typeof mapStateToProps> &
 const Main: React.FC<MainProps> = props => { 
   return (
     <main className="Main">
-      {/* <Empty 
-        name={props.nick ? props.nick : ''}
-        avatarSrc={props.avatar ? props.avatar : ''} 
-      /> */}
-      <ChatWindow name={props.nick ? props.nick : ''} />;
+      <Empty 
+        name={props.nick ? props.nick : props.login}
+        avatarSrc={props.avatar} 
+      />
+      {/* <ChatWindow name={props.nick ? props.nick : props.login} />; */}
     </main>
   )
-    
-	// const renderMainContent = () => {
-  //   if (!activeUserId) {
-  //     return <Empty user={user} activeUserId={activeUserId} />;
-  //   } else {
-  //     return <ChatWindow activeUserId={activeUserId} />;
-  //   }
- 	//  };
-	// return <main className = "Main">{renderMainContent()}</main>
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Main));

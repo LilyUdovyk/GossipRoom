@@ -1,11 +1,11 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
 
-export type UserAction = ActionType<typeof actions>
+export type ContactsAction = ActionType<typeof actions>
 
-export interface UserState {
-    readonly userData: UserData
-    readonly error: string | null
+export interface ContactsState {
+    readonly contactsData: UserData[]
+    // readonly error: string | null
 }
 
 export interface UserData {

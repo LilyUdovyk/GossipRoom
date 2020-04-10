@@ -2,24 +2,25 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
-import jwtDecode from "jwt-decode";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as activeUserAction from "../../store/user/actions";
+import * as userAction from "../../store/user/actions";
+import * as contactsAction from "../../store/contacts/actions";
 
 import style from './style.module.css'
 import Sidebar from '../Sidebar';
 import Main from "../Main";
 
 const mapStateToProps = (state: IRootState) => ({
-  id: state.auth.authData.id,
+  contactsArray: state.contacts.contactsData,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      getUser: activeUserAction.getUser.request,
-      pushRouter: push
+      getUser: userAction.getUser.request,
+      getContacts: contactsAction.getContacts.request,
+      // pushRouter: push
     },
     dispatch
   );
@@ -27,22 +28,23 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type ProfileProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-const Profile: React.FC<ProfileProps> = (props) => {
+const Profile: React.FC<ProfileProps> = props => {
   React.useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     if (!authToken) {
       return
     }
     props.getUser()
+    props.getContacts()
   },[])
 
   return (
     <div className={style.profile}>
-      <Sidebar  />
+      <Sidebar />
       <Main />
     </div>
   );
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(React.memo(Profile));
+export default connect( null, mapDispatchToProps)(React.memo(Profile));
 

@@ -1,55 +1,32 @@
 import React from 'react';
-import "./Sidebar.css";
+// import { bindActionCreators, Dispatch, AnyAction } from "redux";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+
+import { IRootAction, IRootState } from "../../store/rootReducer";
+import { UserData } from '../../store/contacts/types'
+
+import './Sidebar.css';
 import User from "../User";
-import avatar1 from '../../img/avatar1.jpg'
-import avatar2 from '../../img/avatar2.jpg'
-import avatar3 from '../../img/avatar3.jpg'
+import userAvatar from '../../img/user_avatar.png'
+// import { getContacts } from '../../store/contacts/actions';
 
-type chatsData = {
-	key: string,
-	name: string,
-	avatarSrc: string,
-	status: string
-}[]
+const mapStateToProps = (state: IRootState) => ({
+  contactsArray: state.contacts.contactsData
+});
 
-const Sidebar = () => {
-	const chats: chatsData = [
-		{
-			key: "user1",
-			name: "John Doe",
-			avatarSrc: avatar1,
-			status: "The apple is a monkey."
-		},
-		{
-			key: "user2",
-			name: "Janet Brown",
-			avatarSrc: avatar2,
-			status: "Authors often misinterpret the pineapple as a fearless giraffe, when in actuality it feels more like a decorous tiger!"
-		},
-		{
-			key: "user3",
-			name: "Jane Smith",
-			avatarSrc: avatar3,
-			status: "A unbiased squirrel is a grape of the mind."
-		},
-		{
-			key: "user4",
-			name: "John Doe",
-			avatarSrc: avatar1,
-			status: "The apple is a monkey."
-		},
-		{
-			key: "user5",
-			name: "Janet Brown",
-			avatarSrc: avatar2,
-			status: "Those cheetahs are nothing more than pears."
-		}
-	]
-	return (
+// type SidebarProps = ReturnType<typeof mapStateToProps>;
+
+const Sidebar: React.FC<any> = props => { 
+  return (
 		<aside className="Sidebar">
-			{chats.map(chat => <User key={chat.key} name={chat.name} avatarSrc={chat.avatarSrc} status={chat.status} />)}
+			{props.contactsArray.map((contact: UserData) => 
+			<User 
+				key={contact.login}
+				name={contact.nick ? contact.nick : contact.login}
+				avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
+			/>)}
 		</aside>
-	);
+  )
 };
-
-export default React.memo(Sidebar);
+export default connect(mapStateToProps, null)(React.memo(Sidebar));
