@@ -57,8 +57,9 @@ export function* regByCredsSaga() {
         console.log("regByCredsSaga -> payload", payload)
         try {
             const user = yield call(regUser, payload.nick, payload.login, payload.password)
+            console.log("regByCredsSaga -> user", user)
             const authToken = yield call(getAuthToken, payload.login, payload.password)
-            console.log("authByCredsSaga -> authToken", authToken)
+            console.log("regByCredsSaga -> authToken", authToken)
             if (authToken) {
                 const decoded: DecodedToken = jwtDecode(authToken)
                 const id = decoded.sub.id
