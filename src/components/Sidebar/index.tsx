@@ -9,7 +9,6 @@ import { UserData } from '../../store/contacts/types'
 import './Sidebar.css';
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
-// import { getContacts } from '../../store/contacts/actions';
 
 const mapStateToProps = (state: IRootState) => ({
   contactsArray: state.contacts.contactsData

@@ -11,9 +11,9 @@ import style from './style.module.css'
 import Sidebar from '../Sidebar';
 import Main from "../Main";
 
-const mapStateToProps = (state: IRootState) => ({
-  contactsArray: state.contacts.contactsData,
-});
+// const mapStateToProps = (state: IRootState) => ({
+//   contactsArray: state.contacts.contactsData,
+// });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
@@ -25,8 +25,10 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     dispatch
   );
 
-type ProfileProps = ReturnType<typeof mapStateToProps> &
-  ReturnType<typeof mapDispatchToProps>;
+// type ProfileProps = ReturnType<typeof mapStateToProps> &
+//   ReturnType<typeof mapDispatchToProps>;
+
+type ProfileProps = ReturnType<typeof mapDispatchToProps>;
 
 const Profile: React.FC<ProfileProps> = props => {
   React.useEffect(() => {
