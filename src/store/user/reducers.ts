@@ -6,14 +6,15 @@ import * as actions from "./actions";
 const initialState: UserState = {
     error: null,
     userData: {
-        id: '',
+        _id: '',
         createdAt: '',
         login: '',
         nick : '',
         avatar: {
-            id: '',
+            _id: '',
             url: ''
-        }
+        },
+        chats: []
     }
 }
 

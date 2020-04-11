@@ -1,25 +1,11 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
 
-export type UserAction = ActionType<typeof actions>
+export type ChatAction = ActionType<typeof actions>
 
-export interface UserState {
-    readonly userData: UserData
+export interface ChatState {
+    readonly chatData: ChatData
     readonly error: string | null
-}
-
-export interface UserData {
-    readonly _id: string
-    readonly createdAt: string
-    readonly login: string
-    readonly nick : string | null
-    readonly avatar: AvatarData | null
-    readonly chats: ChatData[]
-}
-
-export interface AvatarData {
-    readonly _id: string | null
-    readonly url: string | null
 }
 
 export interface ChatData {
@@ -32,6 +18,19 @@ export interface ChatData {
     readonly avatar: AvatarData | null
 }
 
+export interface MessageData {
+    readonly _id: string
+    readonly createdAt: string
+    readonly owner: ContactData
+    // readonly chat: ChatData
+    readonly text: string
+    // readonly media: [MediaData]
+    // readonly replies: MessageData[]
+    // readonly replyTo: MessageData
+    // readonly forwarded: MessageData
+    // readonly forwardWith: MessageData[]
+}
+
 export interface ContactData {
     readonly _id: string
     readonly login: string
@@ -39,15 +38,7 @@ export interface ContactData {
     readonly avatar: AvatarData | null
 }
 
-export interface MessageData {
-    readonly _id: string
-    readonly createdAt: string
-    readonly owner: ContactData
-    readonly text: string
-    // readonly chat: ChatData
-    // readonly media: [MediaData]
-    // readonly replies: MessageData[]
-    // readonly replyTo: MessageData
-    // readonly forwarded: MessageData
-    // readonly forwardWith: MessageData[]
+export interface AvatarData {
+    readonly _id: string | null
+    readonly url: string | null
 }

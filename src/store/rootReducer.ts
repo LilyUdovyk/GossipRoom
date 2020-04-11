@@ -12,8 +12,8 @@ import { UserAction } from "./user/types";
 import userReducer from './user/reducers'
 import { ContactsAction } from "./contacts/types";
 import contactsReducer from './contacts/reducers'
-// import { ChatsAction } from "./chats/types";
-// import chatsReducer from './chats/reducers'
+import { ChatAction } from "./chat/types";
+import chatReducer from './chat/reducers'
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
@@ -21,10 +21,10 @@ const rootReducer = combineReducers({
     // registration: regReducer,
     user: userReducer,
     contacts: contactsReducer,
-    // chats: chatsReducer
+    chat: chatReducer,
 })
 
 export type IRootState = StateType<typeof rootReducer>
-export type IRootAction = AuthAction | UserAction | ContactsAction | EmptyAction<string>
+export type IRootAction = AuthAction | UserAction | ContactsAction | ChatAction | EmptyAction<string>
 
 export default rootReducer

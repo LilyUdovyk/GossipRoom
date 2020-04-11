@@ -4,7 +4,7 @@ import { ContactsState, ContactsAction } from "./types";
 import * as actions from "./actions";
 
 const initialState: ContactsState = {
-    // error: null,
+    error: null,
     contactsData: []
 }
 
@@ -13,7 +13,7 @@ export default (state: ContactsState = initialState, action: ContactsAction): Co
         case getType(actions.getContacts.success):
             return {
                 ...state,
-                // error: null,
+                error: null,
                 contactsData:[
                     ...state.contactsData,
                     ...action.payload
@@ -22,8 +22,8 @@ export default (state: ContactsState = initialState, action: ContactsAction): Co
         case getType(actions.getContacts.failure):
             return {
                 ...state,
-                contactsData:[]
-                // error: action.payload,
+                contactsData:[],
+                error: action.payload,
             }
         default:
             return state

@@ -5,11 +5,11 @@ export type ContactsAction = ActionType<typeof actions>
 
 export interface ContactsState {
     readonly contactsData: UserData[]
-    // readonly error: string | null
+    readonly error: string | null
 }
 
 export interface UserData {
-    readonly id: string
+    readonly _id: string
     readonly createdAt: string
     readonly login: string
     readonly nick : string | null
@@ -19,6 +19,6 @@ export interface UserData {
 }
 
 export interface UserAvatarData {
-    readonly id: string | null
+    readonly _id: string | null
     readonly url: string | null
 }

@@ -32,11 +32,11 @@ type MainProps = ReturnType<typeof mapStateToProps> &
 const Main: React.FC<MainProps> = props => { 
   return (
     <main className="Main">
-      <Empty 
+      {/* <Empty 
         name={props.nick ? props.nick : props.login}
         avatarSrc={props.avatar} 
-      />
-      {/* <ChatWindow name={props.nick ? props.nick : props.login} />; */}
+      /> */}
+      <ChatWindow name={props.nick ? props.nick : props.login} />;
     </main>
   )
 };

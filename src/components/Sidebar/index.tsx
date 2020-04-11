@@ -1,31 +1,80 @@
 import React from 'react';
-// import { bindActionCreators, Dispatch, AnyAction } from "redux";
+import { bindActionCreators, Dispatch, AnyAction } from "redux";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+// import { push } from "connected-react-router";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
+import * as contactsAction from "../../store/contacts/actions";
 import { UserData } from '../../store/contacts/types'
 
 import './Sidebar.css';
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
+import chatAvatar from '../../img/chat_avatar.jpg'
 
 const mapStateToProps = (state: IRootState) => ({
-  contactsArray: state.contacts.contactsData
+	activeUserId:  state.user.userData._id,
+	contacts: state.contacts.contactsData,
+	chats: state.user.userData.chats,
 });
 
-// type SidebarProps = ReturnType<typeof mapStateToProps>;
+const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
+  bindActionCreators(
+    {
+      getContacts: contactsAction.getContacts.request,
+      // pushRouter: push
+    },
+    dispatch
+);
 
-const Sidebar: React.FC<any> = props => { 
-  return (
+
+type SidebarProps = ReturnType<typeof mapStateToProps> &
+	ReturnType<typeof mapDispatchToProps>;
+
+const Sidebar: React.FC<SidebarProps> = props => { 
+	React.useEffect(() => {
+		const authToken = localStorage.getItem('authToken')
+		if (!authToken) {
+			return
+		}
+		props.getContacts()
+	},[])
+
+	// let nameOfChat: string
+	// 	{
+	// 		props.chats.map(chat => {
+	// 			{
+	// 				if (chat.members.length > 2 && chat.title) {
+	// 					nameOfChat = chat.title
+	// 				} else {
+	// 					chat.members.map(member => {
+	// 						if (member._id !== props.activeUserId) {
+	// 							nameOfChat = member.nick ? member.nick : member.login
+	// 						}
+	// 					})
+	// 				}
+	// 			}
+	// 		})
+	// 	}
+	// }
+
+  	return (
 		<aside className="Sidebar">
-			{props.contactsArray.map((contact: UserData) => 
-			<User 
-				key={contact.login}
-				name={contact.nick ? contact.nick : contact.login}
-				avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
-			/>)}
+			{/* {props.contacts.map((contact: UserData) => 
+				<User 
+					key={contact.login}
+					name={contact.nick ? contact.nick : contact.login}
+					avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
+				/>
+			)} */}
+			{props.chats.map((chat) => 
+				<User 
+					key={chat._id}
+					name={chat.title ? chat.title : chat._id}
+					avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar }
+				/>
+			)}
 		</aside>
   )
 };
-export default connect(mapStateToProps, null)(React.memo(Sidebar));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Sidebar));
