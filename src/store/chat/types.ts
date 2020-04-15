@@ -4,6 +4,7 @@ import * as actions from "./actions";
 export type ChatAction = ActionType<typeof actions>
 
 export interface ChatState {
+    // readonly activeChatId: string | null
     readonly chatData: ChatData
     readonly error: string | null
 }

@@ -6,7 +6,6 @@ interface Props {
   }
 
 function Header(props: Props){
-
 	return (
 		<header className = "Header">
 			<h1 className = "HeaderName">{props.userName}</h1>

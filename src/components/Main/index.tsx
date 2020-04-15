@@ -20,7 +20,7 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      userById: UserActions.getUser.request,
+      getUser: UserActions.getUser.request,
       // pushRouter: push
     },
     dispatch

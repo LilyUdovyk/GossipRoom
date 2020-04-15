@@ -4,12 +4,12 @@ import "./User.css";
 interface Props {
 	name: string,
   avatarSrc: string,
+  onClick: any
 }
 
 const User = (props: Props) => {
-
   return (
-    <div className="User">
+    <div className="User" onClick={props.onClick}>
       <img src={props.avatarSrc} alt="avatar" className="UserImg" />
       <div className="UserDetails">
         <p className="UseDetailsName">{props.name}</p>

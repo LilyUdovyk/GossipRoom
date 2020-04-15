@@ -21,50 +21,52 @@ export function* getUserSaga() {
   }
 }
 
-const getActiveUser = async (userId: string) => {
-  const userQuery = `[{"_id": "${userId}"}]`
-  let userContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
-    `Bearer ${localStorage.authToken}`,
-    `query getUsers($userQuery: String){
-      UserFindOne(query: $userQuery){
-        _id
-        login
-        nick
-        createdAt
+const getActiveUserQuery = `query getUsers($userQuery: String){
+  UserFindOne(query: $userQuery){
+    _id
+    login
+    nick
+    createdAt
+    avatar{
+      _id, url
+    }
+    chats{
+      _id
+      createdAt
+      title
+      owner{
+        _id login nick
         avatar{
           _id, url
         }
-        chats{
-          _id
-          createdAt
-          title
-          owner{
-            _id login nick
-            avatar{
-              _id, url
-            }
-          }
-          members{
-            _id login nick
-            avatar{
-              _id, url
-            }
-          }
-          messages{
-            _id createdAt text
-            owner{
-              _id login nick
-              avatar{
-                _id, url
-              }
-            }
-          }
+      }
+      members{
+        _id login nick
+        avatar{
+          _id, url
+        }
+      }
+      messages{
+        _id createdAt text
+        owner{
+          _id login nick
           avatar{
             _id, url
           }
         }
       }
-    }`,
+      avatar{
+        _id, url
+      }
+    }
+  }
+}`
+
+const getActiveUser = async (userId: string) => {
+  const userQuery = `[{"_id": "${userId}"}]`
+  let userContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
+    `Bearer ${localStorage.authToken}`,
+    getActiveUserQuery,
     {
       "userQuery": userQuery
     }

@@ -20,20 +20,22 @@ export function* getContactsSaga() {
   }
 }
 
+const getContactsListQuery = `query users {
+  UserFind(query:"[{}]"){
+    _id
+    login
+    nick
+    createdAt
+    avatar{
+      _id, url
+    }
+  }
+}`
+
 const getContactsList = async () => {
   let сontactsContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
     `Bearer ${localStorage.authToken}`,
-    `query users {
-      UserFind(query:"[{}]"){
-        _id
-        login
-        nick
-        createdAt
-        avatar{
-          _id, url
-        }
-      }
-    }`
+    getContactsListQuery
   )
   console.log(сontactsContent.data)
   return сontactsContent.data.UserFind

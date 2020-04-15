@@ -65,6 +65,7 @@ left: 0;
 }
 .Chat.is-user-msg {
   margin-left: auto;
+  margin-right: 0.5rem;
   background: #2b2c33;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;

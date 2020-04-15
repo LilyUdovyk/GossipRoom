@@ -11,6 +11,7 @@ export default function* rootSaga() {
     spawn(regByCredsSaga),
     spawn(getUserSaga),
     spawn(getContactsSaga),
+    // spawn(setActiveChatSaga),
     spawn(getActiveChatSaga),
   ]);
 }

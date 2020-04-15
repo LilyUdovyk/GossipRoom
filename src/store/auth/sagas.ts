@@ -38,12 +38,13 @@ export function* authByCredsSaga() {
     }
 }
 
+const logInQuery = `query log ($login:String, $password:String) {
+        login(login:$login, password:$password)
+    }`
+
 const getAuthToken = async (login: string, password: string) => {
     await new Promise((res) => setTimeout(res, 1000))
-    let loginContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '', 
-        `query log ($login:String, $password:String) {
-            login(login:$login, password:$password)
-        }`, 
+    let loginContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '', logInQuery, 
         {
             "login": login,
             "password": password
@@ -77,17 +78,18 @@ export function* regByCredsSaga() {
     }
 }
 
+const registrationQuery = `mutation reg($nick:String, $login:String, $password:String) {
+    UserUpsert(user: {nick:$nick, login:$login, password:$password}) {
+        _id createdAt login nick
+        avatar{
+            _id, url
+        }
+    }
+}`
+
 const regUser = async (nick: string, login: string, password: string) => {
     await new Promise((res) => setTimeout(res, 1000))
-    let regContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '',
-        `mutation reg($nick:String, $login:String, $password:String) {
-            UserUpsert(user: {nick:$nick, login:$login, password:$password}) {
-                _id createdAt login nick
-                avatar{
-                    _id, url
-                }
-            }
-        }`,
+    let regContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '', registrationQuery,
         {
             "nick": nick,
             "login": login,
