@@ -1,7 +1,7 @@
 import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+// import { push } from "connected-react-router";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as userAction from "../../store/user/actions";

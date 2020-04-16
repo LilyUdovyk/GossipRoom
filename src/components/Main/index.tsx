@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as UserActions from "../../store/user/actions";
-import { push } from "connected-react-router";
+// import { push } from "connected-react-router";
 
 import './Main.css';
 import Empty from "../Empty";

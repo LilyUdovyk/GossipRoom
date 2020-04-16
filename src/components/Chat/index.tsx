@@ -97,9 +97,7 @@ class Chat extends React.PureComponent<any> {
     } else {
       return (
         <div className="Chats">
-          <p>
-            Please select a chat to start messaging
-          </p>
+          <p>Please select a chat to start messaging</p>
         </div>
       )
     }

@@ -13,8 +13,6 @@ import './Sidebar.css';
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
 import chatAvatar from '../../img/chat_avatar.jpg'
-import { action } from 'typesafe-actions';
-import { string } from 'prop-types';
 
 const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,

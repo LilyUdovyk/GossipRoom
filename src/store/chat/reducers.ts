@@ -4,7 +4,7 @@ import { ChatState, ChatAction } from "./types";
 import * as actions from "./actions";
 
 const initialState: ChatState = {
-    // activeChatId: null,
+    activeChatId: null,
     error: null,
     chatData: {
         _id: '',
@@ -33,8 +33,9 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
         case getType(actions.getActiveChat.success):
             return {
                 ...state,
+                activeChatId: action.payload.activeChatId,
                 error: null,
-                chatData: action.payload
+                chatData: action.payload.activeChat
             }
         case getType(actions.getActiveChat.failure):
             return {

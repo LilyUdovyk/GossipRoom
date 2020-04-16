@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     dispatch
   );
 
+  
 type AuthorizationProps = ReturnType<typeof mapDispatchToProps>;
 
 const Authorization: React.FC<AuthorizationProps> = ({ authByCreds }) => {

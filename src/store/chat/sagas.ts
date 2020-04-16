@@ -18,7 +18,8 @@ export function* getActiveChatSaga() {
     try {
       const activeChat = yield call(getActiveChat, payload)
       console.log("getActiveChatSaga -> activeChat", activeChat)
-      yield putResolve(actions.getActiveChat.success(activeChat))
+      const activeChatId = activeChat._id
+      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatId }))
     } catch (error) {
       console.error("getActiveChatSaga -> error", error)
       yield put(actions.getActiveChat.failure(error.message))
