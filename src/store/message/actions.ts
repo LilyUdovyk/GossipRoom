@@ -1,4 +1,4 @@
-import { createAction, createAsyncAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 import { MessageCreds, MessageData } from "./types";
 
 export const sendMessage = createAsyncAction(

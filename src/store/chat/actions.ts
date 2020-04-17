@@ -1,4 +1,4 @@
-import { createAction, createAsyncAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 import { ChatSuccessData } from "./types";
 
 export const getActiveChat = createAsyncAction(
@@ -6,7 +6,3 @@ export const getActiveChat = createAsyncAction(
     "chat/GET_ACTIVE_CHAT_SUCCESS",
     "chat/GET_ACTIVE_CHAT_FAILURE"
 )<string, ChatSuccessData, string>();
-
-// export const setActiveChat  = createAction(
-//     "chat/SET_ACTIVE_CHAT", (activeChatId: string) => activeChatId
-// )();

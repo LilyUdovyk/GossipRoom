@@ -1,4 +1,4 @@
-import { take, call, put, putResolve, select } from 'redux-saga/effects';
+import { take, call, put, putResolve } from 'redux-saga/effects';
 // import { push } from 'connected-react-router';
 
 import * as actions from './actions'

@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { useReducer } from "react";
 import { EmptyAction, StateType } from "typesafe-actions";
 import { connectRouter } from "connected-react-router";
 import { history } from "../history";

@@ -2,12 +2,13 @@ import React from "react";
 import "./User.css";
 
 interface Props {
-	name: string,
+	name: any,
   avatarSrc: string,
-  onClick: any
+  onClick?: any
 }
 
 const User = (props: Props) => {
+  console.log("user", props.name)
   return (
     <div className="User" onClick={props.onClick}>
       <img src={props.avatarSrc} alt="avatar" className="UserImg" />
