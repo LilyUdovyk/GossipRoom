@@ -1,7 +1,32 @@
-.Header {
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
   border-bottom: 1px solid rgba(189, 189, 192, 0.2);
 }
-.HeaderName {
+.headerName {
   color: #fff;
+}
+
+.deleteButton {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: none;
+}
+
+.deleteButton:hover {
+  background-color: grey;
+  /* border-color: #0062cc; */
+}
+
+/* .deleteButton:active {
+  background-color: grey;
+  border-color: #005cbf;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+} */
+
+.deleteButton:focus {
+  outline: none;
 }

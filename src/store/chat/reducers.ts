@@ -5,6 +5,7 @@ import * as actions from "./actions";
 
 const initialState: ChatState = {
     activeChatId: null,
+    activeChatName: "Chat",
     error: null,
     chatData: {
         _id: '',
@@ -34,6 +35,7 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
             return {
                 ...state,
                 activeChatId: action.payload.activeChatId,
+                activeChatName: action.payload.activeChatName,
                 error: null,
                 chatData: action.payload.activeChat
             }
@@ -42,12 +44,18 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
                 ...state,
                 error: action.payload,
             }
-        // case getType(actions.setActiveChat):
-        //     return {
-        //         ...state,
-        //         activeChatId: action.payload,
-        //         error: null,
-        //     }
+        case getType(actions.addChat.success):
+            return {
+                ...state,
+                activeChatId: action.payload.activeChatId,
+                error: null,
+                chatData: action.payload.newChat
+            }
+        case getType(actions.addChat.failure):
+            return {
+                ...state,
+                error: action.payload,
+            }
         default:
             return state
     }

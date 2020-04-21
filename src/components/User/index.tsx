@@ -9,7 +9,7 @@ interface Props {
 
 const User = (props: Props) => {
   console.log("user", props.name)
-  return (
+  return (  
     <div className="User" onClick={props.onClick}>
       <img src={props.avatarSrc} alt="avatar" className="UserImg" />
       <div className="UserDetails">

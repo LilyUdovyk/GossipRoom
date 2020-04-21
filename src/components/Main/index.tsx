@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as UserActions from "../../store/user/actions";
-// import { push } from "connected-react-router";
 
 import './Main.css';
 import Empty from "../Empty";
@@ -16,6 +15,7 @@ const mapStateToProps = (state: IRootState) => ({
   login: state.user.userData.login,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
   activeChatId: state.chat.chatData._id,
+  activeChatName: state.chat.activeChatName
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -42,7 +42,7 @@ const Main: React.FC<MainProps> = props => {
       )
     }  else {
       return (
-        <ChatWindow name={props.nick ? props.nick : props.login} />
+        <ChatWindow name={props.activeChatName} />
       )
     }
   }

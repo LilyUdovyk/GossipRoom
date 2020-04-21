@@ -42,10 +42,6 @@ class Chat extends React.PureComponent<any> {
     if (this.chatsRef.current) {
       this.chatsRef.current.scrollTop = this.chatsRef.current.scrollHeight;
     }
-  };
-
-  componentDidMount() {
-    this.scrollToBottom();
   }
 
   componentDidUpdate() {

@@ -19,6 +19,7 @@ const Routes: React.FC<RoutesProps> = ({ authToken }) => (
         <Route exact path="/registration" component={Registration} />
         {!authToken && <Redirect from="/" to="/sign-in" />}
         <Route exact path="/profile" component={Profile} />
+        {authToken && <Redirect from="/" to="/profile" />}
         <Route path="/" render={() => <p>Page Not Found</p>} />
     </Switch>
 )

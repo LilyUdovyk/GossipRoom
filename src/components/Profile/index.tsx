@@ -39,4 +39,3 @@ const Profile: React.FC<ProfileProps> = props => {
 };
 
 export default connect( null, mapDispatchToProps)(React.memo(Profile));
-

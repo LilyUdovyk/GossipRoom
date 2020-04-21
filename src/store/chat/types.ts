@@ -6,6 +6,7 @@ export type ChatAction = ActionType<typeof actions>
 export interface ChatState {
     readonly chatData: ChatData
     readonly activeChatId: string | null
+    readonly activeChatName: string
     readonly error: string | null
 }
 
@@ -21,6 +22,12 @@ export interface ChatData {
 
 export interface ChatSuccessData {
     readonly activeChat: ChatData
+    readonly activeChatId: string
+    readonly activeChatName: string
+}
+
+export interface AddChatSuccessData {
+    readonly newChat: ChatData
     readonly activeChatId: string
 }
 

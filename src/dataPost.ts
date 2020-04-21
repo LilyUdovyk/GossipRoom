@@ -6,6 +6,8 @@ interface variablesData {
     "chatQuery"?: string
     "chat_id"?: string
     "text"?: string
+    "firstMember_id"?: string
+    "secondMember_id"?: string
 }
 
 export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {

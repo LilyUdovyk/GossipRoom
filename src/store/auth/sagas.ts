@@ -98,3 +98,11 @@ const regUser = async (nick: string, login: string, password: string) => {
     )
     return regContent.data.UserUpsert
 }
+
+export function* logoutSaga() {
+    while (true) {
+        yield take(actions.logout)
+        localStorage.clear();
+        yield put(push('/sign-in'))
+    }
+}
