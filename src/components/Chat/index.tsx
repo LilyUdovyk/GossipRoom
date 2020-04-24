@@ -13,6 +13,7 @@ const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
   nick: state.user.userData.nick,
   activeChat: state.chat.chatData,
+  activeChatName: state.chat.activeChatName,
   messages: state.chat.chatData ? state.chat.chatData.messages : []
 });
 
@@ -36,6 +37,14 @@ class Chat extends React.PureComponent<any> {
   constructor(props:any){
     super(props);
     this.chatsRef = React.createRef()
+  }
+
+  componentDidMount() {
+    // const socket = io('http://localhost');
+    // socket.on("msg", (data: any) => {
+    //   console.log("msg", data)
+    // })
+    this.scrollToBottom();
   }
 
   scrollToBottom = () => {
@@ -63,8 +72,8 @@ class Chat extends React.PureComponent<any> {
             // onClick = {is_user_msg ? handleUserMessageEdit:handleContactMessageEdit}
             // onMouseDown = {handleMouseDown}
             // onMouseUp = {handleMouseUp}
-            // data-name = {is_user_msg ? "You":store.getState().contacts[activeUser].name}
             // data-active = {activeUser}
+            data-name = {this.isUserMsg(message) ? "You ": this.props.activeChatName}
             data-user = {this.isUserMsg(message)}
             data-text = {message.text} 
             data-number = {message._id}  

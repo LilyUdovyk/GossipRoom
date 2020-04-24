@@ -47,7 +47,7 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
             return {
                 ...state,
                 error: null,
-                messageData: action.payload
+                messageData: action.payload,
             }
         case getType(actions.sendMessage.failure):
             return {

@@ -1,7 +1,7 @@
 import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom"
+import io from 'socket.io-client';
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
@@ -30,8 +30,14 @@ const MessageInput: React.FC<MessageInputProps> = ({sendMessage, activeChatId}) 
     e.preventDefault()
     if (activeChatId) {
       sendMessage({ activeChatId, text })
+
+      const socket = io('http://chat.fs.a-level.com.ua/');
+
+      socket.emit("msg", text)
+
     }
   }
+
   return (
     <form action="" onSubmit={sendMessageHandler} className="Message">
       <div className="MessageInputBox">

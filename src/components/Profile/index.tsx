@@ -2,6 +2,7 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 // import { push } from "connected-react-router";
+import io from 'socket.io-client';
 
 import { IRootAction } from "../../store/rootReducer";
 import * as userAction from "../../store/user/actions";
@@ -28,6 +29,12 @@ const Profile: React.FC<ProfileProps> = props => {
       return
     }
     props.getUser()
+
+    const socket = io('http://chat.fs.a-level.com.ua/graphql');
+
+    socket.on('jwt_ok',   (data: any) => console.log(data))
+    socket.on('jwt_fail', (error: any) => console.log(error))
+    socket.on('msg', (msg: any) => console.log(msg))
   },[])
 
   return (

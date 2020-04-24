@@ -44,20 +44,15 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	}, [])
 
 
-	const getNameOfChat = () => {
-		// let nameOfChat: string | undefined
-		{ props.chats.map(chat => {
-			console.log("chat", chat)
-			if (chat.members.length > 2 && chat.title) {
-				return chat.title
-			} else {
-				let member = chat.members.find(member => {
-					return member._id !== props.activeUserId
-				})
-				console.log("member", member, (member && (member.nick ? member.nick : member.login)))
-				return member && (member.nick ? member.nick : member.login)
-			}
-		}) }
+	const getNameOfChat = (chat: ChatData) => {
+		if (chat.members.length > 2 && chat.title) {
+			return chat.title
+		} else {
+			let member = chat.members.find(member => {
+				return member._id !== props.activeUserId
+			})
+			return member && (member.nick ? member.nick : member.login)
+		}
 	}
 
 	const renderSidebarContent = () => {
@@ -67,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					{ props.chats.map(chat =>
 						<User
 							key={chat._id}
-							name={getNameOfChat()}
+							name={getNameOfChat(chat)}
 							avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar}
 							onClick={() => activeChatHandler(chat._id)}
 						/>
