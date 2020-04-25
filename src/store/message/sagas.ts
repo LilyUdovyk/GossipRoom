@@ -1,7 +1,8 @@
-import { take, call, put, putResolve } from 'redux-saga/effects';
+import { take, call, put, putResolve, select } from 'redux-saga/effects';
 // import { push } from 'connected-react-router';
 
 import * as actions from './actions'
+import { getActiveChat } from '../chat/actions'
 import { dataPost } from '../../dataPost'
 
 export function* sendMessageSaga() {
@@ -20,27 +21,17 @@ export function* sendMessageSaga() {
 }
 
 const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
-  ChatUpsert(chat: { 
-    messages: {
+  MessageUpsert(message: {
       chat: {_id: $chat_id}, 
       text: $text
-    }
   }) {
     _id
-    members {
+    createdAt
+    text
+    owner {
       _id
       login
       nick
-    }
-    messages {
-      _id
-      createdAt
-      text
-      owner {
-        _id
-        login
-        nick
-      }
     }
   }
 }`
@@ -55,6 +46,16 @@ const sendMessage = async (chat_id: string, text: string) => {
     }
   )
   console.log("chat_id", chat_id, "text", text)
-  console.log('messageContent.data.ChatUpsert', messageContent.data.ChatUpsert)
-  return messageContent.data.ChatUpsert
+  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
+  return messageContent.data.MessageUpsert
+}
+
+
+export function* onMessageSaga() {
+  while (true) {
+    const { payload } = yield take(actions.onMessage)
+    console.log("msg", payload)
+    const activeChatId = yield select(state => state.chat.activeChatId)
+    yield put(getActiveChat.request(activeChatId))
+  }
 }

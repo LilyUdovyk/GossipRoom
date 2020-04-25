@@ -4,7 +4,7 @@ import { getUserSaga } from "./user/sagas";
 import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga } from "./chat/sagas";
 import { addChatSaga } from "./chat/sagas";
-import { sendMessageSaga } from "./message/sagas";
+import { sendMessageSaga, onMessageSaga } from "./message/sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -16,5 +16,6 @@ export default function* rootSaga() {
     spawn(sendMessageSaga),
     spawn(addChatSaga),
     spawn(logoutSaga),
+    spawn(onMessageSaga),
   ]);
 }

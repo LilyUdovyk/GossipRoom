@@ -54,6 +54,12 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
                 ...state,
                 error: action.payload,
             }
+        case getType(actions.onMessage):
+            return {
+                ...state,
+                error: null,
+                messageData: action.payload,
+            }
         default:
             return state
     }

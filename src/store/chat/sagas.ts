@@ -5,13 +5,6 @@ import * as actions from './actions'
 import { dataPost } from '../../dataPost'
 import { ChatData } from '../user/types';
 
-// export function* setActiveChatSaga() {
-//   while (true) {
-//     yield take(actions.setActiveChat)
-//     console.log("setActiveChatSaga")
-//   }
-// }
-
 export function* getActiveChatSaga() {
   while (true) {
     const { payload } = yield take(actions.getActiveChat.request)

@@ -40,10 +40,6 @@ class Chat extends React.PureComponent<any> {
   }
 
   componentDidMount() {
-    // const socket = io('http://localhost');
-    // socket.on("msg", (data: any) => {
-    //   console.log("msg", data)
-    // })
     this.scrollToBottom();
   }
 

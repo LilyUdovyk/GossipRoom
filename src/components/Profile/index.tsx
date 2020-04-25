@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 
 import { IRootAction } from "../../store/rootReducer";
 import * as userAction from "../../store/user/actions";
+import * as messageAction from "../../store/message/actions";
 
 import style from './style.module.css'
 import Sidebar from '../Sidebar';
@@ -15,6 +16,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       getUser: userAction.getUser.request,
+      onMessage: messageAction.onMessage
       // pushRouter: push
     },
     dispatch
@@ -30,11 +32,13 @@ const Profile: React.FC<ProfileProps> = props => {
     }
     props.getUser()
 
-    const socket = io('http://chat.fs.a-level.com.ua/graphql');
-
+    const socket = io('http://chat.fs.a-level.com.ua/');
+    socket.emit('jwt', localStorage.authToken)
     socket.on('jwt_ok',   (data: any) => console.log(data))
     socket.on('jwt_fail', (error: any) => console.log(error))
-    socket.on('msg', (msg: any) => console.log(msg))
+    socket.on('msg', (message: any) => {
+      props.onMessage(message)
+    })
   },[])
 
   return (
