@@ -1,12 +1,14 @@
 import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-// import { push } from "connected-react-router";
 import io from 'socket.io-client';
+// import { push } from "connected-react-router";
 
 import { IRootAction } from "../../store/rootReducer";
 import * as userAction from "../../store/user/actions";
 import * as messageAction from "../../store/message/actions";
+import { MessageData } from '../../store/message/types'
+import { DecodedToken } from '../../store/auth/types'
 
 import style from './style.module.css'
 import Sidebar from '../Sidebar';
@@ -34,9 +36,9 @@ const Profile: React.FC<ProfileProps> = props => {
 
     const socket = io('http://chat.fs.a-level.com.ua/');
     socket.emit('jwt', localStorage.authToken)
-    socket.on('jwt_ok',   (data: any) => console.log(data))
-    socket.on('jwt_fail', (error: any) => console.log(error))
-    socket.on('msg', (message: any) => {
+    socket.on('jwt_ok', (data: DecodedToken) => console.log(data))
+    socket.on('jwt_fail', (error: string) => console.log(error))
+    socket.on('msg', (message: MessageData) => {
       props.onMessage(message)
     })
   },[])

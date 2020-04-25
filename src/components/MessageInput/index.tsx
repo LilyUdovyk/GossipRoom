@@ -30,6 +30,7 @@ const MessageInput: React.FC<MessageInputProps> = ({sendMessage, activeChatId}) 
     if (activeChatId) {
       sendMessage({ activeChatId, text })
     }
+    setText("")
   }
 
   return (
