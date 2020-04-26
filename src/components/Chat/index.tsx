@@ -1,6 +1,7 @@
 import React from "react";
 // import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import Iframe from 'react-iframe'
 
 import { IRootState } from "../../store/rootReducer";
 // import * as ChatActions from "../../store/chat/actions";
@@ -58,6 +59,40 @@ class Chat extends React.PureComponent<any> {
     return message.owner._id === this.props.activeUserId ? true : false
   }
 
+  getTime(milliseconds: number) {
+    let formattedDate = new Date(milliseconds)
+    let hours = this.getFormattedTime(formattedDate.getHours());
+    let minutes = this.getFormattedTime(formattedDate.getMinutes());
+    return `${hours}:${minutes}`
+  }
+
+  getFormattedTime(timeUnit: number) {
+    return timeUnit < 10 ? `0${timeUnit}` : timeUnit;
+  }
+
+  getFormattedMessage (message: string) {
+    let videoArray = message.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
+    if (videoArray) {
+      let videoId = videoArray && videoArray[1]
+      return (
+        <>
+          <a href={message}>{message}</a>
+          <Iframe 
+            url={`https://www.youtube.com/embed/${videoId}`}
+            width="100%"
+            frameBorder={0}
+            allow={"accelerometer"}
+            allowFullScreen
+            encrypted-media
+            picture-in-picture
+          />
+        </>
+      )
+    } else {
+      return  message
+    }
+  }
+
   render() {
     return (
       <div className="Chats" ref = {this.chatsRef}>
@@ -83,7 +118,8 @@ class Chat extends React.PureComponent<any> {
               {/* </p> */}
               {/* {store.getState().chatBoxContainReply[1].substring(0,70)} */}
             {/* </div> */}
-            {message.text}
+            {this.getFormattedMessage(message.text)}
+            <div className="timeBlock">{this.getTime(+message.createdAt)}</div>
             <button 
               // data-active = {activeUser} 
               data-number = {message._id} 

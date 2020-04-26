@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 85%;
+  width: 90%;
   margin: 0 auto;
   overflow-y: scroll;
 }
@@ -33,6 +33,13 @@ display: block!important;
   word-wrap: break-word;
   display:none;
 }
+
+.timeBlock {
+  font-size: 0.6rem;
+  padding-top: 0.5rem;
+  text-align: end;
+}
+
 .Chat_delete_button{
 position: absolute;
 background: black;
@@ -65,11 +72,21 @@ left: 0;
 }
 .Chat.is-user-msg {
   margin-left: auto;
+  margin-right: 1rem;
   background: #2b2c33;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+iframe {
+  margin-top: 1rem;
 }
 
 @media (min-width: 576px) {
