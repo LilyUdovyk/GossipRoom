@@ -1,0 +1,15 @@
+.buttonWithEmoji {
+    position: relative;
+}
+
+.emojiBlock {
+    width: 353px;
+    position: absolute;
+    top: -27rem;
+    right: 3rem;
+}
+
+/* .smile {
+    width: 2rem;
+    padding: 0 0.2rem;
+} */

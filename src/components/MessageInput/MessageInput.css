@@ -1,7 +1,44 @@
 .Message {
   width: 80%;
+  display: flex;
+  justify-content: space-between;
   margin: 1rem auto;
 }
+
+.uploadBtnWrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.button {
+  border: 1px solid gray;
+  /* background: none; */
+  font-size: 1.2rem;
+  /* padding: 8px 20px; */
+  border-radius: 8px;
+}
+
+.uploadBtnWrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.MessageInputBox {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+  background: white;
+ /* border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;*/
+  border-radius: 10px;
+}
+
 .MessageInput {
   width: 100%;
   padding: 0.5rem;
@@ -11,9 +48,10 @@
   border-radius: 10px;
   font-size: 1rem;
   outline: 0;
-  transform: height 3s;
+  box-sizing: border-box;
+  /* transform: height 3s; */
 }
-.MessageReplyDelete {
+/* .MessageReplyDelete {
   border:none;
   background: initial;
   cursor: pointer;
@@ -43,21 +81,11 @@
 }
 .show {
   display: block!important;
-}
+} */
 
-.MessageInputBox {
-  height: 100%;
-  display: flex;
-  flex-direction:column;
-  justify-content: space-between;
-  background: white;
- /* border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;*/
-  border-radius: 10px;
-}
-.MessageReplyName {
+/* .MessageReplyName {
   margin:0;
   padding: 0.2rem 0;
   font-weight: bolder;
   color: #7a37a5;
-}
+} */

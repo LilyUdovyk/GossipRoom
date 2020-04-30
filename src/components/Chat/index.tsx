@@ -7,6 +7,7 @@ import { IRootState } from "../../store/rootReducer";
 // import * as ChatActions from "../../store/chat/actions";
 // import * as contactsAction from "../../store/contacts/actions";
 import { MessageData } from "../../store/chat/types";
+import { smilesObject } from "../../smileObject"
 
 import "./Chat.css";
 
@@ -71,7 +72,14 @@ class Chat extends React.PureComponent<any> {
   }
 
   getFormattedMessage (message: string) {
-    let videoArray = message.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
+    // for (let smile in smilesObject) {
+    //   let newKey= `:${smile}:`
+    //   while(message.includes(newKey)) {
+    //     message = message.replace(newKey, <img src={`https://www.webfx.com/tools/emoji-cheat-sheet/${smilesObject[smile]}`} />)
+    //   }
+    // }
+    
+    let videoArray = message.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)    
     if (videoArray) {
       let videoId = videoArray && videoArray[1]
       return (
