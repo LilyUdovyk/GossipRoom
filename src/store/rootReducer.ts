@@ -13,6 +13,8 @@ import { ChatAction } from "./chat/types";
 import chatReducer from './chat/reducers'
 import { MessageAction } from "./message/types";
 import messageReducer from './message/reducers'
+import { MediaAction } from "./media/types";
+import mediaReducer from './media/reducers'
 
 const rootReducer = combineReducers({
     router: connectRouter(history),
@@ -20,7 +22,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     contacts: contactsReducer,
     chat: chatReducer,
-    message: messageReducer
+    message: messageReducer,
+    media: mediaReducer
 })
 
 export type IRootState = StateType<typeof rootReducer>
@@ -28,7 +31,8 @@ export type IRootAction = AuthAction
                         | UserAction 
                         | ContactsAction 
                         | ChatAction 
-                        | MessageAction 
+                        | MessageAction
+                        | MediaAction
                         | EmptyAction<string>
 
 export default rootReducer

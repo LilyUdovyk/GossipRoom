@@ -11,7 +11,6 @@ import { ChatData } from '../../store/chat/types'
 import './Sidebar.css';
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
-// import chatAvatar from '../../img/chat_avatar.jpg'
 import ButtonWithPopup from '../ButtonWithPopup';
 
 const mapStateToProps = (state: IRootState) => ({
@@ -42,7 +41,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		props.getContacts()
 	}, [])
 
-
 	const getNameOfChat = (chat: ChatData) => {
 		if (chat.members.length === 1) {
 			return "You"
@@ -56,27 +54,18 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		}
 	}
 
-
-	const checkMemberInChat = (contactId: string) => {
-		let contactsIdFromChat: string[] = []
+	const checkMemberInChats = (contactId: string) => {
+		let contactsChats: string[] = []
 		props.chats.map((chat: ChatData) => {
 			if (chat.members.length === 2) {
 				chat.members.forEach(member => {
 					if (member._id === contactId) {
-						contactsIdFromChat.push(member._id)
+						contactsChats.push(chat._id)
 					}
 				})
 			}
 		})
-		console.log("contactsIdFromChat", contactsIdFromChat)
-		// if (contactsIdFromChat && contactsIdFromChat.length) {
-			return contactsIdFromChat
-		// } else {
-		// 	return false
-		// }
-		// return chat.members.find(member => {
-		// 	return (console.log("member._id === contactId",member._id === contactId), member._id === contactId)
-	  	// })
+		return contactsChats
 	}
 
 	const activeChatHandler = (chatId: string) => {
@@ -84,13 +73,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	};
 
 	const addChatHandler = (contactId: string) => {
-		// console.log("if", checkMemberInChat(contactId))
-		if (checkMemberInChat(contactId).length) {
-			console.log("getActiveChat", checkMemberInChat(contactId)[0])
-			props.getActiveChat(checkMemberInChat(contactId)[0])
+		if (checkMemberInChats(contactId).length) {
+			props.getActiveChat(checkMemberInChats(contactId)[0])
 		} else {
-			console.log("props.addChat")
-			// props.addChat(contactId)
+			props.addChat(contactId)
 		}
 	};
 
@@ -127,15 +113,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	return (
 		<aside className="sidebar">
 			<ButtonWithPopup />
-			{/* {renderSidebarContent()} */}
-			{ props.contacts.map((contact: UserData) => 
-				<User 
-					key={contact.login}
-					name={contact.nick ? contact.nick : contact.login}
-					avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
-					onClick={() => addChatHandler(contact._id)}
-				/>
-			) }
+			{renderSidebarContent()}
 		</aside>
 	)
 };

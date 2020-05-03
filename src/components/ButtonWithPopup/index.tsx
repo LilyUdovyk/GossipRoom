@@ -2,21 +2,28 @@ import * as React from 'react'
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 
-import { IRootAction } from "../../store/rootReducer";
+import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as actions from "../../store/auth/actions";
+import * as MediaAction from "../../store/media/actions";
 
 import style from './style.module.css'
 import grid from '../../img/grid.png'
 
+const mapStateToProps = (state: IRootState) => ({
+	activeUserId: state.user.userData._id,
+});
+
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      logout: actions.logout
+      logout: actions.logout,
+      changeAvatar: MediaAction.changeAvatar.request
     },
     dispatch
   );
 
-type ButtonWithPopupProps = ReturnType<typeof mapDispatchToProps>;
+type ButtonWithPopupProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>
 
 interface State {
   isOpenedPopup: boolean
@@ -59,6 +66,15 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     })
   }
 
+  changeAvatarHendler = async (e: any, user_id: string) => {
+    const form = new FormData();
+    form.append('file', e.target.files[0]);
+    // form.append('name', 'some value user types');
+    console.log("form", form)
+    this.props.changeAvatar({user_id, form})
+  }
+
+
   logoutHandler = () => {
     this.props.logout()
   }
@@ -73,6 +89,19 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
         {isOpenedPopup && 
           <div ref={this.myRef} className={style.popup}>
             <nav className={style.navSidebar}>
+              <form action="" id="form">
+                {/* <div className="uploadBtnWrapper">
+                  <button className="button">
+                    Change avatar
+                  </button> */}
+                  <input type="file"
+                    name="media"
+                    id="media"
+                    onChange={e => this.changeAvatarHendler(e, this.props.activeUserId)}
+                  />
+                {/* </div> */}
+                <button>Ok</button>
+              </form>
               <ul className={style.navList}>
                 <li className={style.navItem}>Contacts</li>
                 <li className={style.navItem}>Chats</li>
@@ -91,4 +120,4 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     )
   }
 }
-export default connect(null, mapDispatchToProps)(ButtonWithPopup);
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithPopup);
