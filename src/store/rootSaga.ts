@@ -5,7 +5,7 @@ import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga } from "./chat/sagas";
 import { addChatSaga } from "./chat/sagas";
 import { sendMessageSaga, onMessageSaga } from "./message/sagas";
-import { changeAvatarSaga } from "./media/sagas";
+// import { changeAvatarSaga } from "./media/sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -18,6 +18,6 @@ export default function* rootSaga() {
     spawn(addChatSaga),
     spawn(logoutSaga),
     spawn(onMessageSaga),
-    spawn(changeAvatarSaga),
+    // spawn(changeAvatarSaga),
   ]);
 }

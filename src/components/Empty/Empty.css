@@ -5,16 +5,21 @@
   justify-content: center;
   height: 100%;
 }
+
 .EmptyName {
   color: #fff;
 }
+
 .EmptyInfo {
   padding: 1rem;
   color: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 }
-.EmptyImg {
-  border-radius: 50%;
+ 
+.avatar {
   margin: 2rem 0;
+  border-radius: 50%;
+  object-fit: cover;
   width: 16rem;
+  height: 16rem;
 }

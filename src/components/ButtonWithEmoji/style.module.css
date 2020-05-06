@@ -1,12 +1,12 @@
 .buttonWithEmoji {
     position: relative;
+    padding: 0.3rem 0;
 }
 
 .emojiBlock {
     width: 353px;
     position: absolute;
     top: -27rem;
-    right: 3rem;
 }
 
 /* .smile {

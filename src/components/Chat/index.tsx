@@ -7,7 +7,7 @@ import { IRootState } from "../../store/rootReducer";
 // import * as ChatActions from "../../store/chat/actions";
 // import * as contactsAction from "../../store/contacts/actions";
 import { MessageData } from "../../store/chat/types";
-import { smilesObject } from "../../smileObject"
+// import { smilesObject } from "../../smileObject"
 
 import "./Chat.css";
 

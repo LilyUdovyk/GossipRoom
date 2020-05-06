@@ -1,25 +1,65 @@
-.Message {
+.message {
+  position: relative;
   width: 80%;
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  border-radius: 10px;
   margin: 1rem auto;
+ }
+
+.messageInput {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 4.5rem 1rem 2.5rem;
+  background-color: white;
+  color: black;
+  border: 0;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: 0;
+  box-sizing: border-box; 
+}
+
+.message button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  color: grey;
+}
+
+.message button:focus {
+  outline: none;
+}
+
+.message button:hover {
+  color: black;
+}
+ 
+.ButtonWithEmoji {
+  position: absolute;
+  left: 0.5rem;
+  padding: 0.3rem 0;
+}
+
+.buttonBlock { 
+  position: absolute;
+  right: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.3rem 0;
 }
 
 .uploadBtnWrapper {
   position: relative;
   overflow: hidden;
-  display: inline-block;
 }
 
-.button {
-  border: 1px solid gray;
-  /* background: none; */
-  font-size: 1.2rem;
-  /* padding: 8px 20px; */
-  border-radius: 8px;
-}
-
-.uploadBtnWrapper input[type=file] {
+.uploadInput {
+  width: 100%;
   font-size: 100px;
   position: absolute;
   left: 0;
@@ -27,30 +67,6 @@
   opacity: 0;
 }
 
-.MessageInputBox {
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction:column;
-  justify-content: space-between;
-  background: white;
- /* border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;*/
-  border-radius: 10px;
-}
-
-.MessageInput {
-  width: 100%;
-  padding: 0.5rem;
-  background: white;
-  color: black;
-  border: 0;
-  border-radius: 10px;
-  font-size: 1rem;
-  outline: 0;
-  box-sizing: border-box;
-  /* transform: height 3s; */
-}
 /* .MessageReplyDelete {
   border:none;
   background: initial;

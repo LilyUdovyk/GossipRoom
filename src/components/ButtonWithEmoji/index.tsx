@@ -1,12 +1,9 @@
 import * as React from 'react'
 import 'emoji-mart/css/emoji-mart.css'
-import { Picker } from 'emoji-mart'
+import { Picker, Emoji } from 'emoji-mart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// import { smilesObject } from "../../smileObject"
-
 import style from './style.module.css'
-// import grid from '../../img/grid.png'
 
 // interface Props {
 //   updateMessage: void
@@ -14,7 +11,7 @@ import style from './style.module.css'
 
 interface State {
   isOpenedEmoji: boolean,
-  emoji: string
+  emojiObj: string
 }
 
 class ButtonWithEmoji extends React.PureComponent<{}, State> {
@@ -22,7 +19,7 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
     super(props);
     this.state = {
       isOpenedEmoji: false,
-      emoji: ""
+      emojiObj: ""
     }
   }
   myRef: React.RefObject < HTMLDivElement > = React.createRef()
@@ -50,7 +47,7 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
     }
   }
 
-  toggleEmoji = (event: React.MouseEvent) => {
+  toggleEmoji = () => {
     this.setState({
       isOpenedEmoji: !this.state.isOpenedEmoji
     })
@@ -62,7 +59,6 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
       <div className={style.buttonWithEmoji}>
         <button onClick={ this.toggleEmoji }>
           <FontAwesomeIcon icon="smile" />
-          {/* <img src={grid} alt="Menu" className={style.smilesOpener} /> */}
         </button>
         {isOpenedEmoji && 
           <div ref={this.myRef} className={style.emojiBlock}>

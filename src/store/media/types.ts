@@ -58,5 +58,5 @@ export interface MessageData {
 
 export interface ChangeAvatarCreds {
     readonly user_id: string
-    readonly form: any
+    // readonly form: any
 }

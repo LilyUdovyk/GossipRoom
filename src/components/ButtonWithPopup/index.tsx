@@ -1,16 +1,17 @@
-import * as React from 'react'
+import React, { useRef } from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as actions from "../../store/auth/actions";
 import * as MediaAction from "../../store/media/actions";
 
 import style from './style.module.css'
-import grid from '../../img/grid.png'
+// import Uploader from '../Uploader'
 
 const mapStateToProps = (state: IRootState) => ({
-	activeUserId: state.user.userData._id,
+  activeUserId: state.user.userData._id,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -35,7 +36,8 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     isOpenedPopup: false,
   };
 
-  myRef: React.RefObject < HTMLDivElement > = React.createRef()
+  myRef: React.RefObject<HTMLDivElement> = React.createRef()
+  myFormRef: React.RefObject<HTMLFormElement> = React.createRef()
 
   closePopup = (event: any) => {
     console.log(this.myRef)
@@ -60,20 +62,35 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     }
   }
 
-  togglePopup = (event: React.MouseEvent) => {
+  togglePopup = () => {
     this.setState({
       isOpenedPopup: !this.state.isOpenedPopup
     })
   }
 
-  changeAvatarHendler = async (e: any, user_id: string) => {
-    const form = new FormData();
-    form.append('file', e.target.files[0]);
-    // form.append('name', 'some value user types');
-    console.log("form", form)
-    this.props.changeAvatar({user_id, form})
-  }
+  // changeAvatarHendler = async (e: any, user_id: string) => {
+  //   let form = new FormData();
+  //   console.log(e.target.files[0])
+  //   form.append('media', e.target.files[0]);
+  //   this.props.changeAvatar({user_id})
+  // }
 
+  changeAvatarHendler = async () => {
+    try {
+      console.log(this.myFormRef.current)
+      const response = await fetch('http://chat.fs.a-level.com.ua/upload', 
+                      {
+                        method: "POST",
+                        headers: localStorage.authToken ? { Authorization: 'Bearer ' + localStorage.authToken } : {},
+                        body: new FormData(this.myFormRef.current ? this.myFormRef.current : undefined)
+                      }  );
+      console.log(response)
+      const result = response.json();
+      return response.ok ? result : new Error('status is not 200')
+    } catch (error) {
+      return new Error('dataPost failed')
+    }
+  }
 
   logoutHandler = () => {
     this.props.logout()
@@ -83,38 +100,79 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     const { isOpenedPopup } = this.state;
     return (
       <div className={style.buttonWithPopup}>
-        <button onClick={ this.togglePopup }>
-          <img src={grid} alt="Menu" className={style.popupOpener} />
+        <button onClick={this.togglePopup} className={style.navOpener}>
+          <FontAwesomeIcon icon="bars" />
         </button>
-        {isOpenedPopup && 
+        {isOpenedPopup &&
           <div ref={this.myRef} className={style.popup}>
             <nav className={style.navSidebar}>
-              <form action="" id="form">
-                {/* <div className="uploadBtnWrapper">
-                  <button className="button">
+              <form className={style.uploadForm}
+                ref={this.myFormRef}   
+                method="post"
+                action='/upload'
+                encType ="multipart/form-data"
+                id="form"
+              >
+                <img src="https://i.postimg.cc/G2S2gwyX/Mavka-R-i02.jpg" />
+                <div className={style.uploadBtnWrapper}>        
+                  <button className={style.changeButton}>
                     Change avatar
-                  </button> */}
-                  <input type="file"
+                  </button>
+                  <input 
+                    className={style.uploadInput}
+                    type="file"
                     name="media"
                     id="media"
-                    onChange={e => this.changeAvatarHendler(e, this.props.activeUserId)}
+                    onChange={() => this.changeAvatarHendler()}
                   />
-                {/* </div> */}
-                <button>Ok</button>
+                </div>
+                <button className={style.okButton}>Ok</button>        
               </form>
               <ul className={style.navList}>
-                <li className={style.navItem}>Contacts</li>
-                <li className={style.navItem}>Chats</li>
-                <li className={style.navItem}>Settings</li>
-                <li 
-                  className={style.navItem}
-                  onClick={()=> this.logoutHandler()}
-                >
+                <li className={style.navItem}>
+                  <FontAwesomeIcon icon="user-friends" />
+                  Contacts
+                </li>
+                <li className={style.navItem}>
+                  <FontAwesomeIcon icon="comments" />
+                  Chats
+                </li>
+                <li onClick={() => this.logoutHandler()} className={style.navItem}>
+                  <FontAwesomeIcon icon="sign-out-alt" />
                   Exit
                 </li>
               </ul>
             </nav>
           </div>
+
+          // <div ref={this.myRef} className={style.popup}>
+          //   <nav className={style.navSidebar}>
+          //     <form ref={this.myFormRef} action='http://shop-roles.asmer.fs.a-level.com.ua/upload' encType ="multipart/form-data" id="form" method="post">
+          //       {/* <div className="uploadBtnWrapper">
+          //         <button className="button">
+          //           Change avatar
+          //         </button> */}
+          //         <input type="file"
+          //           name="media"
+          //           id="media"
+          //           onChange={() => this.changeAvatarHendler()}
+          //         />
+          //       {/* </div> */}
+          //       <button id="okButton" disabled={true}>Ok</button>
+          //     </form>
+          //     <ul className={style.navList}>
+          //       <li className={style.navItem}>Contacts</li>
+          //       <li className={style.navItem}>Chats</li>
+          //       <li className={style.navItem}>Settings</li>
+          //       <li 
+          //         className={style.navItem}
+          //         onClick={()=> this.logoutHandler()}
+          //       >
+          //         Exit
+          //       </li>
+          //     </ul>
+          //   </nav>
+          // </div>
         }
       </div>
     )

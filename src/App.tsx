@@ -1,18 +1,17 @@
 import React from 'react';
-
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSmile, faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faSmile, faPaperclip, faPaperPlane, faBars, faUserFriends, faComments, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 import rootReducer from './store/rootReducer';
 import rootSaga from './store/rootSaga';
 import { history } from './history';
 import Routes from './Routes';
 
-library.add(faSmile, faPaperclip, faPaperPlane)
+library.add(faSmile, faPaperclip, faPaperPlane, faBars, faUserFriends, faComments, faSignOutAlt)
 
 const sagaMiddleware = createSagaMiddleware()
 
