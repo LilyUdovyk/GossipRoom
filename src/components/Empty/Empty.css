@@ -1,4 +1,4 @@
-.Empty {
+.empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,14 +6,15 @@
   height: 100%;
 }
 
-.EmptyName {
+.emptyName {
   color: #fff;
 }
 
-.EmptyInfo {
+.emptyInfo {
   padding: 1rem;
   color: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  text-align: center;
 }
  
 .avatar {

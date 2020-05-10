@@ -8,6 +8,8 @@ interface variablesData {
     "text"?: string
     "firstMember_id"?: string
     "secondMember_id"?: string
+    "user_id"?: string
+    "image_id"?: string
 }
 
 export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {

@@ -1,8 +1,8 @@
 import { createAsyncAction } from "typesafe-actions";
-import { ChangeAvatarCreds, MediaData } from "./types";
+import { AvatarData } from "./types";
 
-export const changeAvatar = createAsyncAction(
-    "media/CHANGE_AVATAR_REQUEST",
-    "media/CHANGE_AVATAR_SUCCESS",
-    "media/CHANGE_AVATAR_FAILURE"
-)<ChangeAvatarCreds, MediaData, string>();
+export const uploadAvatar = createAsyncAction(
+    "media/UPLOAD_AVATAR_REQUEST",
+    "media/UPLOAD_AVATAR_SUCCESS",
+    "media/UPLOAD_AVATAR_FAILURE"
+)<HTMLFormElement, AvatarData, string>();

@@ -22,7 +22,7 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
       emojiObj: ""
     }
   }
-  myRef: React.RefObject < HTMLDivElement > = React.createRef()
+  myRef = React.createRef<HTMLDivElement>()
 
   closeEmoji = (event: any) => {
     console.log(this.myRef)

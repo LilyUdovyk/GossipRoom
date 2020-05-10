@@ -23,7 +23,8 @@ export interface MessageData {
 
 export interface MessageCreds {
     readonly activeChatId: string
-    readonly text: string
+    readonly text?: string
+    readonly file?: any
 }
 
 export interface ChatData {

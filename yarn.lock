@@ -4015,6 +4015,14 @@ elliptic@^6.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
 
+emoji-mart-native@^0.6.0-beta:
+  version "0.6.0-beta"
+  resolved "https://registry.yarnpkg.com/emoji-mart-native/-/emoji-mart-native-0.6.0-beta.tgz#ea20f42bd422d5ee5adea02b3f5ecae890506b33"
+  integrity sha512-bfb+UZD1qsLbkFNRNYyzcxXBfKCmGhmgVk9TShoFcIcxyoSvyOgzTHy2ofklHbBDmacA6LJwFb9W1/QE8tG+uQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    prop-types "^15.6.0"
+
 emoji-mart@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-3.0.0.tgz#eca24a04881e27752a6921e09f65a86ce8539a50"

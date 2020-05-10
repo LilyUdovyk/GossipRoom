@@ -5,6 +5,7 @@ export type MediaAction = ActionType<typeof actions>
 
 export interface MediaState {
     readonly mediaData: MediaData
+    readonly avatarData: AvatarData
     readonly error: string | null
 }
 
@@ -54,9 +55,4 @@ export interface MessageData {
     // readonly replyTo: MessageData
     // readonly forwarded: MessageData
     // readonly forwardWith: MessageData[]
-}
-
-export interface ChangeAvatarCreds {
-    readonly user_id: string
-    // readonly form: any
 }

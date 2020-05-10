@@ -8,10 +8,10 @@ interface Props {
 
 const Empty = (props: Props) => {
   return (
-    <div className="Empty">
-      <h1 className="EmptyName">Welcome, {props.name} </h1>
+    <div className="empty">
+      <h1 className="emptyName">Welcome, {props.name} </h1>
       <img src={props.avatarSrc} alt={props.name} className="avatar" />
-      <p className="EmptyInfo">
+      <p className="emptyInfo">
         Please select a chat to start messaging
       </p>
     </div>

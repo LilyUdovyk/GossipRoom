@@ -51,3 +51,8 @@ export interface MessageData {
     // readonly forwarded: MessageData
     // readonly forwardWith: MessageData[]
 }
+
+export interface UpdateAvatarCreds {
+    readonly user_id: string
+    readonly image_id: string | null
+}

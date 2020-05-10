@@ -5,6 +5,10 @@ import * as actions from "./actions";
 
 const initialState: MediaState = {
     error: null,
+    avatarData: {
+        _id: '',
+        url: ''
+    },
     mediaData: {
         _id: '',
         createdAt: '',
@@ -37,13 +41,13 @@ const initialState: MediaState = {
 
 export default (state: MediaState = initialState, action: MediaAction): MediaState => {
     switch (action.type) {
-        case getType(actions.changeAvatar.success):
+        case getType(actions.uploadAvatar.success):
             return {
                 ...state,
                 error: null,
-                mediaData: action.payload
+                avatarData: action.payload
             }
-        case getType(actions.changeAvatar.failure):
+        case getType(actions.uploadAvatar.failure):
             return {
                 ...state,
                 error: action.payload,

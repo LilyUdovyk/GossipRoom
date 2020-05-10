@@ -41,16 +41,29 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		props.getContacts()
 	}, [])
 
-	const getNameOfChat = (chat: ChatData) => {
+	const getDetailsOfChat = (chat: ChatData) => {
 		if (chat.members.length === 1) {
-			return "You"
+			let details = {
+				name: "You",
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
+			}
+			return details
 		} else if (chat.members.length > 2) {
-			return chat.title ? chat.title : "Group"
+			let details = {
+				name: chat.title ? chat.title : "Group",
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
+			}
+			return details
 		} else {
 			let member = chat.members.find(member => {
 				return member._id !== props.activeUserId
 			})
-			return member && (member.nick ? member.nick : member.login)
+			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
+			let details = {
+				name: member && (member.nick ? member.nick : member.login),
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar ? memberAvatar : userAvatar)
+			}
+			return details
 		}
 	}
 
@@ -87,8 +100,9 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					{ props.chats.map(chat =>
 						<User
 							key={chat._id}
-							name={getNameOfChat(chat)}
-							avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
+							name={getDetailsOfChat(chat).name}
+							avatarSrc={getDetailsOfChat(chat).avatar}
+							// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
 							onClick={() => activeChatHandler(chat._id)}
 						/>
 					) }

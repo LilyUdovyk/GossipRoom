@@ -26,6 +26,7 @@ type MessageInputProps = ReturnType<typeof mapStateToProps> &
 
 const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }) => {
   const [text, setText] = React.useState("");
+  const [file, setFile] = React.useState(null);
   const [smile, setSmile] = React.useState("");
 
   // const updateMessage = (value: string) => {
@@ -40,22 +41,43 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
     setText("")
   }
 
+  const addEmoji = (e: any) => {
+    let emoji = e.native;
+    setText(text + emoji);
+  };
+
+  const uploadFile = (file: any) => {
+    if (activeChatId) {
+      sendMessage({ activeChatId, file })
+    }
+    setText("")
+  }
+
   return (
     <>
       <form action="" onSubmit={sendMessageHandler} className={style.message}>
         <input
           className={style.messageInput}
           placeholder="write a message"
+          type="text"
           value={text}
           onChange={e => setText(e.target.value)}
         />
         <ButtonWithEmoji />
         <div className={style.buttonBlock}>
           <div className={style.uploadBtnWrapper}>
-            <button>
+            <button 
+              // onClick={(e) => uploadFile(e.target.files[0])}
+            >
               <FontAwesomeIcon icon="paperclip" />
             </button>
-            <input className={style.uploadInput} type="file" name="media" id="media" />
+            <input 
+              className={style.uploadInput}
+              type="file"
+              name="media"
+              id="media"
+              // onChange={e => {if(e.target.files && (e.target.files[0])) setFile(e.target.files[0])}}
+            />
           </div>
           <button type="submit">
             <FontAwesomeIcon icon="paper-plane" />
