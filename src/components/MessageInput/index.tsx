@@ -2,6 +2,7 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import 'emoji-mart/css/emoji-mart.css'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
@@ -29,22 +30,19 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
   const [file, setFile] = React.useState(null);
   const [smile, setSmile] = React.useState("");
 
-  // const updateMessage = (value: string) => {
-  //   setSmile(value)
-  // }
+  const updateMessage = (emoji: any) => {
+    console.log("input", emoji)
+    setText(text + emoji.native)
+  }
 
   const sendMessageHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (text.trim() === '') return;
     if (activeChatId) {
       sendMessage({ activeChatId, text })
     }
     setText("")
   }
-
-  const addEmoji = (e: any) => {
-    let emoji = e.native;
-    setText(text + emoji);
-  };
 
   const uploadFile = (file: any) => {
     if (activeChatId) {
@@ -63,7 +61,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
           value={text}
           onChange={e => setText(e.target.value)}
         />
-        <ButtonWithEmoji />
+        <ButtonWithEmoji updateMessage={updateMessage} />
         <div className={style.buttonBlock}>
           <div className={style.uploadBtnWrapper}>
             <button 

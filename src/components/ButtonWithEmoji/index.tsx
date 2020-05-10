@@ -2,19 +2,20 @@ import * as React from 'react'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker, Emoji } from 'emoji-mart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import 'emoji-mart/css/emoji-mart.css'
 
 import style from './style.module.css'
 
-// interface Props {
-//   updateMessage: void
-// }
+interface Props {
+  updateMessage: any
+}
 
 interface State {
   isOpenedEmoji: boolean,
   emojiObj: string
 }
 
-class ButtonWithEmoji extends React.PureComponent<{}, State> {
+class ButtonWithEmoji extends React.PureComponent<Props, State> {
   constructor(props: never) {
     super(props);
     this.state = {
@@ -22,6 +23,7 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
       emojiObj: ""
     }
   }
+
   myRef = React.createRef<HTMLDivElement>()
 
   closeEmoji = (event: any) => {
@@ -53,6 +55,13 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
     })
   }
 
+  addEmoji = (e: any) => {
+    let emoji = e.native;
+    this.setState({
+      emojiObj: this.state.emojiObj + emoji
+    });
+  };
+
   render() {
     const { isOpenedEmoji } = this.state;
     return (
@@ -62,7 +71,10 @@ class ButtonWithEmoji extends React.PureComponent<{}, State> {
         </button>
         {isOpenedEmoji && 
           <div ref={this.myRef} className={style.emojiBlock}>
-            <Picker set='google' onSelect={emoji => console.log(emoji)} />
+            <Picker set='google' onSelect={emoji => {
+              this.props.updateMessage(emoji)
+              // this.addEmoji(emoji)
+              console.log(emoji)}} />
             {/* <Picker theme='dark' /> */}
           </div>
         }
