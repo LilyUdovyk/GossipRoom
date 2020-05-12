@@ -1,11 +1,6 @@
 import React from 'react'
 import 'emoji-mart/css/emoji-mart.css'
-import { Picker, Emoji } from 'emoji-mart'
-// import data from 'emoji-mart/data/google.json'
-// import { NimblePicker } from 'emoji-mart'
-// import { NimblePicker, NimbleEmoji } from 'emoji-mart-native'
-// import data from 'emoji-mart-native/data/google.json'
-// import dataRequires from 'emoji-mart-native/data/local-images/google'
+import { Picker } from 'emoji-mart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import style from './style.module.css'
@@ -59,13 +54,6 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
     })
   }
 
-  // addEmoji = (e: any) => {
-  //   let emoji = e.native;
-  //   this.setState({
-  //     emojiObj: this.state.emojiObj + emoji
-  //   });
-  // };
-
   render() {
     const { isOpenedEmoji } = this.state;
     return (
@@ -73,15 +61,11 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
         <button onClick={ this.toggleEmoji }>
           <FontAwesomeIcon icon="smile" />
         </button>
-        {isOpenedEmoji && 
+        { isOpenedEmoji && 
           <div ref={this.myRef} className={style.emojiBlock}>
-            {/* <NimblePicker set='google' data={data} onSelect={emoji => {
-              this.props.addEmoji(emoji)
-              console.log(emoji)}} /> */}
             <Picker set='google' onSelect={emoji => {
               this.props.addEmoji(emoji)
               console.log(emoji)}} />
-            {/* <Picker theme='dark' /> */}
           </div>
         }
       </div>

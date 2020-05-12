@@ -36,7 +36,8 @@ const Main: React.FC<MainProps> = props => {
     if (!props.activeChatId) {
       return (
         <Empty 
-          name={props.nick ? props.nick : props.login}
+          // name={props.nick ? props.nick : props.login}
+          name={props.nick || props.login}
           avatarSrc={props.avatar} 
         />
       )

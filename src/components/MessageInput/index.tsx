@@ -2,13 +2,12 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import 'emoji-mart/css/emoji-mart.css'
-import { Picker, Emoji } from 'emoji-mart'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
 
 import ButtonWithEmoji from "../ButtonWithEmoji"
+import ButtonWithFileUpload from "../ButtonWithFileUpload"
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -29,7 +28,6 @@ type MessageInputProps = ReturnType<typeof mapStateToProps> &
 const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }) => {
   const [text, setText] = React.useState("");
   const [file, setFile] = React.useState(null);
-  // const [smile, setSmile] = React.useState("");
 
   const addEmoji = (emoji: any) => {
     console.log("input", emoji)
@@ -45,18 +43,15 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
     setText("")
   }
 
-  const uploadFile = (file: any) => {
-    if (activeChatId) {
-      sendMessage({ activeChatId, file })
-    }
-    setText("")
-  }
+  // const uploadFile = (file: any) => {
+  //   if (activeChatId) {
+  //     sendMessage({ activeChatId, file })
+  //   }
+  //   setText("")
+  // }
 
   return (
     <>
-      {/* <Picker onSelect={emoji => {
-              addEmoji(emoji)
-              console.log(emoji)}} /> */}
       <form action="" onSubmit={sendMessageHandler} className={style.message}>
         <input
           className={style.messageInput}
@@ -67,20 +62,22 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
         />
         <ButtonWithEmoji addEmoji={addEmoji} />
         <div className={style.buttonBlock}>
-          <div className={style.uploadBtnWrapper}>
-            <button 
+          <ButtonWithFileUpload />
+          {/* <div className={style.uploadBtnWrapper}> */}
+            {/* <button 
               // onClick={(e) => uploadFile(e.target.files[0])}
             >
               <FontAwesomeIcon icon="paperclip" />
-            </button>
-            <input 
+            </button> */}
+            {/* <input 
               className={style.uploadInput}
               type="file"
               name="media"
               id="media"
-              // onChange={e => {if(e.target.files && (e.target.files[0])) setFile(e.target.files[0])}}
-            />
-          </div>
+              // files={file}
+              // onChange={e => setFile(e.target.files[0])}
+            /> */}
+          {/* </div> */}
           <button type="submit">
             <FontAwesomeIcon icon="paper-plane" />
           </button>

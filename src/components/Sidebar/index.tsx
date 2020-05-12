@@ -50,7 +50,8 @@ const Sidebar: React.FC<SidebarProps> = props => {
 			return details
 		} else if (chat.members.length > 2) {
 			let details = {
-				name: chat.title ? chat.title : "Group",
+				// name: chat.title ? chat.title : "Group",
+				name: chat.title || "Group",
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
 			}
 			return details
@@ -60,8 +61,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 			})
 			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
 			let details = {
-				name: member && (member.nick ? member.nick : member.login),
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar ? memberAvatar : userAvatar)
+				// name: member && (member.nick ? member.nick : member.login),
+				name: member && (member.nick || member.login),
+				// avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar ? memberAvatar : userAvatar)
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
 			}
 			return details
 		}
