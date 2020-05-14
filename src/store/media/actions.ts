@@ -1,8 +1,8 @@
 import { createAsyncAction } from "typesafe-actions";
-import { AvatarData } from "./types";
+import { FileData } from "./types";
 
-export const uploadAvatar = createAsyncAction(
-    "media/UPLOAD_AVATAR_REQUEST",
-    "media/UPLOAD_AVATAR_SUCCESS",
-    "media/UPLOAD_AVATAR_FAILURE"
-)<HTMLFormElement, AvatarData, string>();
+export const uploadFile = createAsyncAction(
+    "media/UPLOAD_FILE_REQUEST",
+    "media/UPLOAD_FILE_SUCCESS",
+    "media/UPLOAD_FILE_FAILURE"
+)<HTMLFormElement, FileData, string>();

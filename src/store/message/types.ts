@@ -14,7 +14,7 @@ export interface MessageData {
     readonly owner: ContactData
     readonly chat: ChatData
     readonly text: string
-    // readonly media: [MediaData]
+    readonly media: MediaData[]
     // readonly replies: MessageData[]
     // readonly replyTo: MessageData
     // readonly forwarded: MessageData
@@ -24,7 +24,7 @@ export interface MessageData {
 export interface MessageCreds {
     readonly activeChatId: string
     readonly text?: string
-    readonly file?: any
+    readonly mediaId?: any | null
 }
 
 export interface ChatData {
@@ -42,6 +42,19 @@ export interface ContactData {
     readonly login: string
     readonly nick : string | null
     readonly avatar: AvatarData | null
+}
+
+export interface MediaData {
+    readonly _id: string
+    readonly createdAt: string
+    readonly owner: ContactData 
+    readonly text: string
+    readonly url: string
+    readonly originalFileName: string
+    readonly type: string
+    readonly userAvatar: ContactData 
+    readonly chatAvatar: ChatData[]
+    readonly messages: MessageData[]
 }
 
 export interface AvatarData {

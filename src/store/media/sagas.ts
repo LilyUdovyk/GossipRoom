@@ -1,24 +1,24 @@
 import { take, call, put, putResolve, select } from 'redux-saga/effects';
 
 import * as actions from './actions'
-import { dataPost } from '../../dataPost'
+// import { dataPost } from '../../dataPost'
 
-export function* uploadAvatarSaga() {
+export function* uploadFileSaga() {
   while (true) {
-    const { payload } = yield take(actions.uploadAvatar.request)
-    console.log("uploadAvatarSaga", payload.form)
+    const { payload } = yield take(actions.uploadFile.request)
+    console.log("uploadFileSaga", payload.form)
     try {
-      const imageData = yield call(getNewImageData, payload)
-      console.log("uploadAvatarSaga -> image", imageData)
-      yield putResolve(actions.uploadAvatar.success(imageData))
+      const fileData = yield call(getFileData, payload)
+      console.log("uploadFileSaga -> file", fileData)
+      yield putResolve(actions.uploadFile.success(fileData))
     } catch (error) {
-      console.error("uploadAvatarSaga -> error", error)
-      yield put(actions.uploadAvatar.failure(error.message))
+      console.error("uploadFileSaga -> error", error)
+      yield put(actions.uploadFile.failure(error.message))
     }
   }
 }
 
-let getNewImageData = async (form: HTMLFormElement) => {
+let getFileData = async (form: HTMLFormElement) => {
     try {
         console.log(form)
         const response = await fetch('http://chat.fs.a-level.com.ua/upload', 

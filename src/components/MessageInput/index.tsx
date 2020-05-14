@@ -27,7 +27,7 @@ type MessageInputProps = ReturnType<typeof mapStateToProps> &
 
 const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }) => {
   const [text, setText] = React.useState("");
-  const [file, setFile] = React.useState(null);
+  // const [file, setFile] = React.useState(null);
 
   const addEmoji = (emoji: any) => {
     console.log("input", emoji)
@@ -38,17 +38,10 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
     e.preventDefault()
     if (text.trim() === '') return;
     if (activeChatId) {
-      sendMessage({ activeChatId, text })
+      sendMessage({ activeChatId, text, mediaId: null })
     }
     setText("")
   }
-
-  // const uploadFile = (file: any) => {
-  //   if (activeChatId) {
-  //     sendMessage({ activeChatId, file })
-  //   }
-  //   setText("")
-  // }
 
   return (
     <>

@@ -5,7 +5,7 @@ import * as actions from "./actions";
 
 const initialState: MediaState = {
     error: null,
-    avatarData: {
+    fileData: {
         _id: '',
         url: ''
     },
@@ -41,13 +41,13 @@ const initialState: MediaState = {
 
 export default (state: MediaState = initialState, action: MediaAction): MediaState => {
     switch (action.type) {
-        case getType(actions.uploadAvatar.success):
+        case getType(actions.uploadFile.success):
             return {
                 ...state,
                 error: null,
-                avatarData: action.payload
+                fileData: action.payload
             }
-        case getType(actions.uploadAvatar.failure):
+        case getType(actions.uploadFile.failure):
             return {
                 ...state,
                 error: action.payload,

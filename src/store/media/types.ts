@@ -5,7 +5,7 @@ export type MediaAction = ActionType<typeof actions>
 
 export interface MediaState {
     readonly mediaData: MediaData
-    readonly avatarData: AvatarData
+    readonly fileData: FileData
     readonly error: string | null
 }
 
@@ -20,6 +20,11 @@ export interface MediaData {
     readonly userAvatar: ContactData 
     readonly chatAvatar: ChatData[]
     readonly messages: MessageData[]
+}
+
+export interface FileData {
+    readonly _id: string | null
+    readonly url: string | null
 }
 
 export interface ChatData {

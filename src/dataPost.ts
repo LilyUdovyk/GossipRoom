@@ -10,6 +10,7 @@ interface variablesData {
     "secondMember_id"?: string
     "user_id"?: string
     "image_id"?: string
+    "media_id"?: string
 }
 
 export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {

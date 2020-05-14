@@ -37,7 +37,7 @@ export interface MessageData {
     readonly owner: ContactData
     // readonly chat: ChatData
     readonly text: string
-    // readonly media: [MediaData]
+    readonly media: MediaData[]
     // readonly replies: MessageData[]
     // readonly replyTo: MessageData
     // readonly forwarded: MessageData
@@ -54,4 +54,17 @@ export interface ContactData {
 export interface AvatarData {
     readonly _id: string | null
     readonly url: string | null
+}
+
+export interface MediaData {
+    readonly _id: string
+    readonly createdAt: string
+    readonly owner: ContactData 
+    readonly text: string
+    readonly url: string
+    readonly originalFileName: string
+    readonly type: string
+    readonly userAvatar: ContactData 
+    readonly chatAvatar: ChatData[]
+    readonly messages: MessageData[]
 }

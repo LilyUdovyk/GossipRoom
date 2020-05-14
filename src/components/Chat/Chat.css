@@ -1,3 +1,9 @@
+
+p {
+  padding: 0;
+  margin: 0;
+}
+
 .Chats {
   flex: 1 1 0;
   display: flex;
@@ -7,16 +13,19 @@
   margin: 0 auto;
   overflow-y: scroll;
 }
+
 .Chat.is-user-msg:hover .Chat_delete_button{
   display: block;
 }
+
 .C_Message_reply{
   color: white !important;
   font-style: italic;
   display: none;
 }
+
 .show-reply{
-display: block!important;
+  display: block!important;
 }
 
 .C_Message_reply{
@@ -35,9 +44,31 @@ display: block!important;
 }
 
 .timeBlock {
+  display: block;
   font-size: 0.6rem;
   padding-top: 0.5rem;
   text-align: end;
+}
+
+.mediaAttachment {
+  display: flex;
+  flex-direction: column;
+}
+
+.attachment {
+  width: 25rem;
+  max-width: 100%;
+  max-height: 35rem;
+  margin-top: 1rem;
+}
+
+.attachmentName {
+  margin-top: 1rem;
+}
+
+audio:focus,
+video:focus {
+  outline: none;
 }
 
 .Chat_delete_button{
@@ -54,12 +85,15 @@ border:1px solid grey;
 top: -2px;
 display: none;
 }
+
 .Chat .Chat_delete_button{
 right: 0;
 }
+
 .Chat.is-user-msg .Chat_delete_button{
 left: 0;
 }
+
 .Chat {
   margin: 1rem 0;
   color: #fff;
@@ -70,6 +104,7 @@ left: 0;
   border-bottom-right-radius: 10px;
   position: relative;
 }
+
 .Chat.is-user-msg {
   margin-left: auto;
   margin-right: 1rem;

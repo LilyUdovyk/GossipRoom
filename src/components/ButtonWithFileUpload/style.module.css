@@ -9,84 +9,86 @@
     top: -27rem;
 } */
 
+* {
+  box-sizing: border-box;
+}
+
+h4 {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
 .dialogContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content:center;
-    align-items: center;
-  }
+  position: absolute;
+  /* top: 0; */
+  right: 0;
+  bottom: 0;
+  /* left: 0; */
+  /* width: 500px; */
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
 
-  .dialog {
-    width: 500px;
-    background-color: white;
-    display: flex;
-    align-items:  center;
-    flex-direction: column;
-  }
+.dialog {
+  /* width: 500px; */
+  color: black;
+  background-color: white;
+  display: flex;
+  align-items:  center;
+  flex-direction: column;
+}
 
-  .dialogForm {
-    width: 100%;
-    margin-bottom: 0;
-    padding: 20px;
-  }
+.dialogForm {
+  width: 100%;
+  margin-bottom: 0;
+  padding: 20px;
+}
 
-  .dialogForm > * {
-    display: block;
-  }
+.dialogForm > * {
+  display: block;
+}
 
-  .dialogLabel {
-    text-align: left;
-    font-size: 16px;
-  }
+.dialogLabel {
+  text-align: left;
+  font-size: 16px;
+}
 
-  .dialogForm input[type="text"] {
-    height: 50px;
-    border: none;
-    padding-left: 20px;
-    flex-grow: 1;
-    border-left: 1px solid #ccc;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
+.dialogInput {
+  width: 100%;
+}
 
-  .dialogInput {
-    width: 100%;
-  }
+.dialogHeader {
+  width: 100%;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .dialogHeader {
-    width: 100%;
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-  }
+.dialogHeader svg {
+  width: 36px;
+  height: 36px;
+}
 
-  .dialogHeader svg {
-    width: 36px;
-    height: 36px;
-  }
+.dialogHeader button {
+  border: none;
+  width: auto;
+  padding-right: 10px;
+}
 
-  .dialogHeader button {
-    border: none;
-    width: auto;
-    padding-right: 10px;
-  }
+input[type="text"]:focus {
+  border-color: #5C8436;
+}
 
-  input[type="text"]:focus {
-    border-color: #5C8436;
-  }
+.submitBtn {
+  color: #5C8436;
+  background-color: #181919;
+  width: 100%;
+}
 
-  .submitBtn {
-    color: #5C8436;
-    background-color: #181919;
-    width: 100%;
-  }
+.submitBtn:hover {
+  color: #5C8436;
+  background-color: #222;
+}
 
-  .submitBtn:hover {
-    color: #5C8436;
-    background-color: #222;
-  }

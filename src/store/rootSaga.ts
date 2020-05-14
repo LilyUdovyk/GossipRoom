@@ -5,7 +5,7 @@ import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga } from "./chat/sagas";
 import { addChatSaga } from "./chat/sagas";
 import { sendMessageSaga, onMessageSaga } from "./message/sagas";
-import { uploadAvatarSaga } from "./media/sagas";
+import { uploadFileSaga } from "./media/sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -18,7 +18,7 @@ export default function* rootSaga() {
     spawn(addChatSaga),
     spawn(logoutSaga),
     spawn(onMessageSaga),
-    spawn(uploadAvatarSaga),
+    spawn(uploadFileSaga),
     spawn(updateAvatarSaga),
   ]);
 }

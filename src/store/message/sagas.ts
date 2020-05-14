@@ -10,7 +10,10 @@ export function* sendMessageSaga() {
     const { payload } = yield take(actions.sendMessage.request)
     console.log("sendMessageSaga")
     try {
-      const message = yield call(sendMessage, payload.activeChatId, payload.text)
+      console.log(payload.mediaId)
+      const message = payload.mediaId
+        ? yield call(sendMessageacWithAtthment, payload.activeChatId, payload.text, payload.mediaId)
+        : yield call(sendMessage, payload.activeChatId, payload.text)
       console.log("sendMessageSaga -> message", message)
       yield putResolve(actions.sendMessage.success(message))
     } catch (error) {
@@ -36,6 +39,7 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
   }
 }`
 
+
 const sendMessage = async (chat_id: string, text: string) => {
   let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
     `Bearer ${localStorage.authToken}`,
@@ -45,7 +49,42 @@ const sendMessage = async (chat_id: string, text: string) => {
       "text": text
     }
   )
-  console.log("chat_id", chat_id, "text", text)
+  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
+  return messageContent.data.MessageUpsert
+}
+
+const sendMessageWithAtthmentQuery = `mutation sendMessage ($chat_id:ID, $text:String, $media_id:ID) {
+  MessageUpsert(message: {
+      chat: {_id: $chat_id}, 
+      text: $text,
+    	media:[{_id: $media_id}]
+  }) {
+    _id
+    createdAt
+    text
+    owner {
+      _id
+      login
+      nick
+    }
+    media{
+      _id
+      text
+      url
+    }
+  }
+}`
+
+const sendMessageacWithAtthment = async (chat_id: string, text: string, media_id: string) => {
+  let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
+    `Bearer ${localStorage.authToken}`,
+    sendMessageWithAtthmentQuery,
+    {
+      "chat_id": chat_id,
+      "text": text,
+      "media_id": media_id
+    }
+  )
   console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
   return messageContent.data.MessageUpsert
 }

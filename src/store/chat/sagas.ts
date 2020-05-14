@@ -46,6 +46,13 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
       owner{
         _id
       }
+      media{
+        _id
+				url
+        type
+        originalFileName
+        text
+      }
     }
   }
 }`

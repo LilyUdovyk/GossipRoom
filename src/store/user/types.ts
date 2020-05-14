@@ -45,11 +45,24 @@ export interface MessageData {
     readonly owner: ContactData
     readonly text: string
     // readonly chat: ChatData
-    // readonly media: [MediaData]
+    readonly media: MediaData[]
     // readonly replies: MessageData[]
     // readonly replyTo: MessageData
     // readonly forwarded: MessageData
     // readonly forwardWith: MessageData[]
+}
+
+export interface MediaData {
+    readonly _id: string
+    readonly createdAt: string
+    readonly owner: ContactData 
+    readonly text: string
+    readonly url: string
+    readonly originalFileName: string
+    readonly type: string
+    readonly userAvatar: ContactData 
+    readonly chatAvatar: ChatData[]
+    readonly messages: MessageData[]
 }
 
 export interface UpdateAvatarCreds {

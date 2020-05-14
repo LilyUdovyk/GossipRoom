@@ -14,14 +14,14 @@ import userAvatar from '../../img/user_avatar.png'
 const mapStateToProps = (state: IRootState) => ({
   activeUserId: state.user.userData._id,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
-  imageId: state.media.avatarData._id
+  imageId: state.media.fileData._id
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       logout: actions.logout,
-      uploadAvatar: mediaAction.uploadAvatar.request,
+      uploadAvatar: mediaAction.uploadFile.request,
       updateAvatar: userAction.updateAvatar.request,
     },
     dispatch
@@ -83,6 +83,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
 
   uploadAvatar = (form: any) => {
     this.props.uploadAvatar(form)
+
     this.setState({
       isAvatarUpload: !this.state.isAvatarUpload
     })

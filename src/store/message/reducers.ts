@@ -37,7 +37,8 @@ const initialState: MessageState = {
                 url: ''
             }
         },
-        text: ''
+        text: '',
+        media:[]
     }
 }
 
