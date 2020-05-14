@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import moment from 'moment';
 import Iframe from 'react-iframe'
-import { videoTagString, VideoTag } from 'react-video-tag'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootState } from "../../store/rootReducer";
 // import * as ChatActions from "../../store/chat/actions";
@@ -131,7 +131,25 @@ class Chat extends React.PureComponent<any> {
                   </audio>
                 </>
               )
-             } else return null
+            } else if (attachment.type === "application/zip") {
+              return (
+                <a href={`http://chat.fs.a-level.com.ua/${attachment.url}`}>
+                    <FontAwesomeIcon icon="file-archive" size="3x" className="fileIcon" />
+                    <span className="attachmentName">
+                        {attachment.originalFileName}
+                    </span>
+                  </a>
+              )
+            } else if (attachment.type && (attachment.type.includes("application") || attachment.type.includes("text"))) {
+              return (
+                  <a href={`http://chat.fs.a-level.com.ua/${attachment.url}`}>
+                    <FontAwesomeIcon icon="file-alt" size="3x" className="fileIcon" />
+                    <span className="attachmentName">
+                        {attachment.originalFileName}
+                    </span>
+                  </a>
+              )
+            }
           })}
         </div>
       )

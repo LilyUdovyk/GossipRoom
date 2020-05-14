@@ -71,6 +71,11 @@ video:focus {
   outline: none;
 }
 
+.fileIcon {
+  margin-right: 1rem;
+}
+
+
 .Chat_delete_button{
 position: absolute;
 background: black;
