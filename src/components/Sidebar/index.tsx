@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as contactsAction from "../../store/contacts/actions";
 import * as chatActions from "../../store/chat/actions";
+import * as messageAction from "../../store/message/actions"
 import { UserData } from '../../store/contacts/types'
 import { ChatData } from '../../store/chat/types'
 
@@ -17,6 +18,7 @@ const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
+	chatIdWithNewMessage: state.message.messageData.chat._id
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -33,6 +35,8 @@ type SidebarProps = ReturnType<typeof mapStateToProps> &
 	ReturnType<typeof mapDispatchToProps>;
 
 const Sidebar: React.FC<SidebarProps> = props => {
+	// const [unreadMessage, setUnreadMessage] = React.useState(0)
+
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
 		if (!authToken) {
@@ -86,6 +90,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	const activeChatHandler = (chatId: string) => {
 		props.getActiveChat(chatId)
+		// setUnreadMessage(0)
 	};
 
 	const addChatHandler = (contactId: string) => {
@@ -100,31 +105,36 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		if (props.chats && props.chats.length) {
 			return (
 				<>
-					{ props.chats.map(chat =>
-						<User
-							key={chat._id}
-							name={getDetailsOfChat(chat).name}
-							avatarSrc={getDetailsOfChat(chat).avatar}
-							// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
-							onClick={() => activeChatHandler(chat._id)}
-						/>
-					) }
+					{ props.chats.map(chat => {
+						<div key={chat._id}>
+							<User
+								
+								chat_id={chat._id}
+								name={getDetailsOfChat(chat).name}
+								avatarSrc={getDetailsOfChat(chat).avatar}
+								// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
+								onClick={() => activeChatHandler(chat._id)}
+							/>
+							{/* {unreadMessage > 0 && <p>{unreadMessage}</p>} */}
+						</div>
+					}) }
 				</>
 			)
-		} else {
-			return (
-				<>
-					{ props.contacts.map((contact: UserData) => 
-						<User 
-							key={contact.login}
-							name={contact.nick ? contact.nick : contact.login}
-							avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
-							onClick={() => addChatHandler(contact._id)}
-						/>
-					) }
-				</>
-			)
-		}
+		} 
+		// else {
+		// 	return (
+		// 		<>
+		// 			{ props.contacts.map((contact: UserData) => 
+		// 				<User 
+		// 					key={contact.login}
+		// 					name={contact.nick ? contact.nick : contact.login}
+		// 					avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
+		// 					onClick={() => addChatHandler(contact._id)}
+		// 				/>
+		// 			) }
+		// 		</>
+		// 	)
+		// }
 	}
 
 	return (

@@ -1,7 +1,11 @@
-
 p {
   padding: 0;
   margin: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
 
 .Chats {
@@ -43,11 +47,8 @@ p {
   display:none;
 }
 
-.timeBlock {
-  display: block;
-  font-size: 0.6rem;
-  padding-top: 0.5rem;
-  text-align: end;
+iframe {
+  margin-top: 1rem;
 }
 
 .mediaAttachment {
@@ -62,19 +63,17 @@ p {
   margin-top: 1rem;
 }
 
-.attachmentName {
-  margin-top: 1rem;
-}
-
 audio:focus,
 video:focus {
   outline: none;
 }
 
-.fileIcon {
-  margin-right: 1rem;
+.timeBlock {
+  display: block;
+  font-size: 0.6rem;
+  padding-top: 0.5rem;
+  text-align: end;
 }
-
 
 .Chat_delete_button{
 position: absolute;
@@ -120,21 +119,11 @@ left: 0;
   border-bottom-left-radius: 10px;
 }
 
-a {
-  color: white;
-  text-decoration: none;
-}
-
-iframe {
-  margin-top: 1rem;
-}
-
 @media (min-width: 576px) {
   .Chat {
     max-width: 60%;
   }
 }
-
 
 /* width */
 .Chats::-webkit-scrollbar {

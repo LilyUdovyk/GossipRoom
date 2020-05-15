@@ -1,0 +1,10 @@
+.attachmentLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.fileIcon {
+    margin-right: 1rem;
+}
