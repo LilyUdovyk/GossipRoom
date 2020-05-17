@@ -18,7 +18,8 @@ const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
-	chatIdWithNewMessage: state.message.messageData.chat._id
+	activeChatId: state.chat.activeChatId,
+	newMessage: state.message.messageData
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -105,36 +106,35 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		if (props.chats && props.chats.length) {
 			return (
 				<>
-					{ props.chats.map(chat => {
-						<div key={chat._id}>
-							<User
-								
-								chat_id={chat._id}
-								name={getDetailsOfChat(chat).name}
-								avatarSrc={getDetailsOfChat(chat).avatar}
-								// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
-								onClick={() => activeChatHandler(chat._id)}
-							/>
-							{/* {unreadMessage > 0 && <p>{unreadMessage}</p>} */}
-						</div>
-					}) }
+					{ props.chats.map(chat => 
+						<User
+							key={chat._id}
+							chat_id={chat._id}
+							name={getDetailsOfChat(chat).name}
+							avatarSrc={getDetailsOfChat(chat).avatar}
+							// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
+							newMessage={props.newMessage}
+							activeChatId={props.activeChatId}
+							onClick={() => activeChatHandler(chat._id)}
+						/>
+					) }
 				</>
 			)
 		} 
-		// else {
-		// 	return (
-		// 		<>
-		// 			{ props.contacts.map((contact: UserData) => 
-		// 				<User 
-		// 					key={contact.login}
-		// 					name={contact.nick ? contact.nick : contact.login}
-		// 					avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
-		// 					onClick={() => addChatHandler(contact._id)}
-		// 				/>
-		// 			) }
-		// 		</>
-		// 	)
-		// }
+		else {
+			return (
+				<>
+					{ props.contacts.map((contact: UserData) => 
+						<User 
+							key={contact.login}
+							name={contact.nick ? contact.nick : contact.login}
+							avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
+							onClick={() => addChatHandler(contact._id)}
+						/>
+					) }
+				</>
+			)
+		}
 	}
 
 	return (

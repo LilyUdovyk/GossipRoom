@@ -1,63 +1,54 @@
 import React from "react";
-import { bindActionCreators, Dispatch } from "redux";
-import { connect } from "react-redux";
 
-import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as chatActions from "../../store/chat/actions";
-import * as messageAction from "../../store/message/actions"
+import { MessageData } from '../../store/message/types'
 
 import "./User.css";
+import NewMessageCounter from "../NewMessageCounter"
 
-interface ownProps {
+interface Props {
   name: string | undefined,
   chat_id?: string,
   avatarSrc: string,
+  newMessage?: MessageData,
+  activeChatId?: string | null,
   onClick?: any
 }
 
-const mapStateToProps = (state: IRootState, props: ownProps) => ({
-	activeChatId: state.chat.activeChatId,
-  chatIdWithNewMessage: state.message.messageData.chat._id,
-  name: props.name,
-  chat_id: props.chat_id,
-  avatarSrc: props.avatarSrc,
-  onClick: props.onClick
-});
-
-// const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
-// 	bindActionCreators(
-// 		{
-// 			getContacts: contactsAction.getContacts.request,
-// 			getActiveChat: chatActions.getActiveChat.request,
-// 			addChat: chatActions.addChat.request
-// 		},
-// 		dispatch
-// 	);
-
-type UserProps = ReturnType<typeof mapStateToProps>;
-
-const User: React.FC<UserProps> = props => {
-
-  const [unreadMessage, setUnreadMessage] = React.useState(0)
+const User = (props: Props) => {
+  // const [newMessageCounter, setNewMessageCounter] = React.useState(0)
 
   React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
 		if (!authToken) {
 			return
 		}
-		if (props.chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
-			setUnreadMessage(unreadMessage + 1)
-		}
-	}, [])
+		// if (props.chatIdWithNewMessage && props.chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
+    //   setNewMessageCounter(newMessageCounter + 1)
+    //   console.log("newMessage[]", newMessageCounter)
+		// }
+  }, [])
+  
+  // React.useEffect(() => {
+  //   if (props.chatIdWithNewMessage && props.chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
+  //     console.log("chatIdWithNewMessage", props.chatIdWithNewMessage)
+  //     console.log("newMessageBefore", newMessageCounter)
+  //     setNewMessageCounter(newMessageCounter + 1)
+  //     console.log("newMessage", newMessageCounter)
+	// 	}
+  // }, [props.chatIdWithNewMessage])
 
   return (  
-    <div className="User" onClick={props.onClick}>
-      <img src={props.avatarSrc} alt="avatar" className="UserImg" />
-      <div className="UserDetails">
-        <p className="UseDetailsName">{props.name}</p>
-      </div>
-      { unreadMessage > 0 && <p>{ unreadMessage }</p> }
+    <div className="user" onClick={props.onClick}>
+      <img src={props.avatarSrc} alt="avatar" className="userImg" />
+      <div className="userDetails">
+        <p className="useDetailsName">{props.name}</p>
+      </div >
+      <NewMessageCounter
+        chat_id={props.chat_id}
+        newMessage={props.newMessage}
+        activeChatId={props.activeChatId}
+      />
     </div>
   );
 };
-export default connect(mapStateToProps, null)(React.memo(User));
+export default React.memo(User);

@@ -119,6 +119,10 @@ left: 0;
   border-bottom-left-radius: 10px;
 }
 
+.Chat p {
+  width: 100%;
+}
+
 @media (min-width: 576px) {
   .Chat {
     max-width: 60%;

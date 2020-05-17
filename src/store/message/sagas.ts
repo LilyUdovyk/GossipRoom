@@ -95,6 +95,8 @@ export function* onMessageSaga() {
     const { payload } = yield take(actions.onMessage)
     console.log("msg", payload)
     const activeChatId = yield select(state => state.chat.activeChatId)
-    yield put(getActiveChat.request(activeChatId))
+    if (activeChatId === payload.chat._id) {
+      yield put(getActiveChat.request(activeChatId))
+    }
   }
 }

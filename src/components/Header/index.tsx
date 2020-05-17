@@ -3,9 +3,9 @@ import "./Header.css";
 
 interface Props {
 	userName: string,
-  }
+}
 
-function Header(props: Props){
+const Header = (props: Props) => {
 	return (
 		<header className = "header">
 			<h1 className = "headerName">{props.userName}</h1>

@@ -1,31 +1,31 @@
-.User{
+.user{
 	display: flex;
   align-items: center;
   padding: 1rem;
 }
 
-.User:hover{
+.user:hover{
 	background: rgba(0,0,0,0.2);
 	cursor: pointer;
 }
 
-.UserImg{
+.userImg{
   width: 50px;
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.UserDetails{
+.userDetails{
 	display: none;
 }
 
 @media (min-width: 576px) {
-  .UserDetails {
+  .userDetails {
     display: block;
     padding: 0 0 0 1rem;
   }
-  .UserDetailsName {
+  .userDetailsName {
     margin: 0;
     color: rgba(255, 255, 255, 0.8);
     font-size: 1rem;

@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       getUser: UserActions.getUser.request,
-      // pushRouter: push
     },
     dispatch
   );

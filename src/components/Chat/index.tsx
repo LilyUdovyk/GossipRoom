@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import moment from 'moment';
 import Iframe from 'react-iframe'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import MicrolinkCard from '@microlink/react';
 import Linkify from 'linkifyjs/react';
 import getUrls from 'get-urls';
@@ -119,6 +118,7 @@ class Chat extends React.PureComponent<any> {
                   key={attachment._id}
                   className="attachment"
                   src={`http://chat.fs.a-level.com.ua/${attachment.url}`}
+                  alt="Attachment"
                 />
               )
             } else if (attachment.type === "video/mp4" || attachment.type === "video/webm" || attachment.type === "video/ogg") {
@@ -201,7 +201,7 @@ class Chat extends React.PureComponent<any> {
     return (
       <div className="Chats" ref={this.chatsRef}>
         {this.props.messages && this.props.messages.map((message: MessageData) => (
-          <div
+          <div 
             key={message._id}
             className={`"Message_input_box" Chat ${this.isUserMsg(message) ? "is-user-msg" : ""}`}
             // onClick = {is_user_msg ? handleUserMessageEdit:handleContactMessageEdit}
