@@ -6,38 +6,42 @@ import style from "./style.module.css"
 interface Props {
   chat_id?: string,
   newMessage?: MessageData,
-  activeChatId?: string | null;
+  activeChatId?: string | null,
 }
 
 const NewMessageCounter = (props: Props) => {
   const [counter, setCounter] = React.useState(0)
 
-  let chatIdWithNewMessage = props.newMessage ? props.newMessage.chat._id : null
-  
-  React.useEffect(() => {
-		const authToken = localStorage.getItem('authToken')
-		if (!authToken) {
-			return
-    }
-		if (props.newMessage && chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
-      setCounter(counter + 1)
-      console.log("newMessage[]", counter)
-		}
-  }, [])
+  let chatIdWithNewMessage = props.newMessage && props.newMessage.chat ? props.newMessage.chat._id : null
   
   React.useEffect(() => {
     if (props.newMessage && chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
-      console.log("chatIdWithNewMessage", chatIdWithNewMessage)
-    //   console.log("newMessageBefore", counter)
       setCounter(counter + 1)
       console.log("newMessage", counter)
-	}
-  }, [props.newMessage])
+    }
+    console.log("props.chat_id", props.chat_id)
+    console.log("props.activeChatId", props.activeChatId)
+    console.log("props.chat_id === props.activeChatId", props.chat_id === props.activeChatId)
+
+    if (props.chat_id === props.activeChatId) {
+      setCounter(0)
+    }
+  }, [props.newMessage, chatIdWithNewMessage])
+
+  // React.useEffect(() => {
+  //   if (props.chat_id === props.activeChatId) {
+  //     setCounter(0)
+  //   }
+  // }, [chatIdWithNewMessage])
 
   return (  
-    <div className={style.counter}>
-      {counter}
-    </div>
+    <>
+      { counter > 0 && 
+        <div className={style.counter}>
+          {counter}
+        </div>
+      }
+    </>
   );
 };
 export default React.memo(NewMessageCounter);

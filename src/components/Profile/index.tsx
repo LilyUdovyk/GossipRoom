@@ -2,7 +2,6 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import io from 'socket.io-client';
-// import { push } from "connected-react-router";
 
 import { IRootAction } from "../../store/rootReducer";
 import * as userAction from "../../store/user/actions";
@@ -18,8 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       getUser: userAction.getUser.request,
-      onMessage: messageAction.onMessage
-      // pushRouter: push
+      onMessage: messageAction.onMessage,
     },
     dispatch
   );
@@ -27,6 +25,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type ProfileProps = ReturnType<typeof mapDispatchToProps>;
 
 const Profile: React.FC<ProfileProps> = props => {
+
   React.useEffect(() => {
     const authToken = localStorage.getItem('authToken')
     if (!authToken) {

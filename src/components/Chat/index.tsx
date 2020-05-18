@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 // import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import moment from 'moment';
@@ -6,6 +6,7 @@ import Iframe from 'react-iframe'
 import MicrolinkCard from '@microlink/react';
 import Linkify from 'linkifyjs/react';
 import getUrls from 'get-urls';
+import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 
 import { IRootState } from "../../store/rootReducer";
 // import * as ChatActions from "../../store/chat/actions";
@@ -38,43 +39,31 @@ const mapStateToProps = (state: IRootState) => ({
 
 // type ChatProps = ReturnType<typeof mapStateToProps>;
 
-class Chat extends React.PureComponent<any> {
+const Chat: React.FC<any> = props => {
 
-  chatsRef: React.RefObject<HTMLDivElement>
+  const chatsRef = useRef<HTMLDivElement>(null);
 
-  constructor(props: any) {
-    super(props);
-    this.chatsRef = React.createRef()
-  }
+  React.useEffect(() => {
+		scrollToBottom();
+  }, [])
+  
+  React.useEffect(() => {
+		scrollToBottom();
+	}, [props.messages])
 
-  componentDidMount() {
-    this.scrollToBottom();
-  }
-
-  scrollToBottom = () => {
-    if (this.chatsRef.current) {
-      this.chatsRef.current.scrollTop = this.chatsRef.current.scrollHeight;
+  const scrollToBottom = () => {
+    if (chatsRef.current) {
+      chatsRef.current.scrollTop = chatsRef.current.scrollHeight;
     }
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
+  const isUserMsg = (message: MessageData) => {
+    // console.log(props.messages.message.owner._id, props.activeUserId, props.activeUserId === props.messages.message.owner._id)
+    return message.owner._id === props.activeUserId ? true : false
   }
 
-  isUserMsg(message: MessageData) {
-    // console.log(this.props.messages.message.owner._id, this.props.activeUserId, this.props.activeUserId === this.props.messages.message.owner._id)
-    return message.owner._id === this.props.activeUserId ? true : false
-  }
-
-  private parseURLs = (text: string) => {
+  const parseURLs = (text: string) => {
     const urls = getUrls(text);
-    // if (!urls.size) {
-    //   return;
-    // }
-
-    // const parsedUrls = Array.from(urls).map((url: string, idx: number) => (
-    //   <MicrolinkCard url={url} key={idx}/>
-    // ));
 
     const parsedUrls = Array.from(urls).map((url, idx: number) => {
       return (
@@ -89,7 +78,7 @@ class Chat extends React.PureComponent<any> {
     )
   }
 
-  getFormattedMessage(message: MessageData) {
+  const getFormattedMessage = (message: MessageData) => {
     let videoArray = message.text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
     if (videoArray) {
       let videoId = videoArray && videoArray[1]
@@ -191,51 +180,49 @@ class Chat extends React.PureComponent<any> {
       return (
         <>
           <p>{message.text}</p>
-          <Linkify>{this.parseURLs(message.text)}</Linkify>
+          <Linkify>{parseURLs(message.text)}</Linkify>
         </>
       )
     }
   }
 
-  render() {
-    return (
-      <div className="Chats" ref={this.chatsRef}>
-        {this.props.messages && this.props.messages.map((message: MessageData) => (
-          <div 
-            key={message._id}
-            className={`"Message_input_box" Chat ${this.isUserMsg(message) ? "is-user-msg" : ""}`}
-            // onClick = {is_user_msg ? handleUserMessageEdit:handleContactMessageEdit}
-            // onMouseDown = {handleMouseDown}
-            // onMouseUp = {handleMouseUp}
-            // data-active = {activeUser}
-            data-name={this.isUserMsg(message) ? "You " : this.props.activeChatName}
-            data-user={this.isUserMsg(message)}
-            data-text={message.text}
-            data-number={message._id}
-          >
-            {/* <div
-              // className="{`C_Message_reply "Chat ${ containReply ? "show-reply":""} ${is_user_msg ? "is-user-msg" : ""}`}
-              className="Chat is-user-msg"
-            > */}
-            {/* <p className = "Message_reply_name"> */}
-            {/* {store.getState().chatBoxContainReply[2]} */}
-            {/* </p> */}
-            {/* {store.getState().chatBoxContainReply[1].substring(0,70)} */}
-            {/* </div> */}
-            {this.getFormattedMessage(message)}
-            {/* <Linkify>{this.getFormattedMessage(message)}{this.parseURLs(message.text)}</Linkify> */}
-            <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
-            {/* <button 
-              // data-active = {activeUser} 
-              data-number = {message._id} 
-              // onClick = {handleDeleteMessage} 
-              className ="Chat_delete_button"
-            >x</button> */}
-          </div>
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div className="Chats" ref={chatsRef}>
+      { props.messages && props.messages.map((message: MessageData) => (
+        <div 
+          key={message._id}
+          className={`"Message_input_box" Chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
+          // onClick = {is_user_msg ? handleUserMessageEdit:handleContactMessageEdit}
+          // onMouseDown = {handleMouseDown}
+          // onMouseUp = {handleMouseUp}
+          // data-active = {activeUser}
+          data-name={isUserMsg(message) ? "You " : props.activeChatName}
+          data-user={isUserMsg(message)}
+          data-text={message.text}
+          data-number={message._id}
+        >
+          {/* <div
+            // className="{`C_Message_reply "Chat ${ containReply ? "show-reply":""} ${is_user_msg ? "is-user-msg" : ""}`}
+            className="Chat is-user-msg"
+          > */}
+          {/* <p className = "Message_reply_name"> */}
+          {/* {store.getState().chatBoxContainReply[2]} */}
+          {/* </p> */}
+          {/* {store.getState().chatBoxContainReply[1].substring(0,70)} */}
+          {/* </div> */}
+          {getFormattedMessage(message)}
+          {/* <Linkify>{this.getFormattedMessage(message)}{this.parseURLs(message.text)}</Linkify> */}
+          <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
+          {/* <button 
+            // data-active = {activeUser} 
+            data-number = {message._id} 
+            // onClick = {handleDeleteMessage} 
+            className ="Chat_delete_button"
+          >x</button> */}
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default connect(mapStateToProps, null)(Chat);

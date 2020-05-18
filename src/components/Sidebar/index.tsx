@@ -18,7 +18,7 @@ const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
-	activeChatId: state.chat.activeChatId,
+	activeChatId: state.chat.chatData._id,
 	newMessage: state.message.messageData
 });
 
@@ -36,7 +36,6 @@ type SidebarProps = ReturnType<typeof mapStateToProps> &
 	ReturnType<typeof mapDispatchToProps>;
 
 const Sidebar: React.FC<SidebarProps> = props => {
-	// const [unreadMessage, setUnreadMessage] = React.useState(0)
 
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
@@ -66,9 +65,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 			})
 			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
 			let details = {
-				// name: member && (member.nick ? member.nick : member.login),
 				name: member && (member.nick || member.login),
-				// avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar ? memberAvatar : userAvatar)
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
 			}
 			return details
@@ -91,7 +88,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	const activeChatHandler = (chatId: string) => {
 		props.getActiveChat(chatId)
-		// setUnreadMessage(0)
 	};
 
 	const addChatHandler = (contactId: string) => {

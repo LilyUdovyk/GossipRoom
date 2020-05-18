@@ -27,7 +27,6 @@ type MessageInputProps = ReturnType<typeof mapStateToProps> &
 
 const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }) => {
   const [text, setText] = React.useState("");
-  // const [file, setFile] = React.useState(null);
 
   const addEmoji = (emoji: any) => {
     console.log("input", emoji)
@@ -56,21 +55,6 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
         <ButtonWithEmoji addEmoji={addEmoji} />
         <div className={style.buttonBlock}>
           <ButtonWithFileUpload />
-          {/* <div className={style.uploadBtnWrapper}> */}
-            {/* <button 
-              // onClick={(e) => uploadFile(e.target.files[0])}
-            >
-              <FontAwesomeIcon icon="paperclip" />
-            </button> */}
-            {/* <input 
-              className={style.uploadInput}
-              type="file"
-              name="media"
-              id="media"
-              // files={file}
-              // onChange={e => setFile(e.target.files[0])}
-            /> */}
-          {/* </div> */}
           <button type="submit">
             <FontAwesomeIcon icon="paper-plane" />
           </button>

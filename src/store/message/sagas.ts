@@ -94,9 +94,19 @@ export function* onMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.onMessage)
     console.log("msg", payload)
+    const activeUserId = yield select(state => state.user.userData._id)
+    if (payload.owner._id !== activeUserId) {
+      playSound()
+    }
     const activeChatId = yield select(state => state.chat.activeChatId)
     if (activeChatId === payload.chat._id) {
       yield put(getActiveChat.request(activeChatId))
     }
   }
+}
+
+const playSound = () => {
+  console.log("tik")
+  const audio = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatedible.ogg");
+  audio.play();
 }
