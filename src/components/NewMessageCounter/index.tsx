@@ -26,7 +26,7 @@ const NewMessageCounter = (props: Props) => {
     if (props.chat_id === props.activeChatId) {
       setCounter(0)
     }
-  }, [props.newMessage, chatIdWithNewMessage])
+  }, [props.newMessage, props.activeChatId])
 
   // React.useEffect(() => {
   //   if (props.chat_id === props.activeChatId) {
