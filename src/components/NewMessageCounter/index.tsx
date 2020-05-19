@@ -17,22 +17,12 @@ const NewMessageCounter = (props: Props) => {
   React.useEffect(() => {
     if (props.newMessage && chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
       setCounter(counter + 1)
-      console.log("newMessage", counter)
     }
-    console.log("props.chat_id", props.chat_id)
-    console.log("props.activeChatId", props.activeChatId)
-    console.log("props.chat_id === props.activeChatId", props.chat_id === props.activeChatId)
 
     if (props.chat_id === props.activeChatId) {
       setCounter(0)
     }
   }, [props.newMessage, props.activeChatId])
-
-  // React.useEffect(() => {
-  //   if (props.chat_id === props.activeChatId) {
-  //     setCounter(0)
-  //   }
-  // }, [chatIdWithNewMessage])
 
   return (  
     <>
