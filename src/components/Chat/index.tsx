@@ -1,15 +1,15 @@
 import React, {useRef} from "react";
-// import { bindActionCreators, Dispatch } from "redux";
+import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import moment from 'moment';
 import Iframe from 'react-iframe'
 import MicrolinkCard from '@microlink/react';
 import Linkify from 'linkifyjs/react';
 import getUrls from 'get-urls';
-import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
+// import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 
-import { IRootState } from "../../store/rootReducer";
-// import * as ChatActions from "../../store/chat/actions";
+import { IRootState, IRootAction } from "../../store/rootReducer";
+import * as messageAction from "../../store/message/actions";
 // import * as contactsAction from "../../store/contacts/actions";
 import { MessageData } from "../../store/chat/types";
 import AttachmentLink from "../AttachmentLink"
@@ -26,20 +26,18 @@ const mapStateToProps = (state: IRootState) => ({
   mediaUrl: state.media.fileData.url
 });
 
-// const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
-//   bindActionCreators(
-//     {
-//       getContacts: contactsAction.getContacts.request,
-//     },
-//     dispatch
-//   );
+const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
+  bindActionCreators(
+    {
+      saveOriginalMessage: messageAction.saveOriginalMessage,
+    },
+    dispatch
+  );
 
-// type ChatProps = ReturnType<typeof mapStateToProps> &
-//   ReturnType<typeof mapDispatchToProps>;
+type ChatProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
 
-// type ChatProps = ReturnType<typeof mapStateToProps>;
-
-const Chat: React.FC<any> = props => {
+const Chat: React.FC<ChatProps> = props => {
 
   const chatsRef = useRef<HTMLDivElement>(null);
 
@@ -62,6 +60,11 @@ const Chat: React.FC<any> = props => {
     return message.owner._id === props.activeUserId ? true : false
   }
 
+  const replyToMessage = (message: MessageData) => {
+    console.log("saveOriginalMessage")
+    props.saveOriginalMessage(message)
+  }
+
   const parseURLs = (text: string) => {
     const urls = getUrls(text);
 
@@ -79,7 +82,7 @@ const Chat: React.FC<any> = props => {
   }
 
   const getFormattedMessage = (message: MessageData) => {
-    let videoArray = message.text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
+    let videoArray =  message.text && message.text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
     if (videoArray) {
       let videoId = videoArray && videoArray[1]
       return (
@@ -180,7 +183,7 @@ const Chat: React.FC<any> = props => {
       return (
         <>
           <p>{message.text}</p>
-          <Linkify>{parseURLs(message.text)}</Linkify>
+          {message.text && <Linkify>{parseURLs(message.text)}</Linkify>}
         </>
       )
     }
@@ -192,7 +195,7 @@ const Chat: React.FC<any> = props => {
         <div 
           key={message._id}
           className={`"Message_input_box" Chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
-          // onClick = {is_user_msg ? handleUserMessageEdit:handleContactMessageEdit}
+          onClick = { () => replyToMessage(message) }
           // onMouseDown = {handleMouseDown}
           // onMouseUp = {handleMouseUp}
           // data-active = {activeUser}
@@ -201,28 +204,32 @@ const Chat: React.FC<any> = props => {
           data-text={message.text}
           data-number={message._id}
         >
-          {/* <div
-            // className="{`C_Message_reply "Chat ${ containReply ? "show-reply":""} ${is_user_msg ? "is-user-msg" : ""}`}
-            className="Chat is-user-msg"
-          > */}
-          {/* <p className = "Message_reply_name"> */}
-          {/* {store.getState().chatBoxContainReply[2]} */}
-          {/* </p> */}
-          {/* {store.getState().chatBoxContainReply[1].substring(0,70)} */}
-          {/* </div> */}
+          { message.replyTo &&
+            <div className="replyBlock">
+              <p className="owner">
+                { message.replyTo.owner.nick || message.replyTo.owner.login }
+              </p>
+              <p>
+                { message.replyTo.text }
+              </p>
+            </div>
+          }
+          { message.forwarded &&
+            <div className="forwardedBlock">
+              <p className="owner">
+                Forwarded from { message.forwarded.owner.nick || message.forwarded.owner.login }
+              </p>
+              <p>
+                { getFormattedMessage(message.forwarded) }
+              </p>
+            </div>
+          } 
           {getFormattedMessage(message)}
-          {/* <Linkify>{this.getFormattedMessage(message)}{this.parseURLs(message.text)}</Linkify> */}
           <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
-          {/* <button 
-            // data-active = {activeUser} 
-            data-number = {message._id} 
-            // onClick = {handleDeleteMessage} 
-            className ="Chat_delete_button"
-          >x</button> */}
         </div>
       ))}
     </div>
   );
 }
 
-export default connect(mapStateToProps, null)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

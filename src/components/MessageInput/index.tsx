@@ -11,13 +11,15 @@ import ButtonWithFileUpload from "../ButtonWithFileUpload"
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
-  activeChatId: state.chat.activeChatId
+  activeChatId: state.chat.activeChatId,
+  originalMessageId: state.message.originalMessageId
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      sendMessage: messageActions.sendMessage.request
+      sendMessage: messageActions.sendMessage.request,
+      replyToMessage: messageActions.replyToMessage.request
     },
     dispatch
   );
@@ -25,7 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type MessageInputProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }) => {
+const MessageInput: React.FC<MessageInputProps> = (props) => {
   const [text, setText] = React.useState("");
 
   const addEmoji = (emoji: any) => {
@@ -36,8 +38,10 @@ const MessageInput: React.FC<MessageInputProps> = ({ sendMessage, activeChatId }
   const sendMessageHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (text.trim() === '') return;
-    if (activeChatId) {
-      sendMessage({ activeChatId, text, mediaId: null })
+    if (props.activeChatId && props.originalMessageId) {
+      props.replyToMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessageId })
+    } else if (props.activeChatId) {
+      props.sendMessage({ activeChatId: props.activeChatId, text, mediaId: null })
     }
     setText("")
   }

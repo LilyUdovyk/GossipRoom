@@ -35,13 +35,13 @@ export interface MessageData {
     readonly _id: string
     readonly createdAt: string
     readonly owner: ContactData
-    // readonly chat: ChatData
+    readonly chat: ChatData
     readonly text: string
     readonly media: MediaData[]
-    // readonly replies: MessageData[]
-    // readonly replyTo: MessageData
-    // readonly forwarded: MessageData
-    // readonly forwardWith: MessageData[]
+    readonly replies: MessageData[]
+    readonly replyTo: MessageData
+    readonly forwarded: MessageData
+    readonly forwardWith: MessageData[]
 }
 
 export interface ContactData {

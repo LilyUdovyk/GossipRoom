@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as contactsAction from "../../store/contacts/actions";
@@ -37,12 +38,15 @@ type SidebarProps = ReturnType<typeof mapStateToProps> &
 
 const Sidebar: React.FC<SidebarProps> = props => {
 
+	const [isOpenedContacts, setIsOpenedContacts] = React.useState(false)
+	const [isOpenedChats, setIsOpenedChats] = React.useState(false)
+
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
 		if (!authToken) {
 			return
 		}
-		props.getContacts()
+		// props.getContacts()
 	}, [])
 
 	const getDetailsOfChat = (chat: ChatData) => {
@@ -74,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	const checkMemberInChats = (contactId: string) => {
 		let contactsChats: string[] = []
-		props.chats.map((chat: ChatData) => {
+		props.chats.map(chat => {
 			if (chat.members.length === 2) {
 				chat.members.forEach(member => {
 					if (member._id === contactId) {
@@ -102,32 +106,40 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		if (props.chats && props.chats.length) {
 			return (
 				<>
-					{ props.chats.map(chat => 
-						<User
-							key={chat._id}
-							chat_id={chat._id}
-							name={getDetailsOfChat(chat).name}
-							avatarSrc={getDetailsOfChat(chat).avatar}
-							// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
-							newMessage={props.newMessage}
-							activeChatId={props.activeChatId}
-							onClick={() => activeChatHandler(chat._id)}
-						/>
-					) }
+					{ props.chats.map(chat => {
+						// setIsOpenedContacts(false)
+						// setIsOpenedChats(true)
+						return (
+							<User
+								key={chat._id}
+								chat_id={chat._id}
+								name={getDetailsOfChat(chat).name}
+								avatarSrc={getDetailsOfChat(chat).avatar}
+								// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
+								newMessage={props.newMessage}
+								activeChatId={props.activeChatId}
+								onClick={() => activeChatHandler(chat._id)}
+							/>
+						)
+					})}
 				</>
 			)
 		} 
 		else {
 			return (
 				<>
-					{ props.contacts.map((contact: UserData) => 
-						<User 
-							key={contact.login}
-							name={contact.nick ? contact.nick : contact.login}
-							avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
-							onClick={() => addChatHandler(contact._id)}
-						/>
-					) }
+					{ props.contacts.map((contact: UserData) => {
+						// setIsOpenedChats(false)
+						// setIsOpenedContacts(true)
+						return (
+							<User 
+								key={contact.login}
+								name={contact.nick ? contact.nick : contact.login}
+								avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
+								onClick={() => addChatHandler(contact._id)}
+							/>
+						)
+					})}
 				</>
 			)
 		}
@@ -135,7 +147,19 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	return (
 		<aside className="sidebar">
-			<ButtonWithPopup />
+			<div className="buttonBlock">
+				<ButtonWithPopup />
+				{/* { isOpenedContacts && 
+					<button className="navButton">
+						<FontAwesomeIcon icon="user-friends" />
+					</button>
+				}
+				{ isOpenedChats &&
+					<button className="navButton">
+						<FontAwesomeIcon icon="comments" />
+					</button>
+				} */}
+			</div>
 			{renderSidebarContent()}
 		</aside>
 	)

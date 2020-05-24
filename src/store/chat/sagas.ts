@@ -53,6 +53,62 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
         originalFileName
         text
       }
+      replies {
+        _id
+        text
+        owner {
+          _id
+          login
+          nick
+        }
+        media{
+          _id
+          text
+          url
+        }
+      }
+      replyTo {
+        _id
+        text
+        owner {
+          _id
+          login
+          nick
+        }
+        media{
+          _id
+          text
+          url
+        }
+      }
+      forwarded {
+        _id
+        text
+        owner {
+          _id
+          login
+          nick
+        }
+        media{
+          _id
+          text
+          url
+        }
+      }
+      forwardWith {
+        _id
+        text
+        owner {
+          _id
+          login
+          nick
+        }
+        media{
+          _id
+          text
+          url
+        }
+      }
     }
   }
 }`

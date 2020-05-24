@@ -5,6 +5,7 @@ import * as actions from "./actions";
 
 const initialState: MessageState = {
     error: null,
+    originalMessageId: null,
     messageData: {
         _id: '',
         createdAt: '',
@@ -38,7 +39,28 @@ const initialState: MessageState = {
             }
         },
         text: '',
-        media:[]
+        media:[],
+        replies: [],
+        replyTo: {
+            _id: '',
+            text: '',
+            media: [],
+            owner: {
+                _id: '',
+                login: '',
+                nick : ''
+            }
+        },
+        forwarded: {
+            _id: '',
+            text: '',
+            owner: {
+                _id: '',
+                login: '',
+                nick : ''
+            }
+        },
+        forwardWith: []
     }
 }
 
@@ -60,6 +82,23 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
                 ...state,
                 error: null,
                 messageData: action.payload,
+            }
+        case getType(actions.saveOriginalMessage):
+            return {
+                ...state,
+                error: null,
+                originalMessageId: action.payload._id,
+            }
+        case getType(actions.replyToMessage.success):
+            return {
+                ...state,
+                error: null,
+                messageData: action.payload,
+            }
+        case getType(actions.replyToMessage.failure):
+            return {
+                ...state,
+                error: action.payload,
             }
         default:
             return state

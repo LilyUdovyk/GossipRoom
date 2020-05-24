@@ -8,6 +8,27 @@
 	overflow-y: scroll;
 }
 
+.buttonBlock {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.navButton {
+	width: 2.5rem;
+	height: 2.5rem;
+	font-size: 1.1rem;
+	color: white;
+	border: none;
+	background: none;
+	border-radius: 50%;
+	padding-top: 0.2rem;
+	margin: 0.5rem 1rem;
+}
+
+.navButton:hover {
+	background-color: rgba(0,0,0,0.2);
+}
+
 /* width */
 .sidebar::-webkit-scrollbar {
   width: 5px;

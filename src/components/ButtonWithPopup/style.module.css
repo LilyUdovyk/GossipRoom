@@ -15,7 +15,7 @@ button:focus {
   background: none;
   border-radius: 50%;
   padding-top: 0.2rem;
-  margin: 0.5rem 1.2rem 0.5rem;
+  margin: 0.5rem 1rem;
 }
 
 .navOpener:hover {

@@ -44,12 +44,12 @@ export interface MessageData {
     readonly createdAt: string
     readonly owner: ContactData
     readonly text: string
-    // readonly chat: ChatData
+    readonly chat: ChatData
     readonly media: MediaData[]
-    // readonly replies: MessageData[]
-    // readonly replyTo: MessageData
-    // readonly forwarded: MessageData
-    // readonly forwardWith: MessageData[]
+    readonly replies: MessageData[]
+    readonly replyTo: MessageData
+    readonly forwarded: MessageData
+    readonly forwardWith: MessageData[]
 }
 
 export interface MediaData {

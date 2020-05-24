@@ -11,7 +11,8 @@ import * as userAction from "../../store/user/actions";
 import style from './style.module.css'
 import userAvatar from '../../img/user_avatar.png'
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: IRootState) =>
+ ({
   activeUserId: state.user.userData._id,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
   imageId: state.media.fileData._id
@@ -46,9 +47,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
   myFormRef = React.createRef<HTMLFormElement>()
 
   closePopup = (event: any) => {
-    console.log(this.myRef)
     if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
-      console.log("TCL: Button -> closePopup -> event", event)
       this.setState({
         isOpenedPopup: false
       })
@@ -60,10 +59,8 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
       return;
     }
     if (this.state.isOpenedPopup) {
-      console.log("addEventListener", prevState);
       document.addEventListener("click", this.closePopup);
     } else {
-      console.log("removeEventListener");
       document.removeEventListener("click", this.closePopup);
     }
   }
@@ -73,13 +70,6 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
       isOpenedPopup: !this.state.isOpenedPopup
     })
   }
-
-  // uploadAvatar = async (e: any) => {
-  //   let form = new FormData();
-  //   console.log(e.target.files[0])
-  //   form.append('media', e.target.files[0]);
-  //   this.props.uploadAvatar(form)
-  // }
 
   uploadAvatar = (form: any) => {
     this.props.uploadAvatar(form)

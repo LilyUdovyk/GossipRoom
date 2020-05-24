@@ -36,6 +36,42 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
       login
       nick
     }
+    replies {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    replyTo {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    forwarded {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    forwardWith {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
   }
 }`
 
@@ -71,6 +107,62 @@ const sendMessageWithAtthmentQuery = `mutation sendMessage ($chat_id:ID, $text:S
       _id
       text
       url
+    }
+    replies {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+      }
+    }
+    replyTo {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+      }
+    }
+    forwarded {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+      }
+    }
+    forwardWith {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+      }
     }
   }
 }`
@@ -109,4 +201,102 @@ const playSound = () => {
   console.log("tik")
   const audio = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatedible.ogg");
   audio.play();
+}
+
+// export function* saveOriginalMessageSaga() {
+//   while (true) {
+//     const { payload } = yield take(actions.saveOriginalMessage)
+//     console.log("saveOriginalMessage", payload)
+//     const activeUserId = yield select(state => state.user.userData._id)
+
+//     const activeChatId = yield select(state => state.chat.activeChatId)
+//     if (activeChatId === payload.chat._id) {
+//       yield put(getActiveChat.request(activeChatId))
+//     }
+//   }
+// }
+
+export function* replyToMessageSaga() {
+  while (true) {
+    const { payload } = yield take(actions.replyToMessage.request)
+    console.log("replyToMessageSaga")
+    try {
+      const message = yield call(replyToMessage, payload.activeChatId, payload.text, payload.originalMessageId)
+      console.log("replyToMessageSaga -> message", message)
+      yield putResolve(actions.replyToMessage.success(message))
+    } catch (error) {
+      console.error("replyToMessageSaga -> error", error)
+      yield put(actions.replyToMessage.failure(error.message))
+    }
+  }
+}
+
+const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:ID, $text:String) {
+  MessageUpsert(message: {
+    chat: {_id: $chat_id},
+    text: $text
+    replyTo: {
+      _id: $message_id,
+    }
+  }) {
+    _id
+    createdAt
+    text
+    owner {
+      _id
+      login
+      nick
+    }
+    replies {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    replyTo {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    forwarded {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+    forwardWith {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+    }
+  }
+}`
+
+
+const replyToMessage = async (chat_id: string, text: string, originalMessageId: string) => {
+  let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
+    `Bearer ${localStorage.authToken}`,
+    replyToMessageQuery,
+    {
+      "chat_id": chat_id,
+      "text": text,
+      "message_id": originalMessageId
+    }
+  )
+  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
+  return messageContent.data.MessageUpsert
 }

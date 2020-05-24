@@ -43,9 +43,7 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
   fileAttachmentRef = React.createRef<HTMLInputElement>();
 
   closeFileUpload = (event: any) => {
-    console.log(this.myRef)
     if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
-      console.log("TCL: Button -> closeFileUpload -> event", event)
       this.setState({
         isOpenedFileUpload: false
       })
@@ -57,10 +55,8 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
       return;
     }
     if (this.state.isOpenedFileUpload) {
-      console.log("addEventListener", prevState);
       document.addEventListener("click", this.closeFileUpload);
     } else {
-      console.log("removeEventListener");
       document.removeEventListener("click", this.closeFileUpload);
     }
   }
@@ -69,7 +65,6 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
     this.setState({
       isOpenedFileUpload: !this.state.isOpenedFileUpload
     })
-    console.log("isOpenedFileUpload", this.state.isOpenedFileUpload)
   }
 
   uploadFile = (form: any) => {
@@ -77,7 +72,6 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
   }
 
   sendAttachment = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault();
     const { fileMessage } = this.state;
 
     if (this.props.activeChatId) {
@@ -124,7 +118,6 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
                   name="media"
                   id="media"
                   ref={this.fileAttachmentRef}
-                  // accept="image/png, image/jpeg"
                   onChange={() => { if (this.myFormRef.current) this.uploadFile(this.myFormRef.current) }}
                 />
                 <label className={style.dialogLabel} htmlFor="new-message">

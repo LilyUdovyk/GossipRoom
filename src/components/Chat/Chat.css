@@ -68,6 +68,19 @@ video:focus {
   outline: none;
 }
 
+.replyBlock {
+  width: 94%;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.3rem;
+  border-left: 1px solid #4a5db1;
+}
+
+.owner {
+  color: #4a5db1;
+  font-size: 0.8rem;
+}
+
 .timeBlock {
   display: block;
   font-size: 0.6rem;
@@ -107,6 +120,7 @@ left: 0;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .Chat.is-user-msg {

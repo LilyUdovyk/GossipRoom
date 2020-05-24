@@ -14,13 +14,12 @@
   height: 2rem;
   border-radius: 50%;
   border: none;
-  background-color: #2b2c33;
+  background-color: rgba(0,0,0,0.2);
   color: white;
 }
 
 .deleteButton:hover {
   background-color: #2b2c33;
-  border: 1px solid whitesmoke;
 }
 
 /* .deleteButton:active {

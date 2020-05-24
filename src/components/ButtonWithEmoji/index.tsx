@@ -26,9 +26,7 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
   myRef = React.createRef<HTMLDivElement>()
 
   closeEmoji = (event: any) => {
-    console.log(this.myRef)
     if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
-      console.log("TCL: Button -> closeSmiles -> event", event)
       this.setState({
         isOpenedEmoji: false
       })
@@ -40,10 +38,8 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
       return;
     }
     if (this.state.isOpenedEmoji) {
-      console.log("addEventListener", prevState);
       document.addEventListener("click", this.closeEmoji);
     } else {
-      console.log("removeEventListener");
       document.removeEventListener("click", this.closeEmoji);
     }
   }
@@ -63,9 +59,7 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
         </button>
         { isOpenedEmoji && 
           <div ref={this.myRef} className={style.emojiBlock}>
-            <Picker set='google' onSelect={emoji => {
-              this.props.addEmoji(emoji)
-              console.log(emoji)}} />
+            <Picker set='google' onSelect={emoji => {this.props.addEmoji(emoji)}} />
           </div>
         }
       </div>
