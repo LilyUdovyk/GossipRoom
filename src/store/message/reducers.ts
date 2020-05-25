@@ -5,7 +5,7 @@ import * as actions from "./actions";
 
 const initialState: MessageState = {
     error: null,
-    originalMessageId: null,
+    originalMessage: null,
     messageData: {
         _id: '',
         createdAt: '',
@@ -54,6 +54,7 @@ const initialState: MessageState = {
         forwarded: {
             _id: '',
             text: '',
+            media: [],
             owner: {
                 _id: '',
                 login: '',
@@ -87,17 +88,19 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
             return {
                 ...state,
                 error: null,
-                originalMessageId: action.payload._id,
+                originalMessage: action.payload,
             }
         case getType(actions.replyToMessage.success):
             return {
                 ...state,
                 error: null,
+                originalMessage: null,
                 messageData: action.payload,
             }
         case getType(actions.replyToMessage.failure):
             return {
                 ...state,
+                originalMessage: null,
                 error: action.payload,
             }
         default:

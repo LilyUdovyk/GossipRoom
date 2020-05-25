@@ -65,6 +65,8 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
           _id
           text
           url
+          type
+          originalFileName
         }
       }
       replyTo {
@@ -79,6 +81,8 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
           _id
           text
           url
+          type
+          originalFileName
         }
       }
       forwarded {
@@ -93,6 +97,8 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
           _id
           text
           url
+          type
+          originalFileName
         }
       }
       forwardWith {
@@ -107,6 +113,8 @@ const getActiveChatQuery = `query getActiveChat($chatQuery: String){
           _id
           text
           url
+          type
+          originalFileName
         }
       }
     }

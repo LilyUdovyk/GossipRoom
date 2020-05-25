@@ -39,9 +39,20 @@ export interface MessageData {
     readonly text: string
     readonly media: MediaData[]
     readonly replies: MessageData[]
-    readonly replyTo: MessageData
-    readonly forwarded: MessageData
+    readonly replyTo: ReplyData
+    readonly forwarded:ReplyData
     readonly forwardWith: MessageData[]
+}
+
+export interface ReplyData {
+    readonly _id: string
+    readonly text: string
+    readonly media: MediaData[]
+    readonly owner: {
+        readonly _id: string
+        readonly login: string
+        readonly nick : string | null
+    }
 }
 
 export interface ContactData {

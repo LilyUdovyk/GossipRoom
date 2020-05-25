@@ -11,8 +11,9 @@ import getUrls from 'get-urls';
 import { IRootState, IRootAction } from "../../store/rootReducer";
 import * as messageAction from "../../store/message/actions";
 // import * as contactsAction from "../../store/contacts/actions";
-import { MessageData } from "../../store/chat/types";
+import { MessageData, ReplyData } from "../../store/chat/types";
 import AttachmentLink from "../AttachmentLink"
+import OriginalMessageBlock from "../OriginalMessageBlock"
 
 import "./Chat.css";
 
@@ -23,7 +24,8 @@ const mapStateToProps = (state: IRootState) => ({
   activeChatName: state.chat.activeChatName,
   messages: state.chat.chatData ? state.chat.chatData.messages : [],
   media: state.message.messageData.media,
-  mediaUrl: state.media.fileData.url
+  mediaUrl: state.media.fileData.url,
+  originalMessage: state.message.originalMessage
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -67,13 +69,11 @@ const Chat: React.FC<ChatProps> = props => {
 
   const parseURLs = (text: string) => {
     const urls = getUrls(text);
-
     const parsedUrls = Array.from(urls).map((url, idx: number) => {
       return (
         <MicrolinkCard url={url} key={idx}/>
       )
     })
-
     return (
       <>
         {parsedUrls}
@@ -81,13 +81,13 @@ const Chat: React.FC<ChatProps> = props => {
     )
   }
 
-  const getFormattedMessage = (message: MessageData) => {
-    let videoArray =  message.text && message.text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
+  const getFormattedMessage = (message: MessageData | ReplyData, text: string) => {
+    let videoArray =  text && text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
     if (videoArray) {
       let videoId = videoArray && videoArray[1]
       return (
         <>
-          <a href={message.text}>{message.text}</a>
+          <a href={text}>{text}</a>
           <Iframe
             url={`https://www.youtube.com/embed/${videoId}`}
             width="100%"
@@ -102,7 +102,7 @@ const Chat: React.FC<ChatProps> = props => {
     } else if (message.media) {
       return (
         <div className="mediaAttachment">
-          <p>{message.text}</p>
+          <p>{text}</p>
           {message.media.map(attachment => {
             if (attachment.type === "image/png" || attachment.type === "image/jpeg") {
               return (
@@ -182,8 +182,8 @@ const Chat: React.FC<ChatProps> = props => {
     } else {
       return (
         <>
-          <p>{message.text}</p>
-          {message.text && <Linkify>{parseURLs(message.text)}</Linkify>}
+          <p>{text}</p>
+          {text && <Linkify>{parseURLs(text)}</Linkify>}
         </>
       )
     }
@@ -210,7 +210,7 @@ const Chat: React.FC<ChatProps> = props => {
                 { message.replyTo.owner.nick || message.replyTo.owner.login }
               </p>
               <p>
-                { message.replyTo.text }
+                { getFormattedMessage(message.replyTo, message.replyTo.text) }
               </p>
             </div>
           }
@@ -220,14 +220,20 @@ const Chat: React.FC<ChatProps> = props => {
                 Forwarded from { message.forwarded.owner.nick || message.forwarded.owner.login }
               </p>
               <p>
-                { getFormattedMessage(message.forwarded) }
+                { getFormattedMessage(message.forwarded, message.forwarded.text) }
               </p>
             </div>
           } 
-          {getFormattedMessage(message)}
+          {getFormattedMessage(message, message.text)}
           <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
         </div>
       ))}
+      { props.originalMessage &&
+        <OriginalMessageBlock 
+          originalMessage={props.originalMessage}
+          content={getFormattedMessage(props.originalMessage, props.originalMessage.text)}
+        />
+      }
     </div>
   );
 }

@@ -12,7 +12,7 @@ import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
   activeChatId: state.chat.activeChatId,
-  originalMessageId: state.message.originalMessageId
+  originalMessage: state.message.originalMessage
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -38,8 +38,8 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
   const sendMessageHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (text.trim() === '') return;
-    if (props.activeChatId && props.originalMessageId) {
-      props.replyToMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessageId })
+    if (props.activeChatId && props.originalMessage) {
+      props.replyToMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessage._id })
     } else if (props.activeChatId) {
       props.sendMessage({ activeChatId: props.activeChatId, text, mediaId: null })
     }

@@ -247,6 +247,13 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
       login
       nick
     }
+    media{
+      _id
+      text
+      url
+      originalFileName
+      type
+    }
     replies {
       _id
       text
@@ -254,6 +261,13 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
         _id
         login
         nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
       }
     }
     replyTo {
@@ -264,6 +278,13 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
         login
         nick
       }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
     }
     forwarded {
       _id
@@ -273,6 +294,13 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
         login
         nick
       }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
     }
     forwardWith {
       _id
@@ -281,6 +309,13 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
         _id
         login
         nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
       }
     }
   }

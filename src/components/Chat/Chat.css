@@ -16,6 +16,7 @@ a {
   width: 90%;
   margin: 0 auto;
   overflow-y: scroll;
+  position: relative;
 }
 
 .Chat.is-user-msg:hover .Chat_delete_button{
@@ -119,6 +120,7 @@ left: 0;
   max-width: 90%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  word-wrap: break-word;
   position: relative;
   cursor: pointer;
 }
