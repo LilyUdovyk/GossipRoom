@@ -8,6 +8,8 @@ import * as messageActions from "../../store/message/actions";
 
 import ButtonWithEmoji from "../ButtonWithEmoji"
 import ButtonWithFileUpload from "../ButtonWithFileUpload"
+import OriginalMessageBlock from "../OriginalMessageBlock"
+import getFormattedMessage from "../Chat"
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
@@ -48,6 +50,11 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
 
   return (
     <>
+      { props.originalMessage &&
+        <OriginalMessageBlock 
+          originalMessage={props.originalMessage}
+        />
+      }
       <form action="" onSubmit={sendMessageHandler} className={style.message}>
         <input
           className={style.messageInput}

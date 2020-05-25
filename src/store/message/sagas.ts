@@ -36,6 +36,13 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
       login
       nick
     }
+    media{
+      _id
+      text
+      url
+      originalFileName
+      type
+    }
     replies {
       _id
       text
@@ -43,6 +50,13 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
         _id
         login
         nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
       }
     }
     replyTo {
@@ -53,6 +67,13 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
         login
         nick
       }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
     }
     forwarded {
       _id
@@ -61,6 +82,13 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
         _id
         login
         nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
       }
     }
     forwardWith {
@@ -71,10 +99,16 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
         login
         nick
       }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
     }
   }
 }`
-
 
 const sendMessage = async (chat_id: string, text: string) => {
   let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 

@@ -1,22 +1,22 @@
 import React from "react";
 
 import { MessageData } from "../../store/message/types";
+import FormattedMessage from "../FormattedMessage"
 import style from"./style.module.css";
 
 interface Props {
     originalMessage: MessageData,
-    content: any
 }
 
 const OriginalMessageBlock = (props: Props) => {
 	return (
         <div className={style.originalMessageBlock}>
-            <p className="owner">
-                { props.originalMessage.owner.nick || props.originalMessage.owner.login }
-            </p>
-            <p>
-                { props.content }
-            </p>
+            <div className={style.originalMessage}>
+                <p className="owner">
+                    { props.originalMessage.owner.nick || props.originalMessage.owner.login }
+                </p>
+                <FormattedMessage message={props.originalMessage} />
+            </div>
         </div>
 	);
 }

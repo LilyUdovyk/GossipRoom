@@ -2,19 +2,13 @@ import React, {useRef} from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import moment from 'moment';
-import Iframe from 'react-iframe'
-import MicrolinkCard from '@microlink/react';
-import Linkify from 'linkifyjs/react';
-import getUrls from 'get-urls';
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 
 import { IRootState, IRootAction } from "../../store/rootReducer";
 import * as messageAction from "../../store/message/actions";
 // import * as contactsAction from "../../store/contacts/actions";
-import { MessageData, ReplyData } from "../../store/chat/types";
-import AttachmentLink from "../AttachmentLink"
-import OriginalMessageBlock from "../OriginalMessageBlock"
-
+import { MessageData } from "../../store/chat/types";
+import FormattedMessage from "../FormattedMessage"
 import "./Chat.css";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -63,130 +57,8 @@ const Chat: React.FC<ChatProps> = props => {
   }
 
   const replyToMessage = (message: MessageData) => {
-    console.log("saveOriginalMessage")
+    console.log("saveOriginalMessage", message)
     props.saveOriginalMessage(message)
-  }
-
-  const parseURLs = (text: string) => {
-    const urls = getUrls(text);
-    const parsedUrls = Array.from(urls).map((url, idx: number) => {
-      return (
-        <MicrolinkCard url={url} key={idx}/>
-      )
-    })
-    return (
-      <>
-        {parsedUrls}
-      </>
-    )
-  }
-
-  const getFormattedMessage = (message: MessageData | ReplyData, text: string) => {
-    let videoArray =  text && text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
-    if (videoArray) {
-      let videoId = videoArray && videoArray[1]
-      return (
-        <>
-          <a href={text}>{text}</a>
-          <Iframe
-            url={`https://www.youtube.com/embed/${videoId}`}
-            width="100%"
-            frameBorder={0}
-            allow={"accelerometer"}
-            allowFullScreen
-            encrypted-media
-            picture-in-picture
-          />
-        </>
-      )
-    } else if (message.media) {
-      return (
-        <div className="mediaAttachment">
-          <p>{text}</p>
-          {message.media.map(attachment => {
-            if (attachment.type === "image/png" || attachment.type === "image/jpeg") {
-              return (
-                <img
-                  key={attachment._id}
-                  className="attachment"
-                  src={`http://chat.fs.a-level.com.ua/${attachment.url}`}
-                  alt="Attachment"
-                />
-              )
-            } else if (attachment.type === "video/mp4" || attachment.type === "video/webm" || attachment.type === "video/ogg") {
-              return (
-                <>
-                  <AttachmentLink
-                    url={attachment.url}
-                    icon={"file-video"}
-                    text={attachment.originalFileName}
-                  />
-                  <video
-                    key={attachment._id}
-                    className="attachment"
-                    controls>
-                    <source src={`http://chat.fs.a-level.com.ua/${attachment.url}`} type="video/mp4" />
-                    <source src={`http://chat.fs.a-level.com.ua/${attachment.url}`} type="video/webm" />
-                    <source src={`http://chat.fs.a-level.com.ua/${attachment.url}`} type="video/ogg" />
-                    <p>Your browser doesn't support HTML5 video. Download this file for review.</p>
-                  </video>
-                </>
-              )
-            } else if (attachment.type === "audio/mp3" || attachment.type === "audio/ogg") {
-              return (
-                <>
-                  <AttachmentLink
-                    url={attachment.url}
-                    icon={"file-audio"}
-                    text={attachment.originalFileName}
-                  />
-                  <audio
-                    controls
-                    key={attachment._id}
-                    className="attachment"
-                  >
-                    <source src={`http://chat.fs.a-level.com.ua/${attachment.url}`} type="audio/mp3" />
-                    <source src={`http://chat.fs.a-level.com.ua/${attachment.url}`} type="audio/ogg" />
-                    <p>Your browser doesn't support HTML5 audio. Download this file for review.</p>
-                  </audio>
-                </>
-              )
-            } else if (attachment.type === "application/zip") {
-              return (
-                <AttachmentLink
-                  url={attachment.url}
-                  icon={"file-archive"}
-                  text={attachment.originalFileName}
-                />
-              )
-            } else if (attachment.type && (attachment.type.includes("application") || attachment.type.includes("text"))) {
-              return (
-                <AttachmentLink
-                  url={attachment.url}
-                  icon={"file-alt"}
-                  text={attachment.originalFileName}
-                />
-              )
-            } else {
-              return (
-                <AttachmentLink
-                  url={attachment.url}
-                  icon={"file"}
-                  text={attachment.originalFileName}
-                />
-              )
-            }
-          })}
-        </div>
-      )
-    } else {
-      return (
-        <>
-          <p>{text}</p>
-          {text && <Linkify>{parseURLs(text)}</Linkify>}
-        </>
-      )
-    }
   }
 
   return (
@@ -209,9 +81,7 @@ const Chat: React.FC<ChatProps> = props => {
               <p className="owner">
                 { message.replyTo.owner.nick || message.replyTo.owner.login }
               </p>
-              <p>
-                { getFormattedMessage(message.replyTo, message.replyTo.text) }
-              </p>
+                <FormattedMessage message={message.replyTo} />
             </div>
           }
           { message.forwarded &&
@@ -219,21 +89,19 @@ const Chat: React.FC<ChatProps> = props => {
               <p className="owner">
                 Forwarded from { message.forwarded.owner.nick || message.forwarded.owner.login }
               </p>
-              <p>
-                { getFormattedMessage(message.forwarded, message.forwarded.text) }
-              </p>
+              <FormattedMessage message={message.forwarded} />
             </div>
           } 
-          {getFormattedMessage(message, message.text)}
+          <FormattedMessage message={message} />
           <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
         </div>
       ))}
-      { props.originalMessage &&
+      {/* { props.originalMessage &&
         <OriginalMessageBlock 
           originalMessage={props.originalMessage}
-          content={getFormattedMessage(props.originalMessage, props.originalMessage.text)}
+          content={getFormattedMessage(props.originalMessage)}
         />
-      }
+      } */}
     </div>
   );
 }
