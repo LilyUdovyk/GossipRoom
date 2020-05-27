@@ -38,8 +38,8 @@ type SidebarProps = ReturnType<typeof mapStateToProps> &
 
 const Sidebar: React.FC<SidebarProps> = props => {
 
-	const [isOpenedContacts, setIsOpenedContacts] = React.useState(false)
-	const [isOpenedChats, setIsOpenedChats] = React.useState(false)
+	// const [isOpenedContacts, setIsOpenedContacts] = React.useState(false)
+	// const [isOpenedChats, setIsOpenedChats] = React.useState(false)
 
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
@@ -147,7 +147,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	return (
 		<aside className="sidebar">
-			<div className="buttonBlock">
+			{/* <div className="buttonBlock"> */}
 				<ButtonWithPopup />
 				{/* { isOpenedContacts && 
 					<button className="navButton">
@@ -159,7 +159,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 						<FontAwesomeIcon icon="comments" />
 					</button>
 				} */}
-			</div>
+			{/* </div> */}
 			{renderSidebarContent()}
 		</aside>
 	)

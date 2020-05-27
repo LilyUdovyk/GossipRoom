@@ -22,19 +22,25 @@
   box-sizing: border-box; 
 }
 
-.message button {
+/* .ButtonWithEmoji,
+.ButtonWithFileUpload, */
+.button {
   border: none;
   background: none;
   font-size: 1.2rem;
   border-radius: 8px;
   color: grey;
 }
-
-.message button:focus {
+/* 
+.ButtonWithEmoji:focus,
+.ButtonWithFileUpload:focus, */
+.button:focus {
   outline: none;
 }
 
-.message button:hover {
+/* .ButtonWithEmoji:hover,
+.ButtonWithFileUpload:hover, */
+.button:hover {
   color: black;
 }
  
@@ -66,42 +72,3 @@
   top: 0;
   opacity: 0;
 }
-
-/* .MessageReplyDelete {
-  border:none;
-  background: initial;
-  cursor: pointer;
-  font-weight: bolder;
-  color: purple;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding-right: 10px;
-  padding-top: 5px;
-}
-
-.MessageReply {
-  background: rgba(86.3, 84.7, 83.9,0.1);
-  border-radius:4px;
-  border:0.5px solid rgba(89.8, 85.5, 83.9,0.2);
-  border-left: 4px solid #7a37a5;
-  margin:0.5rem;
-  padding: 1rem 0.5rem;
-  text-overflow: ellipsis;
-  color: black;
-  font-size: 0.8em;
-  overflow: hidden;
-  word-wrap: break-word;
-  position: relative;
-  display:none;
-}
-.show {
-  display: block!important;
-} */
-
-/* .MessageReplyName {
-  margin:0;
-  padding: 0.2rem 0;
-  font-weight: bolder;
-  color: #7a37a5;
-} */

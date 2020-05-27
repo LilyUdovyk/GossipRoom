@@ -1,5 +1,5 @@
 import { createAsyncAction, createAction } from "typesafe-actions";
-import { MessageCreds, MessageData, ReplyCreds } from "./types";
+import { MessageCreds, MessageData, ReplyCreds, SavedMessageData } from "./types";
 
 export const sendMessage = createAsyncAction(
     "message/SEND_MESSAGE_REQUEST",
@@ -12,7 +12,9 @@ export const onMessage = createAction(
 )();
 
 export const saveOriginalMessage = createAction(
-    "message/SAVE_ORIGINAL_MESSAGE", (message: MessageData) => message
+    "message/SAVE_ORIGINAL_MESSAGE", 
+    (message: MessageData | null, isReply: boolean, isForward: boolean) => 
+    ({message, isReply, isForward})
 )();
 
 export const replyToMessage = createAsyncAction(
@@ -20,3 +22,9 @@ export const replyToMessage = createAsyncAction(
     "message/REPLY_TO_MESSAGE_SUCCESS",
     "message/REPLY_TO_MESSAGE_FAILURE"
 )<ReplyCreds, MessageData, string>();
+
+export const forwardMessage = createAsyncAction(
+    "message/FORWARD_MESSAGE_REQUEST",
+    "message/FORWARD_MESSAGE_SUCCESS",
+    "message/FORWARD_MESSAGE_FAILURE"
+)<string, MessageData, string>();

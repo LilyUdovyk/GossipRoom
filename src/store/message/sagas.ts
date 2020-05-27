@@ -237,19 +237,6 @@ const playSound = () => {
   audio.play();
 }
 
-// export function* saveOriginalMessageSaga() {
-//   while (true) {
-//     const { payload } = yield take(actions.saveOriginalMessage)
-//     console.log("saveOriginalMessage", payload)
-//     const activeUserId = yield select(state => state.user.userData._id)
-
-//     const activeChatId = yield select(state => state.chat.activeChatId)
-//     if (activeChatId === payload.chat._id) {
-//       yield put(getActiveChat.request(activeChatId))
-//     }
-//   }
-// }
-
 export function* replyToMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.replyToMessage.request)
@@ -363,6 +350,125 @@ const replyToMessage = async (chat_id: string, text: string, originalMessageId: 
     {
       "chat_id": chat_id,
       "text": text,
+      "message_id": originalMessageId
+    }
+  )
+  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
+  return messageContent.data.MessageUpsert
+}
+
+export function* forwardMessageSaga() {
+  while (true) {
+    const { payload } = yield take(actions.forwardMessage.request)
+    console.log("forwardMessageSaga")
+    try {
+      const originalMessage = yield select(state => state.message.originalMessage)
+      const message = yield call(forwardMessage, payload, originalMessage._id)
+      console.log("forwardMessageSaga -> message", message)
+      yield putResolve(actions.forwardMessage.success(message))
+    } catch (error) {
+      console.error("forwardMessageSaga -> error", error)
+      yield put(actions.forwardMessage.failure(error.message))
+    }
+  }
+}
+
+const forwardMessageQuery = `mutation forwardedMessage ($message_id:ID, $chat_id:ID) {
+  MessageUpsert(message: {
+    chat: {_id: $chat_id},
+    forwarded: {
+    	_id: $message_id,
+    }
+  }) {
+    _id
+    createdAt
+    text
+    owner {
+      _id
+      login
+      nick
+    }
+    media{
+      _id
+      text
+      url
+      originalFileName
+      type
+    }
+    replies {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
+    }
+    replyTo {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
+    }
+    forwarded {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
+    }
+    forwardWith {
+      _id
+      text
+      owner {
+        _id
+        login
+        nick
+      }
+      media{
+        _id
+        text
+        url
+        originalFileName
+        type
+      }
+    }
+  }
+}`
+
+
+const forwardMessage = async (chat_id: string, originalMessageId: string) => {
+  let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
+    `Bearer ${localStorage.authToken}`,
+    forwardMessageQuery,
+    {
+      "chat_id": chat_id,
       "message_id": originalMessageId
     }
   )

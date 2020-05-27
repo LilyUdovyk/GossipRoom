@@ -5,7 +5,7 @@ export type MessageAction = ActionType<typeof actions>
 
 export interface MessageState {
     readonly messageData: MessageData
-    readonly originalMessage: MessageData | null
+    readonly savedMessage: SavedMessageData
     readonly error: string | null
 }
 
@@ -45,16 +45,6 @@ export interface ReplyData {
     }
 }
 
-// export interface ForwardData {
-//     readonly _id: string
-//     readonly text: string
-//     readonly owner: {
-//         readonly _id: string
-//         readonly login: string
-//         readonly nick : string | null
-//     }
-// }
-
 export interface ChatData {
     readonly _id: string
     readonly owner: ContactData
@@ -88,4 +78,10 @@ export interface MediaData {
 export interface AvatarData {
     readonly _id: string | null
     readonly url: string | null
+}
+
+export interface SavedMessageData {
+    readonly originalMessage: MessageData | null
+    readonly isReply?: boolean
+    readonly isForward?: boolean
 }

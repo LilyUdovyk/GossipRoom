@@ -54,7 +54,7 @@ class ButtonWithEmoji extends React.PureComponent<Props, State> {
     const { isOpenedEmoji } = this.state;
     return (
       <div className={style.buttonWithEmoji}>
-        <button onClick={ this.toggleEmoji }>
+        <button onClick={ this.toggleEmoji } className={style.button}>
           <FontAwesomeIcon icon="smile" />
         </button>
         { isOpenedEmoji && 

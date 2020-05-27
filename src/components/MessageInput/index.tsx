@@ -9,19 +9,20 @@ import * as messageActions from "../../store/message/actions";
 import ButtonWithEmoji from "../ButtonWithEmoji"
 import ButtonWithFileUpload from "../ButtonWithFileUpload"
 import OriginalMessageBlock from "../OriginalMessageBlock"
-import getFormattedMessage from "../Chat"
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
   activeChatId: state.chat.activeChatId,
-  originalMessage: state.message.originalMessage
+  originalMessage: state.message.savedMessage.originalMessage,
+  isReply: state.message.savedMessage.isReply
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       sendMessage: messageActions.sendMessage.request,
-      replyToMessage: messageActions.replyToMessage.request
+      replyToMessage: messageActions.replyToMessage.request,
+      saveOriginalMessage: messageActions.saveOriginalMessage,
     },
     dispatch
   );
@@ -31,6 +32,10 @@ type MessageInputProps = ReturnType<typeof mapStateToProps> &
 
 const MessageInput: React.FC<MessageInputProps> = (props) => {
   const [text, setText] = React.useState("");
+
+  const deleteOriginalMessage = () => {
+    props.saveOriginalMessage(null, false, false)
+  }
 
   const addEmoji = (emoji: any) => {
     console.log("input", emoji)
@@ -50,15 +55,16 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
 
   return (
     <>
-      { props.originalMessage &&
+      {/* { props.isReply &&
         <OriginalMessageBlock 
           originalMessage={props.originalMessage}
+          deleteOriginalMessage={deleteOriginalMessage}
         />
-      }
+      } */}
       <form action="" onSubmit={sendMessageHandler} className={style.message}>
         <input
           className={style.messageInput}
-          placeholder="write a message"
+          placeholder="Write your message"
           type="text"
           value={text}
           onChange={e => setText(e.target.value)}
@@ -66,7 +72,7 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
         <ButtonWithEmoji addEmoji={addEmoji} />
         <div className={style.buttonBlock}>
           <ButtonWithFileUpload />
-          <button type="submit">
+          <button type="submit" className={style.button} >
             <FontAwesomeIcon icon="paper-plane" />
           </button>
         </div>

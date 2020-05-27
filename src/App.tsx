@@ -15,7 +15,10 @@ import { faSmile,
          faFileArchive,
          faFile,
          faFileVideo,
-         faFileAudio
+         faFileAudio,
+         faTimes,
+         faCheckCircle,
+         faExclamationCircle
        } from '@fortawesome/free-solid-svg-icons'
 
 import rootReducer from './store/rootReducer';
@@ -34,7 +37,10 @@ library.add(faSmile,
             faFileArchive, 
             faFile,
             faFileVideo,
-            faFileAudio
+            faFileAudio,
+            faTimes,
+            faCheckCircle,
+            faExclamationCircle
           )
 
 const sagaMiddleware = createSagaMiddleware()

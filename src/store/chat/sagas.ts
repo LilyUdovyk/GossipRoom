@@ -25,26 +25,39 @@ export function* getActiveChatSaga() {
 
 const getActiveChatQuery = `query getActiveChat($chatQuery: String){
   ChatFindOne(query: $chatQuery){
-    _id title createdAt
+    _id
+    title
+    createdAt
     owner {
-      _id login nick
-      avatar{
-        _id, url
+      _id
+      login
+      nick
+      avatar {
+        _id
+        url
       }
     }
-        avatar{
-      _id, url
+    avatar {
+      _id
+      url
     }
-    members{
-      _id login nick
-      avatar{
-        _id, url
+    members {
+      _id
+      login
+      nick
+      avatar {
+        _id
+        url
       }
     }
     messages{
-      _id text createdAt 
+      _id
+      text
+      createdAt 
       owner{
         _id
+        login
+        nick
       }
       media{
         _id

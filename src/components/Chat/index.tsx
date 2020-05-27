@@ -5,10 +5,10 @@ import moment from 'moment';
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 
 import { IRootState, IRootAction } from "../../store/rootReducer";
-import * as messageAction from "../../store/message/actions";
-// import * as contactsAction from "../../store/contacts/actions";
+import * as messageActions from "../../store/message/actions";
 import { MessageData } from "../../store/chat/types";
 import FormattedMessage from "../FormattedMessage"
+import ForwardBlock from "../ForwardBlock"
 import "./Chat.css";
 
 const mapStateToProps = (state: IRootState) => ({
@@ -19,13 +19,14 @@ const mapStateToProps = (state: IRootState) => ({
   messages: state.chat.chatData ? state.chat.chatData.messages : [],
   media: state.message.messageData.media,
   mediaUrl: state.media.fileData.url,
-  originalMessage: state.message.originalMessage
+  originalMessage: state.message.savedMessage.originalMessage,
+  isForward: state.message.savedMessage.isForward
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      saveOriginalMessage: messageAction.saveOriginalMessage,
+      saveOriginalMessage: messageActions.saveOriginalMessage,
     },
     dispatch
   );
@@ -33,7 +34,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type ChatProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-const Chat: React.FC<ChatProps> = props => {
+const Chat: React.FC<ChatProps> = props => {  
 
   const chatsRef = useRef<HTMLDivElement>(null);
 
@@ -56,9 +57,16 @@ const Chat: React.FC<ChatProps> = props => {
     return message.owner._id === props.activeUserId ? true : false
   }
 
-  const replyToMessage = (message: MessageData) => {
+  const replyMessage = (message: MessageData) => {
+    console.log("replyOriginalMessage", message)
+    props.saveOriginalMessage(message, true, false)
+  }
+
+  const forwardMessage = (message: MessageData) => {
     console.log("saveOriginalMessage", message)
-    props.saveOriginalMessage(message)
+    props.saveOriginalMessage(message, false, true)
+    console.log("isForward", props.isForward)
+    console.log("saveOriginalMessage", props.originalMessage)
   }
 
   return (
@@ -67,7 +75,8 @@ const Chat: React.FC<ChatProps> = props => {
         <div 
           key={message._id}
           className={`"Message_input_box" Chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
-          onClick = { () => replyToMessage(message) }
+          // onClick = { () => replyToMessage(message) }
+          onClick = { () => forwardMessage(message) }
           // onMouseDown = {handleMouseDown}
           // onMouseUp = {handleMouseUp}
           // data-active = {activeUser}
@@ -96,12 +105,9 @@ const Chat: React.FC<ChatProps> = props => {
           <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
         </div>
       ))}
-      {/* { props.originalMessage &&
-        <OriginalMessageBlock 
-          originalMessage={props.originalMessage}
-          content={getFormattedMessage(props.originalMessage)}
-        />
-      } */}
+      { props.isForward &&
+        <ForwardBlock />
+      }
     </div>
   );
 }

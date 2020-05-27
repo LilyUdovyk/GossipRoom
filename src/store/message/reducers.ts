@@ -5,7 +5,11 @@ import * as actions from "./actions";
 
 const initialState: MessageState = {
     error: null,
-    originalMessage: null,
+    savedMessage: {
+        originalMessage: null,
+        isReply: false,
+        isForward: false,
+    },
     messageData: {
         _id: '',
         createdAt: '',
@@ -87,20 +91,44 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
         case getType(actions.saveOriginalMessage):
             return {
                 ...state,
-                error: null,
-                originalMessage: action.payload,
+                error: null, 
+                savedMessage: {
+                    ...state.savedMessage,
+                    originalMessage: action.payload.message,
+                    isReply: action.payload.isReply,
+                    isForward: action.payload.isForward
+                }
             }
         case getType(actions.replyToMessage.success):
             return {
                 ...state,
                 error: null,
-                originalMessage: null,
                 messageData: action.payload,
+                savedMessage: {
+                    ...state.savedMessage,
+                    originalMessage: null,
+                    isReply: false
+                }               
             }
         case getType(actions.replyToMessage.failure):
             return {
                 ...state,
-                originalMessage: null,
+                error: action.payload,
+            }
+        case getType(actions.forwardMessage.success):
+            return {
+                ...state,
+                error: null,
+                messageData: action.payload,
+                savedMessage: {
+                    ...state.savedMessage,
+                    originalMessage: null,
+                    isForward: false
+                }
+            }
+        case getType(actions.forwardMessage.failure):
+            return {
+                ...state,
                 error: action.payload,
             }
         default:
