@@ -13,8 +13,10 @@ import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
   activeChatId: state.chat.activeChatId,
+  // originalMessage: state.message.originalMessage,
   originalMessage: state.message.savedMessage.originalMessage,
-  isReply: state.message.savedMessage.isReply
+  isReply: state.message.savedMessage.isReply,
+  isForward: state.message.savedMessage.isForward
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -22,6 +24,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     {
       sendMessage: messageActions.sendMessage.request,
       replyToMessage: messageActions.replyToMessage.request,
+      forwardMessage: messageActions.forwardMessage.request,
       saveOriginalMessage: messageActions.saveOriginalMessage,
     },
     dispatch
@@ -34,7 +37,7 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
   const [text, setText] = React.useState("");
 
   const deleteOriginalMessage = () => {
-    props.saveOriginalMessage(null, false, false)
+    props.saveOriginalMessage({originalMessage: null, isReply: false, isForward: false})
   }
 
   const addEmoji = (emoji: any) => {
@@ -45,8 +48,11 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
   const sendMessageHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (text.trim() === '') return;
-    if (props.activeChatId && props.originalMessage) {
+    if (props.activeChatId && props.originalMessage && props.isReply) {
+      console.log("props.originalMessage", props.originalMessage, "props.isReply", props.isReply)
       props.replyToMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessage._id })
+    // } else if (props.activeChatId && props.originalMessage && props.isForward) {
+    //   props.forwardMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessage._id })    
     } else if (props.activeChatId) {
       props.sendMessage({ activeChatId: props.activeChatId, text, mediaId: null })
     }
@@ -55,12 +61,12 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
 
   return (
     <>
-      {/* { props.isReply &&
+      { props.isReply &&
         <OriginalMessageBlock 
           originalMessage={props.originalMessage}
           deleteOriginalMessage={deleteOriginalMessage}
         />
-      } */}
+      }
       <form action="" onSubmit={sendMessageHandler} className={style.message}>
         <input
           className={style.messageInput}

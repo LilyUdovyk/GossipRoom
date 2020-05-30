@@ -6,7 +6,7 @@ import FormattedMessage from "../FormattedMessage"
 import style from"./style.module.css";
 
 interface Props {
-    originalMessage: MessageData,
+    originalMessage: MessageData | null,
     deleteOriginalMessage: any
 }
 
@@ -15,7 +15,7 @@ const OriginalMessageBlock = (props: Props) => {
         <div className={style.originalMessageBlock}>
             <div className={style.originalMessage}>
                 <p className={style.owner}>
-                    { props.originalMessage.owner.nick || props.originalMessage.owner.login }
+                    { props.originalMessage && (props.originalMessage.owner.nick || props.originalMessage.owner.login) }
                 </p>
                 <FormattedMessage message={props.originalMessage} />
                 <button 

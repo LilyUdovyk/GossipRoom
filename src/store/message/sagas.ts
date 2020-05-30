@@ -1,5 +1,4 @@
 import { take, call, put, putResolve, select } from 'redux-saga/effects';
-// import { push } from 'connected-react-router';
 
 import * as actions from './actions'
 import { getActiveChat } from '../chat/actions'
@@ -23,13 +22,25 @@ export function* sendMessageSaga() {
   }
 }
 
-const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
-  MessageUpsert(message: {
-      chat: {_id: $chat_id}, 
-      text: $text
-  }) {
+const messageQuery = 
+`{
+  _id
+  createdAt
+  text
+  owner {
     _id
-    createdAt
+    login
+    nick
+  }
+  media{
+    _id
+    text
+    url
+    originalFileName
+    type
+  }
+  replies {
+    _id
     text
     owner {
       _id
@@ -43,71 +54,62 @@ const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
       originalFileName
       type
     }
-    replies {
+  }
+  replyTo {
+    _id
+    text
+    owner {
       _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
+      login
+      nick
     }
-    replyTo {
+    media{
       _id
       text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwarded {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwardWith {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
+      url
+      originalFileName
+      type
     }
   }
+  forwarded {
+    _id
+    text
+    owner {
+      _id
+      login
+      nick
+    }
+    media{
+      _id
+      text
+      url
+      originalFileName
+      type
+    }
+  }
+  forwardWith {
+    _id
+    text
+    owner {
+      _id
+      login
+      nick
+    }
+    media{
+      _id
+      text
+      url
+      originalFileName
+      type
+    }
+  }
+}`
+
+const sendMessageQuery = `mutation sendMessage ($chat_id:ID, $text:String) {
+  MessageUpsert(message: {
+      chat: {_id: $chat_id}, 
+      text: $text
+  }) ${messageQuery}
 }`
 
 const sendMessage = async (chat_id: string, text: string) => {
@@ -128,77 +130,7 @@ const sendMessageWithAtthmentQuery = `mutation sendMessage ($chat_id:ID, $text:S
       chat: {_id: $chat_id}, 
       text: $text,
     	media:[{_id: $media_id}]
-  }) {
-    _id
-    createdAt
-    text
-    owner {
-      _id
-      login
-      nick
-    }
-    media{
-      _id
-      text
-      url
-    }
-    replies {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-      }
-    }
-    replyTo {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-      }
-    }
-    forwarded {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-      }
-    }
-    forwardWith {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-      }
-    }
-  }
+  }) ${messageQuery}
 }`
 
 const sendMessageacWithAtthment = async (chat_id: string, text: string, media_id: string) => {
@@ -259,87 +191,7 @@ const replyToMessageQuery = `mutation replyToMessage ($message_id:ID, $chat_id:I
     replyTo: {
       _id: $message_id,
     }
-  }) {
-    _id
-    createdAt
-    text
-    owner {
-      _id
-      login
-      nick
-    }
-    media{
-      _id
-      text
-      url
-      originalFileName
-      type
-    }
-    replies {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    replyTo {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwarded {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwardWith {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-  }
+  }) ${messageQuery}
 }`
 
 
@@ -362,8 +214,9 @@ export function* forwardMessageSaga() {
     const { payload } = yield take(actions.forwardMessage.request)
     console.log("forwardMessageSaga")
     try {
-      const originalMessage = yield select(state => state.message.originalMessage)
-      const message = yield call(forwardMessage, payload, originalMessage._id)
+      // const originalMessage = yield select(state => state.message.originalMessage)
+      const message = yield call(forwardMessage, payload.activeChatId, payload.text, payload.originalMessageId )
+      // const message = yield call(forwardMessage, payload.activeChatId, payload.text, payload.originalMessageId )
       console.log("forwardMessageSaga -> message", message)
       yield putResolve(actions.forwardMessage.success(message))
     } catch (error) {
@@ -373,102 +226,24 @@ export function* forwardMessageSaga() {
   }
 }
 
-const forwardMessageQuery = `mutation forwardedMessage ($message_id:ID, $chat_id:ID) {
+const forwardMessageQuery = `mutation forwardedMessage ($chat_id:ID, $message_id:ID, $text:String) {
   MessageUpsert(message: {
     chat: {_id: $chat_id},
+    text: $text,
     forwarded: {
     	_id: $message_id,
     }
-  }) {
-    _id
-    createdAt
-    text
-    owner {
-      _id
-      login
-      nick
-    }
-    media{
-      _id
-      text
-      url
-      originalFileName
-      type
-    }
-    replies {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    replyTo {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwarded {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-    forwardWith {
-      _id
-      text
-      owner {
-        _id
-        login
-        nick
-      }
-      media{
-        _id
-        text
-        url
-        originalFileName
-        type
-      }
-    }
-  }
+  }) ${messageQuery}
 }`
 
 
-const forwardMessage = async (chat_id: string, originalMessageId: string) => {
+const forwardMessage = async (chat_id: string, text: string, originalMessageId: string) => {
   let messageContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
     `Bearer ${localStorage.authToken}`,
     forwardMessageQuery,
     {
       "chat_id": chat_id,
+      "text": text,
       "message_id": originalMessageId
     }
   )

@@ -12,9 +12,7 @@ export const onMessage = createAction(
 )();
 
 export const saveOriginalMessage = createAction(
-    "message/SAVE_ORIGINAL_MESSAGE", 
-    (message: MessageData | null, isReply: boolean, isForward: boolean) => 
-    ({message, isReply, isForward})
+    "message/SAVE_ORIGINAL_MESSAGE", (savedMessage: SavedMessageData) => savedMessage
 )();
 
 export const replyToMessage = createAsyncAction(
@@ -27,4 +25,4 @@ export const forwardMessage = createAsyncAction(
     "message/FORWARD_MESSAGE_REQUEST",
     "message/FORWARD_MESSAGE_SUCCESS",
     "message/FORWARD_MESSAGE_FAILURE"
-)<string, MessageData, string>();
+)<ReplyCreds, MessageData, string>();

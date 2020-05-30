@@ -6,6 +6,7 @@ export type MessageAction = ActionType<typeof actions>
 export interface MessageState {
     readonly messageData: MessageData
     readonly savedMessage: SavedMessageData
+    // originalMessage: MessageData | null
     readonly error: string | null
 }
 

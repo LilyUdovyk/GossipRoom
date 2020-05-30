@@ -9,7 +9,7 @@ import AttachmentLink from "../AttachmentLink"
 import style from"./style.module.css";
 
 interface Props {
-	message: MessageData | ReplyData
+	message: MessageData | ReplyData | null
 }
   
 const parseURLs = (text: string) => {
@@ -32,7 +32,7 @@ const FormattedMessage = (props: Props) => {
       let videoId = videoArray && videoArray[1]
       return (
         <>
-          <a href={props.message.text}>{props.message.text}</a>
+          <a href={props.message && props.message.text}>{props.message && props.message.text}</a>
           <Iframe
             url={`https://www.youtube.com/embed/${videoId}`}
             width="100%"
@@ -133,5 +133,4 @@ const FormattedMessage = (props: Props) => {
         )
     }
 }
-
-  export default React.memo(FormattedMessage);
+export default React.memo(FormattedMessage);

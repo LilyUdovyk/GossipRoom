@@ -17,9 +17,97 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     dispatch
   );
 
-type AuthorizationProps = ReturnType<typeof mapDispatchToProps>;
+type RegistrationProps = ReturnType<typeof mapDispatchToProps>;
 
-const Authorization: React.FC<AuthorizationProps> = ({ regByCreds }) => {
+// const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
+//   const [nick, setNick] = React.useState("");
+//   const [login, setLogin] = React.useState("");
+//   const [password, setPassword] = React.useState("");
+//   const [password2, setPassword2] = React.useState("");
+  
+//   const loginValue = login.trim() !== "" ? true : false;
+//   const nickValue = nick.trim() !== "" ? true : false;
+//   const passwordValue = password.trim() !== "" ? true : false;
+//   const password2Value = password2.trim() !== "" ? true : false;
+
+//   const signUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     /* checkInputs() */;
+//     regByCreds({ nick, login, password })
+//   }
+
+//   return (
+//     <div className={style.container}>
+//       <div className={style.card}>
+//         <div className={style.header}>
+//           <h2>Create Account</h2>
+//         </div>
+//         <form id="form" className={style.form}>
+//           <div className={style.formControl}>
+//             <label htmlFor="login">Login</label>
+//             <input type="text" id="login" />
+//             { loginValue &&
+//             	<FontAwesomeIcon icon="check-circle" className={style.checkCircle} />
+//             }
+//             { !loginValue &&
+//               <>
+//                 <FontAwesomeIcon icon="exclamation-circle" className={style.exclamationCircle} />
+//                 <small>Login cannot be blank</small>
+//               </>
+//             }
+//           </div>
+//           <div className={style.formControl}>
+//             <label htmlFor="nick">Nick</label>
+//             <input type="text" id="nick" />
+//             { nickValue &&
+//             	<FontAwesomeIcon icon="check-circle" className={style.checkCircle} />
+//             }
+//             { !nickValue &&
+//               <>
+//                 <FontAwesomeIcon icon="exclamation-circle" className={style.exclamationCircle} />
+//                 <small>Nick cannot be blank</small>
+//               </>
+//             }
+//           </div>
+//           <div className={style.formControl}>
+//             <label htmlFor="password">Password</label>
+//             <input type="password" id="password" />
+//             { passwordValue &&
+//             	<FontAwesomeIcon icon="check-circle" className={style.checkCircle} />
+//             }
+//             { !passwordValue &&
+//               <>
+//                 <FontAwesomeIcon icon="exclamation-circle" className={style.exclamationCircle} />
+//                 <small>Password cannot be blank</small>
+//               </>
+//             }
+//           </div>
+//           <div className={style.formControl}>
+//             <label htmlFor="password2">Password check</label>
+//             <input type="password" id="password2" />
+//             { password2Value &&
+//             	<FontAwesomeIcon icon="check-circle" className={style.checkCircle} />
+//             }
+//             { if (!password2Value) {
+//                 <>
+//                   <FontAwesomeIcon icon="exclamation-circle" className={style.exclamationCircle} />
+//                   <small>Password check cannot be blank</small>
+//                 </>
+//              } else if (passwordValue !== password2Value) {
+//                 <>
+//                   <FontAwesomeIcon icon="exclamation-circle" className={style.exclamationCircle} />
+//                   <small>Passwords does not match</small>
+//                 </>
+//              }
+//             }
+//           </div>
+//           <button className={style.submitBtn}>Sign Up</button>
+//           <p><Link to="/sign-in">Sign In</Link></p>
+//         </form>
+//       </div>
+//     </div>
+
+const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
   const [nick, setNick] = React.useState("");
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -35,7 +123,7 @@ const Authorization: React.FC<AuthorizationProps> = ({ regByCreds }) => {
         <div className={style.header}>
           <h2>Create Account</h2>
         </div>
-        <form id="form" className={style.form}>
+        <form action="" onSubmit={signUpHandler} id="form" className={style.form}>
           <div className={style.formControl}>
             <label htmlFor="login">Login</label>
             <input type="text" id="login" />
@@ -69,39 +157,7 @@ const Authorization: React.FC<AuthorizationProps> = ({ regByCreds }) => {
         </form>
       </div>
     </div>
-    // <form action="" onSubmit={signUpHandler} className = {style.loginForm}>
-    //   <label htmlFor="nick">Nick</label>
-    //   <input
-    //     type="text"
-    //     id="nick"
-    //     required={true}
-    //     value={nick}
-    //     onChange={e => setNick(e.target.value)}
-    //   />
-
-    //   <label htmlFor="login">Login</label>
-    //   <input
-    //     type="text"
-    //     id="login"
-    //     required={true}
-    //     value={login}
-    //     onChange={e => setLogin(e.target.value)}
-    //   />
-
-    //   <label htmlFor="password">Password</label>
-    //   <input
-    //     type="password"
-    //     id="password"
-    //     required={true}
-    //     value={password}
-    //     onChange={e => setPassword(e.target.value)}
-    //   />
-    //   <div className = {style.buttonBlock}>
-    //      <button type="submit">Sign Up</button>
-    //   </div>
-    //   <p><Link to="/sign-in">Sign In</Link></p>
-    // </form>
   );
 };
 
-export default connect(null, mapDispatchToProps)(React.memo(Authorization));
+export default connect(null, mapDispatchToProps)(React.memo(Registration));

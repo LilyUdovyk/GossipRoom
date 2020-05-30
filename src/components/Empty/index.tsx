@@ -17,5 +17,4 @@ const Empty = (props: Props) => {
     </div>
   );
 };
-
-export default Empty;
+export default React.memo(Empty);
