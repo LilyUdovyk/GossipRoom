@@ -6,7 +6,7 @@
 	justify-content: center;
 	background-color: #4b4c50;
 }
-.card{
+.card {
 	background-color: #fff;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -58,43 +58,17 @@
 	outline: 0;
 	border-color: #777;
 }
-background-color
-background-color
-background-color
-background-color
-background-color
-.formControl.error input {
-	border-color: #e74c3c;
-}
-
-.formControl svg {
-	visibility: hidden;
-	position: absolute;
-	top: 2.5rem;
-	right: 0.7rem;
-}
-
-.formControl.success .checkCircle {
-	color: #2ecc71;
-	visibility: visible;
-}
-
-.formControl.error .exclamationCircle {
-	color: #e74c3c;
-	visibility: visible;
-}
 
 .formControl small {
 	color: #e74c3c;
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	visibility: hidden;
 }
 
-.formControl.error small {
+/* .formControl.error small {
 	visibility: visible;
-}
+} */
 
 .submitBtn {
 	color: #fff;

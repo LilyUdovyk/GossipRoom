@@ -49,7 +49,7 @@ const Authorization: React.FC<AuthorizationProps> = ({ authByCreds }) => {
       <div className = {style.buttonBlock}>
          <button type="submit">Sign In</button>
       </div>
-      <p>New to Chat? <Link to="/registration">Join now</Link></p>
+      <p>New to GossipRoom? <Link to="/registration">Join now</Link></p>
     </form>
   );
 };
