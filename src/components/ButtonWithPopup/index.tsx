@@ -15,7 +15,8 @@ const mapStateToProps = (state: IRootState) =>
  ({
   activeUserId: state.user.userData._id,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
-  imageId: state.media.fileData._id
+  imageId: state.media.fileData._id,
+  imageUrl: `http://chat.fs.a-level.com.ua/${state.media.fileData.url}`
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -97,7 +98,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
         {isOpenedPopup &&
           <div ref={this.myRef} className={style.popup}>
             <div className={style.popupHeader}>
-              <img src={this.props.avatar} />
+              <img src={this.props.imageId ? this.props.imageUrl : this.props.avatar} />
               <form className={style.uploadForm}
                 ref={this.myFormRef}
                 method="post"
@@ -129,14 +130,6 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
             </div>
             <nav className={style.navSidebar}>
               <ul className={style.navList}>
-                <li className={style.navItem}>
-                  <FontAwesomeIcon icon="user-friends" />
-                  Contacts
-                </li>
-                <li className={style.navItem}>
-                  <FontAwesomeIcon icon="comments" />
-                  Chats
-                </li>
                 <li onClick={() => this.logoutHandler()} className={style.navItem}>
                   <FontAwesomeIcon icon="sign-out-alt" />
                   Exit

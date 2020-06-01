@@ -61,7 +61,9 @@ const Authorization: React.FC<AuthorizationProps> = props => {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            <small>Wrong login or password</small>
+            {
+              <small>Wrong login or password</small>
+            }
           </div>
           <button type="submit" className={style.submitBtn}>Sign In</button>
           <p>New to GossipRoom? <Link to="/registration">Join now</Link></p>

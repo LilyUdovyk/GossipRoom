@@ -87,7 +87,9 @@ const Registration: React.FC<RegistrationProps> = props => {
               value={password2}
               onChange={e => setPassword2(e.target.value)}
             />
-            <small>{passwordError || props.authError}</small>
+            { (passwordError || props.authError) &&
+              <small>{passwordError || props.authError}</small>
+            }
           </div>
           <button type="submit" className={style.submitBtn}>Sign Up</button>
           <p>Have an account?  <Link to="/sign-in">Sign In</Link></p>

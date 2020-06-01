@@ -6,8 +6,8 @@ import * as actions from "./actions";
 const initialState: MediaState = {
     error: null,
     fileData: {
-        _id: '',
-        url: ''
+        _id: null,
+        url: null
     },
     mediaData: {
         _id: '',

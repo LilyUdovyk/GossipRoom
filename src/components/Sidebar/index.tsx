@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as contactsAction from "../../store/contacts/actions";
 import * as chatActions from "../../store/chat/actions";
-import * as messageAction from "../../store/message/actions"
+// import * as messageAction from "../../store/message/actions"
 import { UserData } from '../../store/contacts/types'
 import { ChatData } from '../../store/chat/types'
 
@@ -36,17 +36,22 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type SidebarProps = ReturnType<typeof mapStateToProps> &
 	ReturnType<typeof mapDispatchToProps>;
 
+type SidebarView = "contacts" | "chats"
+
 const Sidebar: React.FC<SidebarProps> = props => {
 
-	// const [isOpenedContacts, setIsOpenedContacts] = React.useState(false)
-	// const [isOpenedChats, setIsOpenedChats] = React.useState(false)
+	const [sidebarView, setSidebarView] = React.useState<SidebarView>("chats")
 
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
 		if (!authToken) {
 			return
 		}
-		// props.getContacts()
+		props.getContacts()
+		// console.log("props.chats && props.chats.length", props.chats && props.chats.length)
+		// if (!(props.chats && props.chats.length)) {
+		// 	setSidebarView("contacts")
+		// }
 	}, [])
 
 	const getDetailsOfChat = (chat: ChatData) => {
@@ -103,12 +108,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	};
 
 	const renderSidebarContent = () => {
-		if (props.chats && props.chats.length) {
+			if (sidebarView === "chats") {
 			return (
 				<>
 					{ props.chats.map(chat => {
-						// setIsOpenedContacts(false)
-						// setIsOpenedChats(true)
 						return (
 							<User
 								key={chat._id}
@@ -124,16 +127,13 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					})}
 				</>
 			)
-		} 
-		else {
+		} else {
 			return (
 				<>
 					{ props.contacts.map((contact: UserData) => {
-						// setIsOpenedChats(false)
-						// setIsOpenedContacts(true)
 						return (
 							<User 
-								key={contact.login}
+								key={contact._id}
 								name={contact.nick ? contact.nick : contact.login}
 								avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
 								onClick={() => addChatHandler(contact._id)}
@@ -147,19 +147,25 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	return (
 		<aside className="sidebar">
-			{/* <div className="buttonBlock"> */}
+			<div className="buttonBlock">
 				<ButtonWithPopup />
-				{/* { isOpenedContacts && 
-					<button className="navButton">
+				{ sidebarView === "chats" && 
+					<button 
+						className="navButton"
+						onClick={() => setSidebarView("contacts")}
+					>
 						<FontAwesomeIcon icon="user-friends" />
 					</button>
 				}
-				{ isOpenedChats &&
-					<button className="navButton">
+				{ sidebarView === "contacts" &&
+					<button 
+					className="navButton"
+					onClick={() => setSidebarView("chats")}
+				>
 						<FontAwesomeIcon icon="comments" />
 					</button>
-				} */}
-			{/* </div> */}
+				}
+			</div>
 			{renderSidebarContent()}
 		</aside>
 	)

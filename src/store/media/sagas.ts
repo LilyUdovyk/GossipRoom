@@ -29,8 +29,8 @@ let getFileData = async (form: HTMLFormElement) => {
                         }  );
         console.log(response)
         const result = response.json();
-        return response.ok ? result : new Error('status is not 200')
+        return response.ok ? result : new Error('Status is not 200')
     } catch (error) {
-        return new Error('dataPost failed')
+        return new Error('DataPost failed')
     }
 }
