@@ -31,7 +31,7 @@
 }
 
 .form {
-	padding: 1.9rem 2.5rem;	
+	padding: 1.9rem 2.5rem;
 }
 
 .formControl {
@@ -93,7 +93,7 @@
 } */
 
 .submitBtn:focus {
-  	outline: none;
+	outline: none;
 }
 
 .form p {
@@ -109,5 +109,5 @@
 }
         
 .form a:hover {
-	color: black;
+  	color: black;
 }

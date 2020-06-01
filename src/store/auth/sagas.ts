@@ -68,8 +68,9 @@ export function* regByCredsSaga() {
                 localStorage.setItem('authToken', authToken)
                 yield putResolve(actions.authByCreds.success({ authToken, id, login }))
                 yield put(push('/profile'))
-            } else {
-                yield put(actions.authByCreds.failure('Wrong login or password'))
+            } 
+            else {
+                yield put(actions.authByCreds.failure(`User ${payload.login} already exists`))
             }
         } catch (error) {
             console.error(error);

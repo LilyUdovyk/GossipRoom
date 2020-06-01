@@ -3,10 +3,15 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom"
 
-import { IRootAction } from "../../store/rootReducer";
+import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as authActions from "../../store/auth/actions";
 
-import style from './style.module.scss'
+import style from './style.module.css'
+
+const mapStateToProps = (state: IRootState) =>
+ ({
+  authError: state.auth.authData.error
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
@@ -16,42 +21,53 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     dispatch
   );
 
-  
-type AuthorizationProps = ReturnType<typeof mapDispatchToProps>;
+type AuthorizationProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>
 
-const Authorization: React.FC<AuthorizationProps> = ({ authByCreds }) => {
+const Authorization: React.FC<AuthorizationProps> = props => {
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
+  // const [passwordError, setPasswordError] = React.useState("");
 
   const signInHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    authByCreds({ login, password })
+    props.authByCreds({ login, password })
   }
 
+
   return (
-    <form action="" onSubmit={signInHandler} className = {style.loginForm}>
-      <label htmlFor="login">Login</label>
-      <input
-        type="text"
-        id="login"
-        required={true}
-        value={login}
-        onChange={e => setLogin(e.target.value)}
-      />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        required={true}
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <div className = {style.buttonBlock}>
-         <button type="submit">Sign In</button>
+    <div className={style.container}>
+      <div className={style.card}>
+        <div className={style.header}>
+          <h2>Authorization</h2>
+        </div>
+        <form action="" onSubmit={signInHandler} id="form" className={style.form}>
+          <div className={style.formControl}>
+            <label htmlFor="login">Login</label>
+            <input
+              type="text"
+              id="login"
+              required={true}
+              value={login}
+              onChange={e => setLogin(e.target.value)}
+            />
+          </div>
+          <div className={style.formControl}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              required={true}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <small>Wrong login or password</small>
+          </div>
+          <button type="submit" className={style.submitBtn}>Sign In</button>
+          <p>New to GossipRoom? <Link to="/registration">Join now</Link></p>
+        </form>
       </div>
-      <p>New to GossipRoom? <Link to="/registration">Join now</Link></p>
-    </form>
+    </div>
   );
 };
-
-export default connect(null, mapDispatchToProps)(React.memo(Authorization));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Authorization));

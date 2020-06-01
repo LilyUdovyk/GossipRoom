@@ -2,13 +2,16 @@ import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import classnames from 'classnames';
 
-import { IRootAction } from "../../store/rootReducer";
+import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as authActions from "../../store/auth/actions";
 
 import style from './style.module.css'
+
+const mapStateToProps = (state: IRootState) =>
+ ({
+  authError: state.auth.authData.error
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
@@ -18,9 +21,10 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     dispatch
   );
 
-type RegistrationProps = ReturnType<typeof mapDispatchToProps>;
+type RegistrationProps = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>
 
-const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
+const Registration: React.FC<RegistrationProps> = props => {
   const [nick, setNick] = React.useState("");
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -33,7 +37,8 @@ const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
       setPasswordError("Passwords does not match")
       return
     }
-    regByCreds({ nick, login, password })
+    props.regByCreds({ nick, login, password })
+    console.log("authError", props.authError)
   }
 
   return (
@@ -82,9 +87,9 @@ const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
               value={password2}
               onChange={e => setPassword2(e.target.value)}
             />
-            <small>{passwordError}</small>
+            <small>{passwordError || props.authError}</small>
           </div>
-          <button className={style.submitBtn}>Sign Up</button>
+          <button type="submit" className={style.submitBtn}>Sign Up</button>
           <p>Have an account?  <Link to="/sign-in">Sign In</Link></p>
         </form>
       </div>
@@ -92,4 +97,4 @@ const Registration: React.FC<RegistrationProps> = ({ regByCreds }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(React.memo(Registration));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Registration));
