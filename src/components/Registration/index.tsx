@@ -38,8 +38,7 @@ const Registration: React.FC<RegistrationProps> = props => {
       return
     }
     props.regByCreds({ nick, login, password })
-    console.log("authError", props.authError)
-  }
+ }
 
   return (
     <div className={style.container}>
@@ -98,5 +97,4 @@ const Registration: React.FC<RegistrationProps> = props => {
     </div>
   );
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Registration));

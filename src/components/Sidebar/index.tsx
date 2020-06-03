@@ -4,16 +4,16 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
+import * as userAction from "../../store/user/actions";
 import * as contactsAction from "../../store/contacts/actions";
 import * as chatActions from "../../store/chat/actions";
-// import * as messageAction from "../../store/message/actions"
 import { UserData } from '../../store/contacts/types'
 import { ChatData } from '../../store/chat/types'
 
-import './Sidebar.css';
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
 import ButtonWithPopup from '../ButtonWithPopup';
+import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 	bindActionCreators(
 		{
 			getContacts: contactsAction.getContacts.request,
+			getUser: userAction.getUser.request,
 			getActiveChat: chatActions.getActiveChat.request,
 			addChat: chatActions.addChat.request
 		},
@@ -47,11 +48,12 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		if (!authToken) {
 			return
 		}
-		props.getContacts()
-		// console.log("props.chats && props.chats.length", props.chats && props.chats.length)
-		// if (!(props.chats && props.chats.length)) {
+		props.getUser()
+		// console.log("props.chats,props.chats.length", props.chats, props.chats.length)
+		// if (props.chats && props.chats.length) {
 		// 	setSidebarView("contacts")
 		// }
+		props.getContacts()
 	}, [])
 
 	const getDetailsOfChat = (chat: ChatData) => {
@@ -63,7 +65,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 			return details
 		} else if (chat.members.length > 2) {
 			let details = {
-				// name: chat.title ? chat.title : "Group",
 				name: chat.title || "Group",
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
 			}
@@ -118,7 +119,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 								chat_id={chat._id}
 								name={getDetailsOfChat(chat).name}
 								avatarSrc={getDetailsOfChat(chat).avatar}
-								// avatarSrc={chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar}
 								newMessage={props.newMessage}
 								activeChatId={props.activeChatId}
 								onClick={() => activeChatHandler(chat._id)}
@@ -146,12 +146,13 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	}
 
 	return (
-		<aside className="sidebar">
-			<div className="buttonBlock">
+		<aside className={style.sidebar}>
+			<div className={style.buttonBlock}>
 				<ButtonWithPopup />
 				{ sidebarView === "chats" && 
 					<button 
-						className="navButton"
+						className={style.navButton}
+						title="Contacts"
 						onClick={() => setSidebarView("contacts")}
 					>
 						<FontAwesomeIcon icon="user-friends" />
@@ -159,9 +160,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 				}
 				{ sidebarView === "contacts" &&
 					<button 
-					className="navButton"
-					onClick={() => setSidebarView("chats")}
-				>
+						className={style.navButton}
+						title="Chats"
+						onClick={() => setSidebarView("chats")}
+					>
 						<FontAwesomeIcon icon="comments" />
 					</button>
 				}

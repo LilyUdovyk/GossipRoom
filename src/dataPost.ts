@@ -2,8 +2,8 @@ interface variablesData {
     "login"?: string
     "password"?: string
     "nick"?: string
-    "userQuery"?: string
-    "chatQuery"?: string
+    "activeUserQuery"?: string
+    "activeChatQuery"?: string
     "chat_id"?: string
     "text"?: string
     "firstMember_id"?: string

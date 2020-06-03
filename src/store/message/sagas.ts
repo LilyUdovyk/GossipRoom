@@ -7,16 +7,12 @@ import { dataPost } from '../../dataPost'
 export function* sendMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.sendMessage.request)
-    console.log("sendMessageSaga")
     try {
-      console.log(payload.mediaId)
       const message = payload.mediaId
         ? yield call(sendMessageacWithAtthment, payload.activeChatId, payload.text, payload.mediaId)
         : yield call(sendMessage, payload.activeChatId, payload.text)
-      console.log("sendMessageSaga -> message", message)
       yield putResolve(actions.sendMessage.success(message))
     } catch (error) {
-      console.error("sendMessageSaga -> error", error)
       yield put(actions.sendMessage.failure(error.message))
     }
   }
@@ -121,7 +117,6 @@ const sendMessage = async (chat_id: string, text: string) => {
       "text": text
     }
   )
-  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
   return messageContent.data.MessageUpsert
 }
 
@@ -143,7 +138,6 @@ const sendMessageacWithAtthment = async (chat_id: string, text: string, media_id
       "media_id": media_id
     }
   )
-  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
   return messageContent.data.MessageUpsert
 }
 
@@ -151,7 +145,6 @@ const sendMessageacWithAtthment = async (chat_id: string, text: string, media_id
 export function* onMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.onMessage)
-    console.log("msg", payload)
     const activeUserId = yield select(state => state.user.userData._id)
     if (payload.owner._id !== activeUserId) {
       playSound()
@@ -164,7 +157,6 @@ export function* onMessageSaga() {
 }
 
 const playSound = () => {
-  console.log("tik")
   const audio = new Audio("http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatedible.ogg");
   audio.play();
 }
@@ -172,13 +164,10 @@ const playSound = () => {
 export function* replyToMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.replyToMessage.request)
-    console.log("replyToMessageSaga")
     try {
       const message = yield call(replyToMessage, payload.activeChatId, payload.text, payload.originalMessageId)
-      console.log("replyToMessageSaga -> message", message)
       yield putResolve(actions.replyToMessage.success(message))
     } catch (error) {
-      console.error("replyToMessageSaga -> error", error)
       yield put(actions.replyToMessage.failure(error.message))
     }
   }
@@ -205,22 +194,16 @@ const replyToMessage = async (chat_id: string, text: string, originalMessageId: 
       "message_id": originalMessageId
     }
   )
-  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
   return messageContent.data.MessageUpsert
 }
 
 export function* forwardMessageSaga() {
   while (true) {
     const { payload } = yield take(actions.forwardMessage.request)
-    console.log("forwardMessageSaga")
     try {
-      // const originalMessage = yield select(state => state.message.originalMessage)
       const message = yield call(forwardMessage, payload.activeChatId, payload.text, payload.originalMessageId )
-      // const message = yield call(forwardMessage, payload.activeChatId, payload.text, payload.originalMessageId )
-      console.log("forwardMessageSaga -> message", message)
       yield putResolve(actions.forwardMessage.success(message))
     } catch (error) {
-      console.error("forwardMessageSaga -> error", error)
       yield put(actions.forwardMessage.failure(error.message))
     }
   }
@@ -247,6 +230,5 @@ const forwardMessage = async (chat_id: string, text: string, originalMessageId: 
       "message_id": originalMessageId
     }
   )
-  console.log('messageContent.data.MessageUpsert', messageContent.data.MessageUpsert)
   return messageContent.data.MessageUpsert
 }

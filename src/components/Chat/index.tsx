@@ -2,7 +2,6 @@ import React, {useRef} from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import moment from 'moment';
-// import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom';
 
 import { IRootState, IRootAction } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
@@ -19,7 +18,6 @@ const mapStateToProps = (state: IRootState) => ({
   messages: state.chat.chatData ? state.chat.chatData.messages : [],
   media: state.message.messageData.media,
   mediaUrl: state.media.fileData.url,
-  // originalMessage: state.message.originalMessage,
   originalMessage: state.message.savedMessage.originalMessage,
   isForward: state.message.savedMessage.isForward
 });
@@ -54,12 +52,10 @@ const Chat: React.FC<ChatProps> = props => {
   }
 
   const isUserMsg = (message: MessageData) => {
-    // console.log(props.messages.message.owner._id, props.activeUserId, props.activeUserId === props.messages.message.owner._id)
     return message.owner._id === props.activeUserId ? true : false
   }
 
   const saveOriginalMessage = (message: MessageData) => {
-    console.log("saveOriginalMessage")
     props.saveOriginalMessage({originalMessage: message, isReply: false, isForward: false})
   }
 
@@ -70,13 +66,6 @@ const Chat: React.FC<ChatProps> = props => {
           key={message._id}
           className={`"Message_input_box" Chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
           onClick = { () => saveOriginalMessage(message) }
-          // onMouseDown = {handleMouseDown}
-          // onMouseUp = {handleMouseUp}
-          // data-active = {activeUser}
-          data-name={isUserMsg(message) ? "You " : props.activeChatName}
-          data-user={isUserMsg(message)}
-          data-text={message.text}
-          data-number={message._id}
         >
           { message.replyTo &&
             <div className="replyBlock">
@@ -95,7 +84,9 @@ const Chat: React.FC<ChatProps> = props => {
             </div>
           } 
           <FormattedMessage message={message} />
-          <time className="timeBlock">{moment(+message.createdAt).format('HH:mm')}</time>
+          <time className="timeBlock">
+            {moment(+message.createdAt).format('HH:mm')}
+          </time>
         </div>
       ))}
       { props.originalMessage &&

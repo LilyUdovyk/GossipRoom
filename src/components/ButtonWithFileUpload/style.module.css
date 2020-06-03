@@ -35,14 +35,6 @@ button:hover {
     border-radius: 5px;
 }
 
-/* .dialog {
-  color: black;
-  background-color: white;
-  display: flex;
-  align-items:  center;
-  flex-direction: column;
-} */
-
 .dialogHeader {
   width: 100%;
   display: flex;

@@ -27,13 +27,11 @@ type AuthorizationProps = ReturnType<typeof mapStateToProps> &
 const Authorization: React.FC<AuthorizationProps> = props => {
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
-  // const [passwordError, setPasswordError] = React.useState("");
 
   const signInHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     props.authByCreds({ login, password })
   }
-
 
   return (
     <div className={style.container}>
@@ -61,7 +59,7 @@ const Authorization: React.FC<AuthorizationProps> = props => {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            {
+            { props.authError &&
               <small>Wrong login or password</small>
             }
           </div>

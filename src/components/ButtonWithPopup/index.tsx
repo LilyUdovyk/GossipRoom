@@ -72,16 +72,19 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     })
   }
 
-  uploadAvatar = (form: any) => {
+  uploadAvatar = (form: HTMLFormElement) => {
     this.props.uploadAvatar(form)
 
     this.setState({
-      isAvatarUpload: !this.state.isAvatarUpload
+      isAvatarUpload: true
     })
   }
 
   updateAvatar = (user_id: string, image_id: string | null) => {
     this.props.updateAvatar({ user_id, image_id })
+    this.setState({
+      isOpenedPopup: false
+    })
   }
 
   logoutHandler = () => {

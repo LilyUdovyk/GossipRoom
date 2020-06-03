@@ -1,5 +1,6 @@
 import React from "react";
-import "./Header.css";
+
+import style from './style.module.css'
 
 interface Props {
 	userName: string,
@@ -7,11 +8,10 @@ interface Props {
 
 const Header = (props: Props) => {
 	return (
-		<header className = "header">
-			<h1 className = "headerName">{props.userName}</h1>
-			<button className ="deleteButton">...</button>
+		<header className={style.header}>
+			<h1 className={style.headerName}>{props.userName}</h1>
+			<button className={style.settingsButton}>...</button>
 		</header>
 	);
 }
-
 export default React.memo(Header);

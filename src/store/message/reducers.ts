@@ -5,7 +5,6 @@ import * as actions from "./actions";
 
 const initialState: MessageState = {
     error: null,
-    // originalMessage: null,
     savedMessage: {
         originalMessage: null,
         isReply: false,
@@ -93,7 +92,6 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
             return {
                 ...state,
                 error: null, 
-                // originalMessage: action.payload,
                 savedMessage: {
                     ...state.savedMessage,
                     originalMessage: action.payload.originalMessage,
@@ -106,7 +104,6 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
                 ...state,
                 error: null,
                 messageData: action.payload,
-                // originalMessage: null,
                 savedMessage: {
                     ...state.savedMessage,
                     originalMessage: null,
@@ -123,7 +120,6 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
                 ...state,
                 error: null,
                 messageData: action.payload,
-                // originalMessage: null,
                 savedMessage: {
                     ...state.savedMessage,
                     originalMessage: null,

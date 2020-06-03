@@ -15,10 +15,8 @@ import userAvatar from '../../img/user_avatar.png'
 const mapStateToProps = (state: IRootState) => ({
   chats: state.user.userData.chats,
   activeUserId: state.user.userData._id,
-  // activeChatId: state.chat.activeChatId,
   originalMessage: state.message.savedMessage.originalMessage,
   isForward: state.message.savedMessage.isForward
-  // originalMessage: state.message.originalMessage,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -35,8 +33,6 @@ type ForwardingBlockProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
 const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
-
-  // const [isOpenedForwardBlock, setIsOpenedForwardBlock] = React.useState(true);
 
   const myRef = React.useRef<HTMLDivElement>(null);
   
@@ -60,7 +56,6 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
 
   const forwardMessage = (chatId: string) => {
     props.getActiveChat(chatId)
-    // props.forwardMessage(chatId)
     if (props.originalMessage){
       props.forwardMessage({ activeChatId: chatId, originalMessageId: props.originalMessage._id })
     }
@@ -75,7 +70,6 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
 			return details
 		} else if (chat.members.length > 2) {
 			let details = {
-				// name: chat.title ? chat.title : "Group",
 				name: chat.title || "Group",
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
 			}

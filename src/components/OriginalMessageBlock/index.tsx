@@ -28,5 +28,4 @@ const OriginalMessageBlock = (props: Props) => {
         </div>
 	);
 }
-
 export default React.memo(OriginalMessageBlock);

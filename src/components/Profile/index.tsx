@@ -31,7 +31,7 @@ const Profile: React.FC<ProfileProps> = props => {
     if (!authToken) {
       return
     }
-    props.getUser()
+    // props.getUser()
 
 
     const socket = io('http://chat.fs.a-level.com.ua/');

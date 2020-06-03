@@ -13,7 +13,6 @@ import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
   activeChatId: state.chat.activeChatId,
-  // originalMessage: state.message.originalMessage,
   originalMessage: state.message.savedMessage.originalMessage,
   isReply: state.message.savedMessage.isReply,
   isForward: state.message.savedMessage.isForward
@@ -41,7 +40,6 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
   }
 
   const addEmoji = (emoji: any) => {
-    console.log("input", emoji)
     setText(text + emoji.native)
   }
 
@@ -49,10 +47,7 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
     e.preventDefault()
     if (text.trim() === '') return;
     if (props.activeChatId && props.originalMessage && props.isReply) {
-      console.log("props.originalMessage", props.originalMessage, "props.isReply", props.isReply)
       props.replyToMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessage._id })
-    // } else if (props.activeChatId && props.originalMessage && props.isForward) {
-    //   props.forwardMessage({ activeChatId: props.activeChatId, text, originalMessageId: props.originalMessage._id })    
     } else if (props.activeChatId) {
       props.sendMessage({ activeChatId: props.activeChatId, text, mediaId: null })
     }

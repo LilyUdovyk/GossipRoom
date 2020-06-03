@@ -22,8 +22,6 @@
   box-sizing: border-box; 
 }
 
-/* .ButtonWithEmoji,
-.ButtonWithFileUpload, */
 .button {
   border: none;
   background: none;
@@ -31,15 +29,11 @@
   border-radius: 8px;
   color: grey;
 }
-/* 
-.ButtonWithEmoji:focus,
-.ButtonWithFileUpload:focus, */
+
 .button:focus {
   outline: none;
 }
 
-/* .ButtonWithEmoji:hover,
-.ButtonWithFileUpload:hover, */
 .button:hover {
   color: black;
 }

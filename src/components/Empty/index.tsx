@@ -1,5 +1,6 @@
 import React from "react";
-import "./Empty.css";
+
+import style from './style.module.css'
 
 interface Props {
   name: string,
@@ -8,10 +9,10 @@ interface Props {
 
 const Empty = (props: Props) => {
   return (
-    <div className="empty">
-      <h1 className="emptyName">Welcome, {props.name} </h1>
-      <img src={props.avatarSrc} alt={props.name} className="avatar" />
-      <p className="emptyInfo">
+    <div className={style.empty}>
+      <h1 className={style.emptyName}>Welcome, {props.name} </h1>
+      <img src={props.avatarSrc} alt={props.name} className={style.avatar} />
+      <p className={style.emptyInfo}>
         Please select a chat to start messaging
       </p>
     </div>

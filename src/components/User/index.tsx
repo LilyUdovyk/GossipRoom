@@ -2,8 +2,8 @@ import React from "react";
 
 import { MessageData } from '../../store/message/types'
 
-import "./User.css";
 import NewMessageCounter from "../NewMessageCounter"
+import style from './style.module.css'
 
 interface Props {
   name: string | undefined,
@@ -11,7 +11,7 @@ interface Props {
   avatarSrc: string,
   newMessage?: MessageData,
   activeChatId?: string | null,
-  onClick?: any
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 const User = (props: Props) => {
@@ -24,10 +24,10 @@ const User = (props: Props) => {
   }, [])
   
   return (  
-    <div className="user" onClick={props.onClick}>
-      <img src={props.avatarSrc} alt="avatar" className="userImg" />
-      <div className="userDetails">
-        <p className="useDetailsName">{props.name}</p>
+    <div className={style.user} onClick={props.onClick}>
+      <img src={props.avatarSrc} alt="avatar" className={style.userImg} />
+      <div className={style.userDetails}>
+        <p className={style.useDetailsName}>{props.name}</p>
       </div >
       <NewMessageCounter
         chat_id={props.chat_id}

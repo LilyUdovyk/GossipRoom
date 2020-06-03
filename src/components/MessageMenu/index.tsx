@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
-import { MessageData } from "../../store/chat/types";
 
 import ForwardingBlock from "../ForwardingBlock"
 import style from './style.module.css'
@@ -51,12 +50,10 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
   // }
 
   const replyToMessage = () => {
-    console.log("reply saveOriginalMessage")
     props.saveOriginalMessage({originalMessage: props.originalMessage, isReply: true})
   }
 
   const forwardMessage = () => {
-    console.log("forward saveOriginalMessage")
     props.saveOriginalMessage({originalMessage: props.originalMessage, isForward: true})
   }
 

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as UserActions from "../../store/user/actions";
 
-import './Main.css';
+import style from './style.module.css'
 import Empty from "../Empty";
 import ChatWindow from "../ChatWindow";
 import userAvatar from '../../img/user_avatar.png'
@@ -35,7 +35,6 @@ const Main: React.FC<MainProps> = props => {
     if (!props.activeChatId) {
       return (
         <Empty 
-          // name={props.nick ? props.nick : props.login}
           name={props.nick || props.login}
           avatarSrc={props.avatar} 
         />
@@ -48,7 +47,7 @@ const Main: React.FC<MainProps> = props => {
   }
 
   return (
-    <main className="Main">
+    <main className={style.main}>
       {renderMainPageContent()}
     </main>
   )

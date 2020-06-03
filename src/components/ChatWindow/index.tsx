@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../Header";
 
-import "./ChatWindow.css";
 import Chat from "../Chat";
 import MessageInput from "../MessageInput";
+import style from './style.module.css'
 
 interface Props {
   name: string,
@@ -11,12 +11,10 @@ interface Props {
 
 const ChatWindow = (props: Props) => {
   return (
-    <div className="ChatWindow">
+    <div className={style.chatWindow}>
       <Header userName = {props.name} />
-      {/* <FunctionButtons /> */}
       <Chat />
       <MessageInput />
-      {/* <MessageInput value = {typing}/> */}
     </div>
   );
 };

@@ -17,10 +17,8 @@ export function* authByCredsSaga() {
     }
     while (true) {
         const { payload } = yield take(actions.authByCreds.request)
-        console.log("authByCredsSaga -> payload", payload)
         try {
             const authToken = yield call(getAuthToken, payload.login, payload.password)
-            console.log("authByCredsSaga -> authToken", authToken)
             if (authToken) {
                 const decoded: DecodedToken = jwtDecode(authToken)
                 const id = decoded.sub.id
@@ -32,7 +30,6 @@ export function* authByCredsSaga() {
                 yield put(actions.authByCreds.failure('Wrong login or password'))
             }
         } catch (error) {
-            console.error("authByCredsSaga -> error", error)
             yield put(actions.authByCreds.failure(error.message))
         }
     }
@@ -55,12 +52,9 @@ const getAuthToken = async (login: string, password: string) => {
 export function* regByCredsSaga() {
     while (true) {
         const { payload } = yield take(actions.regByCreds.request)
-        console.log("regByCredsSaga -> payload", payload)
         try {
             const user = yield call(regUser, payload.nick, payload.login, payload.password)
-            console.log("regByCredsSaga -> user", user)
             const authToken = yield call(getAuthToken, payload.login, payload.password)
-            console.log("regByCredsSaga -> authToken", authToken)
             if (authToken) {
                 const decoded: DecodedToken = jwtDecode(authToken)
                 const id = decoded.sub.id
@@ -73,7 +67,6 @@ export function* regByCredsSaga() {
                 yield put(actions.authByCreds.failure(`User ${payload.login} already exists`))
             }
         } catch (error) {
-            console.error(error);
             yield put(actions.regByCreds.failure(error.message))
         }
     }
