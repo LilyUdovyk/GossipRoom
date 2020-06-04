@@ -62,22 +62,25 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
           deleteOriginalMessage={deleteOriginalMessage}
         />
       }
-      <form action="" onSubmit={sendMessageHandler} className={style.message}>
-        <input
-          className={style.messageInput}
-          placeholder="Write your message"
-          type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
-        />
+      <div className={style.messageBlock}>
         <ButtonWithEmoji addEmoji={addEmoji} />
+        <form action="" onSubmit={sendMessageHandler} className={style.messageForm}>
+          <input
+            className={style.messageInput}
+            placeholder="Write your message"
+            type="text"
+            autoFocus={true}
+            value={text}
+            onChange={e => setText(e.target.value)}
+          />
+        </form>
         <div className={style.buttonBlock}>
-          <ButtonWithFileUpload />
-          <button type="submit" className={style.button} >
+          <button className={style.button} >
             <FontAwesomeIcon icon="paper-plane" />
           </button>
+          <ButtonWithFileUpload />
         </div>
-      </form>
+      </div>
     </>
   );
 };
