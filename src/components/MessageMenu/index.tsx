@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import classnames from 'classnames';
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
@@ -29,6 +30,8 @@ type MessageMenuProps = ReturnType<typeof mapStateToProps> &
 
 const MessageMenu: React.FC<MessageMenuProps> = props => {
 
+  const [isVisibleMenu, setIsVisibleMenu] = React.useState(true);
+
   const myRef = React.useRef<HTMLDivElement>(null);
   
   React.useEffect(() => {
@@ -41,16 +44,13 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
   
   const closeForwardBlock = (event: any) => {
     if (myRef.current && !(myRef.current.contains(event.target))) {
-      // deleteOriginalMessage()
+      setIsVisibleMenu(false)
     }
   };
 
-  // const deleteOriginalMessage = () => {
-  //   props.saveOriginalMessage({originalMessage: null, isReply: false, isForward: false})
-  // }
-
   const replyToMessage = () => {
     props.saveOriginalMessage({originalMessage: props.originalMessage, isReply: true})
+    setIsVisibleMenu(false)
   }
 
   const forwardMessage = () => {
@@ -59,7 +59,11 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
 
   return (
     <>
-      <div ref={myRef} className={style.messageMenu}>
+      <div ref={myRef}
+        className={classnames(style.messageMenu, {
+          [style.invisible]: !isVisibleMenu
+        })} 
+      >
         <ul className={style.menuList}>
           <li 
             className={style.menuItem}

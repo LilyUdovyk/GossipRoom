@@ -13,6 +13,10 @@
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
+.messageMenu.invisible {
+  z-index: -1;
+}
+
 .menuList {
 	width: 100%;
 	display: flex;
