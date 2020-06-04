@@ -14,7 +14,7 @@
 }
 
 .messageMenu.invisible {
-  z-index: -1;
+  visibility: hidden;
 }
 
 .menuList {

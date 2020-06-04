@@ -2,24 +2,8 @@
   box-sizing: border-box;
 }
 
-h4 {
-  padding: 0;
-  margin: 0;
-}
-
-button {
-  border: none;
-  background: none;
-  font-size: 0.9rem;
-  color: grey;
-}
-
 button:focus {
   outline: none;
-}
-
-button:hover {
-  color: black;
 }
 
 .forwardingContainer {
@@ -42,14 +26,24 @@ button:hover {
   padding: 1rem 1rem 0;
 }
 
-.dialogHeader button {
+.containerTitle {
+  padding: 0;
+  margin: 0 1rem 0 0;
+}
+
+.containerHeader button {
   border: none;
   background: none;
   font-size: 0.9rem;
+  color: grey;
 }
 
-.dialogHeader button:hover {
-   color: grey;
+.containerHeader button:hover {
+   color: black;
+}
+
+.forwardingContainer .user {
+  flex-direction: column;
 }
 
 /* width */

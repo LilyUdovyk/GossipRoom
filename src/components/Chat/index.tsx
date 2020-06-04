@@ -1,6 +1,7 @@
 import React, {useRef} from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import classnames from 'classnames';
 import moment from 'moment';
 
 import { IRootState, IRootAction } from "../../store/rootReducer";
@@ -8,7 +9,7 @@ import * as messageActions from "../../store/message/actions";
 import { MessageData } from "../../store/chat/types";
 import FormattedMessage from "../FormattedMessage"
 import MessageMenu from "../MessageMenu"
-import "./Chat.css";
+import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
   activeUserId: state.user.userData._id,
@@ -60,16 +61,19 @@ const Chat: React.FC<ChatProps> = props => {
   }
 
   return (
-    <div className="Chats" ref={chatsRef}>
+    <div className={style.chats} ref={chatsRef}>
       { props.messages && props.messages.map((message: MessageData) => (
         <div 
           key={message._id}
-          className={`"Message_input_box" Chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
+          // className={`chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
+          className={classnames(style.chat, {
+            [style.isUserMsg]: isUserMsg(message)
+          })}
           onClick = { () => saveOriginalMessage(message) }
         >
           { message.replyTo &&
-            <div className="replyBlock">
-              <p className="owner">
+            <div className={style.replyBlock}>
+              <p className={style.owner}>
                 { message.replyTo.owner.nick || message.replyTo.owner.login }
               </p>
                 <FormattedMessage message={message.replyTo} />
@@ -84,7 +88,7 @@ const Chat: React.FC<ChatProps> = props => {
             </div>
           } 
           <FormattedMessage message={message} />
-          <time className="timeBlock">
+          <time className={style.timeBlock}>
             {moment(+message.createdAt).format('HH:mm')}
           </time>
         </div>

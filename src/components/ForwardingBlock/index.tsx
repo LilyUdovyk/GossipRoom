@@ -90,7 +90,7 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
   return (
     <div ref={myRef} className={style.forwardingContainer}>
       <header className={style.containerHeader}>
-        <h4>Choose recipient</h4>
+        <h4 className={style.containerTitle}>Choose recipient</h4>
         <button onClick={() => deleteOriginalMessage()}>
           <FontAwesomeIcon icon="times" />
         </button>
