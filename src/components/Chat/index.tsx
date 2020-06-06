@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import { IRootState, IRootAction } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
-import { MessageData } from "../../store/chat/types";
+import { MessageData } from "../../store/message/types";
 import FormattedMessage from "../FormattedMessage"
 import MessageMenu from "../MessageMenu"
 import style from './style.module.css'

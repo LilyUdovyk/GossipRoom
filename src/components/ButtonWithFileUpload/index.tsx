@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as messageActions from "../../store/message/actions";
-import * as mediaAction from "../../store/media/actions";
+import * as mediaActions from "../../store/media/actions";
 
 import style from './style.module.css'
 
@@ -17,7 +17,7 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      uploadFile: mediaAction.uploadFile.request,
+      uploadFile: mediaActions.uploadFile.request,
       sendMessage: messageActions.sendMessage.request
     },
     dispatch
@@ -118,11 +118,11 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
                 ref={this.fileAttachmentRef}
                 onChange={() => { if (this.myFormRef.current) this.uploadFile(this.myFormRef.current) }}
               />
-              <label className={style.dialogLabel} htmlFor="new-message">
+              <label className={style.dialogLabel} htmlFor="fileMessage">
                 Add a message about the file
-            </label>
+              </label>
               <input
-                id="new-message"
+                id="fileMessage"
                 className={style.dialogInput}
                 autoFocus
                 type="text"

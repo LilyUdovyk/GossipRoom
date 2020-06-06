@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
+import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as actions from "../../store/auth/actions";
-import * as mediaAction from "../../store/media/actions";
-import * as userAction from "../../store/user/actions";
+import * as authActions from "../../store/auth/actions";
+import * as mediaActions from "../../store/media/actions";
+import * as userActions from "../../store/user/actions";
 
 import style from './style.module.css'
 import userAvatar from '../../img/user_avatar.png'
+import NewGroupBlock from "../NewGroupBlock";
 
 const mapStateToProps = (state: IRootState) =>
  ({
@@ -22,9 +23,9 @@ const mapStateToProps = (state: IRootState) =>
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      logout: actions.logout,
-      uploadAvatar: mediaAction.uploadFile.request,
-      updateAvatar: userAction.updateAvatar.request,
+      logout: authActions.logout,
+      uploadAvatar: mediaActions.uploadFile.request,
+      updateAvatar: userActions.updateAvatar.request,
     },
     dispatch
   );
@@ -133,7 +134,18 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
             </div>
             <nav className={style.navSidebar}>
               <ul className={style.navList}>
-                <li onClick={() => this.logoutHandler()} className={style.navItem}>
+                <li
+                  className={style.navItem}
+                  // onClick={() => this.addNewGroupHandler()}
+                >
+                  {/* <FontAwesomeIcon icon="comments" />
+                  New group */}
+                  <NewGroupBlock />
+                </li>
+                <li 
+                  className={style.navItem}
+                  onClick={() => this.logoutHandler()}
+                >
                   <FontAwesomeIcon icon="sign-out-alt" />
                   Exit
                 </li>

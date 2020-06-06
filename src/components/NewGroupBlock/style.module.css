@@ -1,0 +1,59 @@
+.newGroupBlock {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(32,32,35,1);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 3px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
+}
+
+.changeButton img {
+  width: 50px;
+  height: 50px;
+	border-radius: 50%;
+  object-fit: cover;
+  padding: 0.5rem;
+}
+
+.users {
+  display: flex;
+  flex-direction: row;
+}
+
+.contacts {
+  width: 50%;
+  overflow-y: scroll;
+}
+
+.members {
+  width: 50%;
+  overflow-y: scroll;
+}
+
+/* width */
+.contacts::-webkit-scrollbar,
+.members::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.contacts::-webkit-scrollbar-track,
+.members::-webkit-scrollbar-track {
+  background: inherit; 
+}
+ 
+/* Handle */
+.contacts::-webkit-scrollbar-thumb,
+.members::-webkit-scrollbar-thumb {
+  background: inherit;
+  border-radius: 5px;
+  border:1px solid grey;
+}
+
+/* Handle on hover */
+.contacts::-webkit-scrollbar-thumb:hover,
+.members::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

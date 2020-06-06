@@ -3,7 +3,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as UserActions from "../../store/user/actions";
+import * as userActions from "../../store/user/actions";
 
 import style from './style.module.css'
 import Empty from "../Empty";
@@ -21,7 +21,7 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      getUser: UserActions.getUser.request,
+      getUser: userActions.getUser.request,
     },
     dispatch
   );

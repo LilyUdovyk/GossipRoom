@@ -5,6 +5,7 @@ import * as actions from "./actions";
 
 const initialState: ContactsState = {
     error: null,
+    newGroupMembers: [],
     contactsData: []
 }
 
@@ -25,6 +26,15 @@ export default (state: ContactsState = initialState, action: ContactsAction): Co
                 contactsData:[],
                 error: action.payload,
             }
+        // case getType(actions.setMembers):
+        //     return {
+        //         ...state,
+        //         error: null,
+        //         newGroupMembers:[
+        //             ...state.newGroupMembers,
+        //             ...action.payload
+        //         ]
+        //     }
         default:
             return state
     }

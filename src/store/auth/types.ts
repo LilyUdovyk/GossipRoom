@@ -38,4 +38,4 @@ export interface DecodedToken {
       acl: [string]
     },
     iat: number
-  }
+}

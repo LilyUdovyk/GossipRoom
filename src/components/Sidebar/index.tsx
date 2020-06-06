@@ -4,14 +4,15 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as userAction from "../../store/user/actions";
-import * as contactsAction from "../../store/contacts/actions";
+import * as userActions from "../../store/user/actions";
+import * as contactsActions from "../../store/contacts/actions";
 import * as chatActions from "../../store/chat/actions";
-import { UserData } from '../../store/contacts/types'
+import { UserData } from '../../store/user/types'
 import { ChatData } from '../../store/chat/types'
 
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
+import chatAvatar from '../../img/chat_avatar.jpg'
 import ButtonWithPopup from '../ButtonWithPopup';
 import style from './style.module.css'
 
@@ -26,8 +27,8 @@ const mapStateToProps = (state: IRootState) => ({
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 	bindActionCreators(
 		{
-			getContacts: contactsAction.getContacts.request,
-			getUser: userAction.getUser.request,
+			getContacts: contactsActions.getContacts.request,
+			getUser: userActions.getUser.request,
 			getActiveChat: chatActions.getActiveChat.request,
 			addChat: chatActions.addChat.request
 		},
@@ -66,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		} else if (chat.members.length > 2) {
 			let details = {
 				name: chat.title || "Group",
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
 			}
 			return details
 		} else {
@@ -134,7 +135,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 						return (
 							<User 
 								key={contact._id}
-								name={contact.nick ? contact.nick : contact.login}
+								name={contact.nick || contact.login}
 								avatarSrc={contact.avatar ? `http://chat.fs.a-level.com.ua/${contact.avatar.url}` : userAvatar }
 								onClick={() => addChatHandler(contact._id)}
 							/>

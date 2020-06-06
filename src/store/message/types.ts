@@ -1,5 +1,8 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
+import { ContactData } from "../user/types";
+import { ChatData } from "../chat/types";
+import { MediaData } from "../media/types";
 
 export type MessageAction = ActionType<typeof actions>
 
@@ -43,41 +46,6 @@ export interface ReplyData {
         readonly login: string
         readonly nick : string | null
     }
-}
-
-export interface ChatData {
-    readonly _id: string
-    readonly owner: ContactData
-    readonly title: string | null
-    readonly createdAt: string
-    readonly members: ContactData[]
-    readonly messages: MessageData[] | null
-    readonly avatar: AvatarData | null
-}
-
-export interface ContactData {
-    readonly _id: string
-    readonly login: string
-    readonly nick : string | null
-    readonly avatar: AvatarData | null
-}
-
-export interface MediaData {
-    readonly _id: string
-    readonly createdAt: string
-    readonly owner: ContactData 
-    readonly text: string
-    readonly url: string
-    readonly originalFileName: string
-    readonly type: string
-    readonly userAvatar: ContactData 
-    readonly chatAvatar: ChatData[]
-    readonly messages: MessageData[]
-}
-
-export interface AvatarData {
-    readonly _id: string | null
-    readonly url: string | null
 }
 
 export interface SavedMessageData {

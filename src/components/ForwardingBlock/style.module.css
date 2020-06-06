@@ -42,10 +42,6 @@ button:focus {
    color: black;
 }
 
-.forwardingContainer .user {
-  flex-direction: column;
-}
-
 /* width */
 .forwardingContainer::-webkit-scrollbar {
   width: 10px;

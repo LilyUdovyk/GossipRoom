@@ -11,6 +11,7 @@ import { ChatData } from '../../store/chat/types'
 import style from './style.module.css'
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
+import chatAvatar from '../../img/chat_avatar.jpg'
 
 const mapStateToProps = (state: IRootState) => ({
   chats: state.user.userData.chats,
@@ -71,7 +72,7 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
 		} else if (chat.members.length > 2) {
 			let details = {
 				name: chat.title || "Group",
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
+				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
 			}
 			return details
 		} else {

@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import io from 'socket.io-client';
 
 import { IRootAction } from "../../store/rootReducer";
-import * as userAction from "../../store/user/actions";
-import * as messageAction from "../../store/message/actions";
+import * as userActions from "../../store/user/actions";
+import * as messageActions from "../../store/message/actions";
 import { MessageData } from '../../store/message/types'
 import { DecodedToken } from '../../store/auth/types'
 
@@ -16,8 +16,8 @@ import Main from "../Main";
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      getUser: userAction.getUser.request,
-      onMessage: messageAction.onMessage,
+      getUser: userActions.getUser.request,
+      onMessage: messageActions.onMessage,
     },
     dispatch
   );
