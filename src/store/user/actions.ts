@@ -1,5 +1,5 @@
 import { createAsyncAction } from "typesafe-actions";
-import { UserData, UpdateAvatarCreds } from "./types";
+import { UserData, UpdateAvatarCreds } from "../user/types";
 
 export const getUser = createAsyncAction(
     "user/GET_USER_REQUEST",

@@ -64,7 +64,7 @@ const Authorization: React.FC<AuthorizationProps> = props => {
             }
           </div>
           <button type="submit" className={style.submitBtn}>Sign In</button>
-          <p>New to GossipRoom? <Link to="/registration">Join now</Link></p>
+          <p>New to Gossip Room? <Link to="/registration">Join now</Link></p>
         </form>
       </div>
     </div>

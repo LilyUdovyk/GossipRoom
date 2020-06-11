@@ -122,6 +122,10 @@ button:focus {
   cursor: pointer;
 }
 
-li svg {
+.navItem svg {
   margin-right: 1rem;
+}
+
+.navItem a {
+  color: white;
 }

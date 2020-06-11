@@ -1,8 +1,10 @@
 import { take, call, put, putResolve, select } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import * as actions from './actions'
 import { dataPost } from '../../dataPost'
-import { ChatData } from '../user/types';
+import { ChatData } from '../chat/types';
+import { UserData } from '../user/types';
 
 export function* getActiveChatSaga() {
   while (true) {
@@ -147,8 +149,12 @@ const getActiveChat = async (chatId: string) => {
 }
 
 const getNameOfChat = (activeChat: ChatData, activeUserId: string) => {
-  if (activeChat.title) {
-    return activeChat.title
+  if (activeChat.members.length === 1) {
+    return "You"
+  } else if (activeChat.title) {
+    let membersNames = activeChat.members.map(member => member.nick || member.login)
+    let members = membersNames.join(', ')
+    return `${activeChat.title} with ${members}`
   } else {
     let member = activeChat.members.find(member => {
       return member._id !== activeUserId
@@ -191,4 +197,48 @@ const addNewChat = async (firstMember_id: string, secondMember_id: string) => {
     }
   )
   return newChatContent.data.ChatUpsert
+}
+
+export function* addGroupSaga() {
+  while (true) {
+    const { payload } = yield take(actions.addGroup.request)
+    try {
+      console.log("addGroupSaga", payload)
+      const newChat = yield call(addNewGroup, payload.chatTitle,  payload.members)
+      console.log("newChat", newChat)
+      const activeChatId = newChat._id
+      yield putResolve(actions.addGroup.success({ newChat, activeChatId }))
+      const activeChat = yield call(getActiveChat, activeChatId)
+      const activeUserId = yield select(state => state.auth.authData.id)
+      const activeChatName = yield call(getNameOfChat, activeChat, activeUserId)
+      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatId, activeChatName }))
+      yield put(push('/profile'))
+    } catch (error) {
+      yield put(actions.addGroup.failure(error.message))
+    }
+  }
+}
+
+const addNewGroupQuery = `mutation addNewGroup ($chat_title:String, $members:[UserInput]) {
+  ChatUpsert(chat: {
+    title: $chat_title,
+		members: $members
+  }) ${chatQuery}
+}`
+
+const addNewGroup = async (chatTitle: string, members: UserData[]) => {
+  const membersQuery = members.map(member => {
+    return {"_id": member._id}
+  })
+  console.log("membersQuery", membersQuery)
+  let newGroupContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
+    `Bearer ${localStorage.authToken}`,
+    addNewGroupQuery,
+    {
+    	"chat_title": chatTitle,
+  		"members": membersQuery
+    }
+  )
+  console.log("newGroupContent.data.ChatUpsert", newGroupContent.data.ChatUpsert)
+  return newGroupContent.data.ChatUpsert
 }

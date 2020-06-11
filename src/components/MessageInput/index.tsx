@@ -73,13 +73,13 @@ const MessageInput: React.FC<MessageInputProps> = (props) => {
             value={text}
             onChange={e => setText(e.target.value)}
           />
+          <div className={style.buttonBlock}>
+            <button type="submit" className={style.button} >
+              <FontAwesomeIcon icon="paper-plane" />
+            </button>
+            <ButtonWithFileUpload />
+          </div>
         </form>
-        <div className={style.buttonBlock}>
-          <button className={style.button} >
-            <FontAwesomeIcon icon="paper-plane" />
-          </button>
-          <ButtonWithFileUpload />
-        </div>
       </div>
     </>
   );

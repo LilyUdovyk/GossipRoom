@@ -1,0 +1,144 @@
+.container {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(32,32,35,1);
+}
+
+.card {
+	height: 95%;
+	background-color: #f7f7f7;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	width: 25rem;
+	max-width: 96%;
+	margin: auto;
+	max-height: 100vh;
+}
+
+.header {
+	border-bottom: 1px solid #f0f0f0;
+	background-color: #66676c;
+	padding: 1.2rem 2.5rem;
+	border-radius: 5px 5px 0 0;
+	height: 12%;
+}
+
+.header h2 {
+    text-align: center;
+    margin: 0;
+    color: #fff;
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	height: 76%;
+}
+
+.form {
+	padding: 1rem 2.5rem;
+}
+
+.form label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.form input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 0.9rem;
+	padding: 0.7rem;
+	width: 100%;
+}
+
+.form input:focus {
+	outline: 0;
+	border-color: #777;
+}
+
+.form p {
+	text-align: center;
+	margin-top: 1rem;
+}
+        
+.buttonBlock {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 12%;
+	border-top: 1px solid #f0f0f0;
+}
+
+.buttonBlock button {
+	color: #fff;
+	background-color: #66676c;
+	border: none;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 1rem;
+	padding: 0.3rem 0.5rem;
+	margin: 1rem;
+  	cursor: pointer;
+}
+
+.buttonBlock button:hover {
+	background-color: #4b4c50;
+}
+
+.buttonBlock button:focus {
+	outline: none;
+}
+
+.buttonBlock a {
+	color: #fff;
+}
+
+.users {
+	flex: 1 1 0;
+	display: flex;
+	flex-direction: row;
+	width: 25rem;
+	overflow: hidden;
+  }
+  
+  .contacts {
+	width: 50%;
+	overflow-y: scroll;
+  }
+  
+  .members {
+	width: 50%;
+	overflow-y: scroll;
+  }
+  
+  /* width */
+  .contacts::-webkit-scrollbar,
+  .members::-webkit-scrollbar {
+	width: 8px;
+  }
+  
+  /* Track */
+  .contacts::-webkit-scrollbar-track,
+  .members::-webkit-scrollbar-track {
+	background: inherit; 
+  }
+   
+  /* Handle */
+  .contacts::-webkit-scrollbar-thumb,
+  .members::-webkit-scrollbar-thumb {
+	background: inherit;
+	border-radius: 5px;
+	border:1px solid grey;
+  }
+  
+  /* Handle on hover */
+  .contacts::-webkit-scrollbar-thumb:hover,
+  .members::-webkit-scrollbar-thumb:hover {
+	background: #555;
+  }

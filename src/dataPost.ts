@@ -1,3 +1,5 @@
+import { UserData } from './store/user/types';
+
 interface variablesData {
     "login"?: string
     "password"?: string
@@ -12,6 +14,8 @@ interface variablesData {
     "image_id"?: string
     "media_id"?: string
     "message_id"?: string
+    "chat_title"?: string,
+    "members"?: { "_id": string; }[]
 }
 
 export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {

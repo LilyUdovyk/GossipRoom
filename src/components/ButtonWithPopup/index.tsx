@@ -1,6 +1,7 @@
 import React from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
@@ -136,11 +137,11 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
               <ul className={style.navList}>
                 <li
                   className={style.navItem}
-                  // onClick={() => this.addNewGroupHandler()}
                 >
-                  {/* <FontAwesomeIcon icon="comments" />
-                  New group */}
-                  <NewGroupBlock />
+                  <Link to="/new_group">
+                    <FontAwesomeIcon icon="comments" />
+                    New group
+                  </Link>
                 </li>
                 <li 
                   className={style.navItem}

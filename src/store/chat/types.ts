@@ -1,7 +1,7 @@
 import { ActionType } from "typesafe-actions";
 import * as actions from "./actions";
 import { MessageData } from "../message/types";
-import { ContactData } from "../user/types";
+import { UserData, ContactData } from "../user/types";
 import { AvatarData } from "../media/types";
 
 export type ChatAction = ActionType<typeof actions>
@@ -32,4 +32,9 @@ export interface ChatSuccessData {
 export interface AddChatSuccessData {
     readonly newChat: ChatData
     readonly activeChatId: string
+}
+
+export interface AddGroupCreds {
+    readonly chatTitle: string
+    readonly members: UserData[]
 }

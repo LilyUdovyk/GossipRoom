@@ -65,7 +65,6 @@ const Chat: React.FC<ChatProps> = props => {
       { props.messages && props.messages.map((message: MessageData) => (
         <div 
           key={message._id}
-          // className={`chat ${isUserMsg(message) ? "is-user-msg" : ""}`}
           className={classnames(style.chat, {
             [style.isUserMsg]: isUserMsg(message)
           })}
@@ -89,11 +88,11 @@ const Chat: React.FC<ChatProps> = props => {
           } 
           <FormattedMessage message={message} />
           <time className={style.timeBlock}>
-            {moment(+message.createdAt).format('HH:mm')}
+            {moment(+message.createdAt).format('HH:mm  DD.MM')}
           </time>
         </div>
       ))}
-      { props.originalMessage &&
+      { props.originalMessage && 
         <MessageMenu />
       }
     </div>

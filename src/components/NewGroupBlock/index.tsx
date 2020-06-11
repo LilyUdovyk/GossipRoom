@@ -15,14 +15,11 @@ import chatAvatar from '../../img/chat_avatar.jpg'
 
 
 const mapStateToProps = (state: IRootState) => ({
-  // chats: state.user.userData.chats,
-  // activeUserId: state.user.userData._id,
   activeUser: state.user.userData,
   contacts: state.contacts.contactsData,
-  chatAvatar: state.chat.chatData.avatar ? `http://chat.fs.a-level.com.ua/${state.chat.chatData.avatar.url}` : chatAvatar,
+  chatAvatar: state.chat.chatData.avatar ? `http://chat.fs.a-level.com.ua/${state.chat.chatData.avatar.url}` : userAvatar,
   imageId: state.media.fileData._id,
   imageUrl: `http://chat.fs.a-level.com.ua/${state.media.fileData.url}`
-
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -30,6 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
     {
       uploadAvatar: mediaActions.uploadFile.request,
       getActiveChat: chatActions.getActiveChat.request,
+      addGroup: chatActions.addGroup.request
     },
     dispatch
   );
@@ -39,10 +37,11 @@ type NewGroupBlockProps = ReturnType<typeof mapStateToProps> &
 
 const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
 
+  let defaultMembers = [props.activeUser]
+
   const [isOpenedNewGroupBlock, setIsOpenedNewGroupBlock] = React.useState(false);
   const [chatTitle, setChatTitle] = React.useState("");
-
-  let members = [props.activeUser]
+  const [members, setMembers] = React.useState(defaultMembers);
 
   const myRef = React.useRef<HTMLDivElement>(null);
   const myFormRef = React.useRef<HTMLFormElement>(null)
@@ -53,7 +52,7 @@ const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
     } else {
       document.removeEventListener("click", closeNewGroupBlock);
     }
-  }, [isOpenedNewGroupBlock, members.length])
+  }, [isOpenedNewGroupBlock, members])
   
   const openNewGroupBlock = () => {
     setIsOpenedNewGroupBlock(true)
@@ -71,9 +70,13 @@ const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
 
   const addMemberHandler = (contact: UserData) => {
     if (!members.includes(contact)) {
-      console.log('push', members)
-      members.push(contact)
+      setMembers([...members, contact])
     }
+  }
+
+  const addGroupHandler = () => {
+    console.log("addGroupHandler")
+    props.addGroup({ chatTitle, members })
   }
 
   return (
@@ -93,7 +96,7 @@ const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
               encType="multipart/form-data"
               id="form"
             >
-              <div className={style.uploadBtnWrapper}>
+              {/* <div className={style.uploadBtnWrapper}>
                 <button className={style.changeButton}>
                   <img src={props.imageId ? props.imageUrl : props.chatAvatar} />
                 </button>
@@ -104,7 +107,7 @@ const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
                   id="media"
                   onChange={() => { if (myFormRef.current) uploadAvatar(myFormRef.current) }}
                 />
-              </div>
+              </div> */}
               <input
                 className={style.titleInput}
                 type="text"
@@ -139,6 +142,14 @@ const NewGroupBlock: React.FC<NewGroupBlockProps> = props => {
                 )
               })}
             </div>
+          </div>
+          <div className={style.buttonBlock}>
+            <button onClick={addGroupHandler}>
+              Create
+            </button>
+            <button onClick={closeNewGroupBlock}>
+              Cancel
+            </button>
           </div>
         </div>
       }

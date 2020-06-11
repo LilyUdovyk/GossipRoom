@@ -3,7 +3,7 @@ import { authByCredsSaga, regByCredsSaga, logoutSaga } from "./auth/sagas";
 import { getUserSaga, updateAvatarSaga } from "./user/sagas";
 import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga } from "./chat/sagas";
-import { addChatSaga } from "./chat/sagas";
+import { addChatSaga, addGroupSaga } from "./chat/sagas";
 import { sendMessageSaga, onMessageSaga, replyToMessageSaga, forwardMessageSaga } from "./message/sagas";
 import { uploadFileSaga } from "./media/sagas";
 
@@ -21,6 +21,7 @@ export default function* rootSaga() {
     spawn(uploadFileSaga),
     spawn(updateAvatarSaga),
     spawn(replyToMessageSaga),
-    spawn(forwardMessageSaga)
+    spawn(forwardMessageSaga),
+    spawn(addGroupSaga)
   ]);
 }

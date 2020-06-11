@@ -58,29 +58,29 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	}, [])
 
 	const getDetailsOfChat = (chat: ChatData) => {
+		let details
 		if (chat.members.length === 1) {
-			let details = {
-				name: "You",
+			details = {
+				name: chat.title || "You",
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
 			}
-			return details
 		} else if (chat.members.length > 2) {
-			let details = {
+			details = {
 				name: chat.title || "Group",
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
 			}
-			return details
 		} else {
 			let member = chat.members.find(member => {
 				return member._id !== props.activeUserId
 			})
+			let nameFromMember = member && (member.nick || member.login)
 			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
-			let details = {
-				name: member && (member.nick || member.login),
+			details = {
+				name: chat.title || nameFromMember,
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
 			}
-			return details
 		}
+		return details
 	}
 
 	const checkMemberInChats = (contactId: string) => {

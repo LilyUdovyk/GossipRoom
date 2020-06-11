@@ -6,6 +6,5 @@ export type ContactsAction = ActionType<typeof actions>
 
 export interface ContactsState {
     readonly contactsData: UserData[]
-    readonly newGroupMembers: UserData[]
     readonly error: string | null
 }

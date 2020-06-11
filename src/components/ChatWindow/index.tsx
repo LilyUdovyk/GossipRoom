@@ -12,7 +12,7 @@ interface Props {
 const ChatWindow = (props: Props) => {
   return (
     <div className={style.chatWindow}>
-      <Header userName = {props.name} />
+      <Header activeChatName = {props.name} />
       <Chat />
       <MessageInput />
     </div>

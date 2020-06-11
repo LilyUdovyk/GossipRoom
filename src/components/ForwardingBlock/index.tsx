@@ -80,8 +80,9 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
 				return member._id !== props.activeUserId
 			})
 			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
-			let details = {
-				name: member && (member.nick || member.login),
+      let groupTitleFromMember = member && (member.nick || member.login)
+      let details = {
+				name: chat.title ? chat.title : groupTitleFromMember,
 				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
 			}
 			return details
