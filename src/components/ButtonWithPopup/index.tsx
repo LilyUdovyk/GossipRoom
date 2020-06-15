@@ -6,26 +6,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
 import * as authActions from "../../store/auth/actions";
-import * as mediaActions from "../../store/media/actions";
-import * as userActions from "../../store/user/actions";
 
 import style from './style.module.css'
 import userAvatar from '../../img/user_avatar.png'
 
 const mapStateToProps = (state: IRootState) =>
  ({
-  activeUserId: state.user.userData._id,
+  nick: state.user.userData.nick,
+  login: state.user.userData.login,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
-  imageId: state.media.fileData._id,
-  imageUrl: `http://chat.fs.a-level.com.ua/${state.media.fileData.url}`
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
       logout: authActions.logout,
-      uploadAvatar: mediaActions.uploadFile.request,
-      updateAvatar: userActions.updateAvatar.request,
     },
     dispatch
   );
@@ -46,7 +41,6 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
   };
 
   myRef = React.createRef<HTMLDivElement>()
-  myFormRef = React.createRef<HTMLFormElement>()
 
   closePopup = (event: any) => {
     if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
@@ -73,21 +67,6 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
     })
   }
 
-  uploadAvatar = (form: HTMLFormElement) => {
-    this.props.uploadAvatar(form)
-
-    this.setState({
-      isAvatarUpload: true
-    })
-  }
-
-  updateAvatar = (user_id: string, image_id: string | null) => {
-    this.props.updateAvatar({ user_id, image_id })
-    this.setState({
-      isOpenedPopup: false
-    })
-  }
-
   logoutHandler = () => {
     this.props.logout()
   }
@@ -102,35 +81,8 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
         {isOpenedPopup &&
           <div ref={this.myRef} className={style.popup}>
             <div className={style.popupHeader}>
-              <img src={this.props.imageId ? this.props.imageUrl : this.props.avatar} />
-              <form className={style.uploadForm}
-                ref={this.myFormRef}
-                method="post"
-                action='/upload'
-                encType="multipart/form-data"
-                id="form"
-              >
-              <div className={style.uploadBtnWrapper}>
-                  <button className={style.changeButton}>
-                    Change avatar
-                  </button>
-                  <input
-                    className={style.uploadInput}
-                    type="file"
-                    name="media"
-                    id="media"
-                    onChange={() => { if (this.myFormRef.current) this.uploadAvatar(this.myFormRef.current) }}
-                  />
-                </div>
-              </form>
-              { isAvatarUpload &&
-                <button
-                  className={style.okButton}
-                  onClick={() => this.updateAvatar(this.props.activeUserId, this.props.imageId)}
-                >
-                  Ok
-                </button>
-              }
+              <img src={this.props.avatar} />
+              <p>{ this.props.nick || this.props.login}</p>
             </div>
             <nav className={style.navSidebar}>
               <ul className={style.navList}>
