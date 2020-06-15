@@ -3,8 +3,8 @@ import { push } from 'connected-react-router';
 import jwtDecode from "jwt-decode";
 
 import * as actions from './actions'
+import { getAuthToken , regUser } from './api'
 import { DecodedToken } from './types'
-import { dataPost } from '../../dataPost'
 
 export function* authByCredsSaga() {
     const authToken = localStorage.getItem('authToken')
@@ -35,20 +35,6 @@ export function* authByCredsSaga() {
     }
 }
 
-const logInQuery = `query log ($login:String, $password:String) {
-        login(login:$login, password:$password)
-    }`
-
-const getAuthToken = async (login: string, password: string) => {
-    await new Promise((res) => setTimeout(res, 1000))
-    let loginContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '', logInQuery, 
-        {
-            "login": login,
-            "password": password
-        })
-    return loginContent.data.login
-}
-
 export function* regByCredsSaga() {
     while (true) {
         const { payload } = yield take(actions.regByCreds.request)
@@ -70,27 +56,6 @@ export function* regByCredsSaga() {
             yield put(actions.regByCreds.failure(error.message))
         }
     }
-}
-
-const registrationQuery = `mutation reg($nick:String, $login:String, $password:String) {
-    UserUpsert(user: {nick:$nick, login:$login, password:$password}) {
-        _id createdAt login nick
-        avatar{
-            _id, url
-        }
-    }
-}`
-
-const regUser = async (nick: string, login: string, password: string) => {
-    await new Promise((res) => setTimeout(res, 1000))
-    let regContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', '', registrationQuery,
-        {
-            "nick": nick,
-            "login": login,
-            "password": password
-        }  
-    )
-    return regContent.data.UserUpsert
 }
 
 export function* logoutSaga() {

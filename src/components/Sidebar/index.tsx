@@ -12,7 +12,7 @@ import { ChatData } from '../../store/chat/types'
 
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
-import chatAvatar from '../../img/chat_avatar.jpg'
+import chatAvatar from '../../img/chat_avatar.png'
 import ButtonWithPopup from '../ButtonWithPopup';
 import style from './style.module.css'
 

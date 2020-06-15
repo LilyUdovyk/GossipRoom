@@ -11,7 +11,6 @@ import * as userActions from "../../store/user/actions";
 
 import style from './style.module.css'
 import userAvatar from '../../img/user_avatar.png'
-import NewGroupBlock from "../NewGroupBlock";
 
 const mapStateToProps = (state: IRootState) =>
  ({
@@ -141,6 +140,14 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
                   <Link to="/new_group">
                     <FontAwesomeIcon icon="comments" />
                     New group
+                  </Link>
+                </li>
+                <li
+                  className={style.navItem}
+                >
+                  <Link to="/settings">
+                    <FontAwesomeIcon icon="cogs" />
+                    Settings
                   </Link>
                 </li>
                 <li 

@@ -1,6 +1,9 @@
 p {
     padding: 0;
     margin: 0;
+    text-overflow: ellipsis;
+    overflow: auto;
+    word-wrap: break-word; 
 }
 
 a {
@@ -18,7 +21,7 @@ iframe {
 }
 
 .attachment {
-    width: 25rem;
+    width: 15rem;
     max-width: 100%;
     max-height: 35rem;
     margin-top: 1rem;
@@ -27,4 +30,10 @@ iframe {
 audio:focus,
 video:focus {
     outline: none;
+}
+
+@media (min-width:576px){
+	.attachment {
+		width: 25rem;
+	}
 }

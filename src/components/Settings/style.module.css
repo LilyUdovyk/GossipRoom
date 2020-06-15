@@ -1,5 +1,5 @@
 .container {
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -8,10 +8,10 @@
 }
 
 .card {
-	height: 95%;
 	background-color: #f7f7f7;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
 	width: 25rem;
 	max-width: 96%;
 	margin: auto;
@@ -22,8 +22,6 @@
 	border-bottom: 1px solid #f0f0f0;
 	background-color: #66676c;
 	padding: 1.2rem 2.5rem;
-	border-radius: 5px 5px 0 0;
-	height: 12%;
 }
 
 .header h2 {
@@ -32,29 +30,72 @@
     color: #fff;
 }
 
-.main {
+.avatarBlock {
 	display: flex;
-	flex-direction: column;
-	height: 76%;
-}
-
-.main h4 {
-	padding: 1rem 2.5rem;
-	color: #544f4f;
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 0.5rem 0;
 }
 
 .form {
-	padding: 1rem 2.5rem;
+	padding: 0 2.5rem;	
 }
 
-.form label {
+.form img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	object-fit: cover;
+	padding: 0.5rem;
+}
+  
+.uploadForm {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+  
+.uploadBtnWrapper{
+	position: relative;
+	overflow: hidden;
+}
+  
+.uploadInput {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+  
+.changeButton {
+	width: 6rem;
+	border: 1px solid rgba(0,0,0,0.1);
+	background-color: rgba(0,0,0,0.1);
+	border-radius: 5px;
+	font-size: 1rem;
+	padding: 0.1rem 0;
+	color: black;
+}
+  
+.changeButton:hover {
+	background-color: grey;
+	cursor: pointer;
+}
+
+.formControl {
+	margin-bottom: 0.7rem;
+	padding-bottom: 1.2rem;
+	position: relative;
+}
+
+.formControl label {
 	display: inline-block;
 	margin-bottom: 5px;
-	font-weight: bold;
-	color: #544f4f;
 }
 
-.form input {
+.formControl input {
 	border: 2px solid #f0f0f0;
 	border-radius: 4px;
 	display: block;
@@ -64,16 +105,20 @@
 	width: 100%;
 }
 
-.form input:focus {
+.formControl input:focus {
 	outline: 0;
 	border-color: #777;
 }
 
-.form p {
-	text-align: center;
-	margin-top: 1rem;
+.formControl small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: -0.5rem;
+	left: 1rem;
+	font-size: 0.9rem;
+	font-weight: bold;
 }
-        
+
 .buttonBlock {
 	display: flex;
 	flex-direction: row;
@@ -83,13 +128,14 @@
 }
 
 .buttonBlock button {
+	width: 5rem;
 	color: #fff;
 	background-color: #66676c;
 	border: none;
 	border-radius: 4px;
 	font-family: inherit;
 	font-size: 1rem;
-	padding: 0.3rem 0.5rem;
+	padding: 0.6rem 0.5rem;
 	margin: 1rem;
   	cursor: pointer;
 }
@@ -105,47 +151,3 @@
 .buttonBlock a {
 	color: #fff;
 }
-
-.users {
-	flex: 1 1 0;
-	display: flex;
-	flex-direction: row;
-	width: 25rem;
-	overflow: hidden;
-}
-  
-.contacts {
-	width: 50%;
-	overflow-y: scroll;
-}
-  
-.members {
-	width: 50%;
-	overflow-y: scroll;
-}
-  
-  /* width */
-  .contacts::-webkit-scrollbar,
-  .members::-webkit-scrollbar {
-	width: 8px;
-  }
-  
-  /* Track */
-  .contacts::-webkit-scrollbar-track,
-  .members::-webkit-scrollbar-track {
-	background: inherit; 
-  }
-   
-  /* Handle */
-  .contacts::-webkit-scrollbar-thumb,
-  .members::-webkit-scrollbar-thumb {
-	background: inherit;
-	border-radius: 5px;
-	border:1px solid grey;
-  }
-  
-  /* Handle on hover */
-  .contacts::-webkit-scrollbar-thumb:hover,
-  .members::-webkit-scrollbar-thumb:hover {
-	background: #555;
-  }

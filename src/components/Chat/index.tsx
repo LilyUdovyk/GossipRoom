@@ -79,13 +79,18 @@ const Chat: React.FC<ChatProps> = props => {
             </div>
           }
           { message.forwarded &&
-            <div className="forwardedBlock">
-              <p className="owner">
+            <div className={style.forwardedBlock}>
+              <p className={style.owner}>
                 Forwarded from { message.forwarded.owner.nick || message.forwarded.owner.login }
               </p>
               <FormattedMessage message={message.forwarded} />
             </div>
           } 
+          { props.activeChat.title && !isUserMsg(message) &&
+            <p className={style.owner}>
+              { message.owner.nick || message.owner.login }
+            </p>
+          }
           <FormattedMessage message={message} />
           <time className={style.timeBlock}>
             {moment(+message.createdAt).format('HH:mm  DD.MM')}

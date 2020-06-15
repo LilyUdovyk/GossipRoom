@@ -43,7 +43,8 @@ a {
 }
 
 .chat p {
-  width: 100%;
+  max-width: 100%;
+  /* width: 13rem; */
 }
 
 .replyBlock {
@@ -74,13 +75,30 @@ a {
 
 /* MicrolinkCard */
 span a {
+  width: 15rem;
+  max-width: 100%;
   margin-top: 0.4rem;
 }
+
+.hZbuWw {
+  max-width: 100%;
+}
+
+
 
 @media (min-width: 576px) {
   .chat {
     max-width: 60%;
   }
+
+  /* .chat p {
+    width: 25rem;
+  } */
+
+/* MicrolinkCard */
+  /* .span a {
+		width: 10rem;
+	} */
 }
 
 /* width */

@@ -1,5 +1,3 @@
-import { UserData } from './store/user/types';
-
 interface variablesData {
     "login"?: string
     "password"?: string
@@ -18,9 +16,9 @@ interface variablesData {
     "members"?: { "_id": string; }[]
 }
 
-export const dataPost = async (url: string, Authorization: string, query: string, variables?: variablesData) => {
+export const dataPost = async (Authorization: string, query: string, variables?: variablesData) => {
     try {
-        const response = await fetch(url, {
+        const response = await fetch('http://chat.fs.a-level.com.ua/graphql', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',

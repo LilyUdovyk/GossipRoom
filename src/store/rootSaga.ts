@@ -1,6 +1,6 @@
 import { all, spawn } from "redux-saga/effects";
 import { authByCredsSaga, regByCredsSaga, logoutSaga } from "./auth/sagas";
-import { getUserSaga, updateAvatarSaga } from "./user/sagas";
+import { getUserSaga, updateAvatarSaga, updateUserSaga } from "./user/sagas";
 import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga } from "./chat/sagas";
 import { addChatSaga, addGroupSaga } from "./chat/sagas";
@@ -22,6 +22,7 @@ export default function* rootSaga() {
     spawn(updateAvatarSaga),
     spawn(replyToMessageSaga),
     spawn(forwardMessageSaga),
-    spawn(addGroupSaga)
+    spawn(addGroupSaga),
+    spawn(updateUserSaga)
   ]);
 }

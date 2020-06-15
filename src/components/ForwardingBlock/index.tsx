@@ -11,7 +11,7 @@ import { ChatData } from '../../store/chat/types'
 import style from './style.module.css'
 import User from "../User";
 import userAvatar from '../../img/user_avatar.png'
-import chatAvatar from '../../img/chat_avatar.jpg'
+import chatAvatar from '../../img/chat_avatar.png'
 
 const mapStateToProps = (state: IRootState) => ({
   chats: state.user.userData.chats,

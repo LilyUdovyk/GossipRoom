@@ -7,6 +7,7 @@ import Registration from './components/Registration';
 import Authorization from './components/Authorization';
 import Profile from './components/Profile';
 import CreationNewChat from './components/CreationNewChat';
+import Settings from './components/Settings'
 
 const mapStateToProps = (state: IRootState) => ({
     authToken: state.auth.authData.authToken
@@ -21,6 +22,7 @@ const Routes: React.FC<RoutesProps> = ({ authToken }) => (
         {!authToken && <Redirect from="/" to="/sign-in" />}
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/new_group" component={CreationNewChat} />
+        <Route exact path="/settings" component={Settings} />
         {authToken && <Redirect from="/" to="/profile" />}
         <Route path="/" render={() => <p>Page Not Found</p>} />
     </Switch>

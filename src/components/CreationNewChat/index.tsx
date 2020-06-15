@@ -47,7 +47,6 @@ const CreationNewChat: React.FC<CreationNewChatProps> = props => {
   }
 
   const addGroupHandler = () => {
-    console.log("addGroupHandler")
     props.addGroup({ chatTitle, members })
   }
 
@@ -74,6 +73,7 @@ const CreationNewChat: React.FC<CreationNewChatProps> = props => {
               onChange={(e) => setChatTitle(e.target.value)}
             />
           </form>
+          <h4>Add members</h4>
           <div className={style.users}>
             <div className={style.contacts}>
               { props.contacts.map((contact: UserData) => {

@@ -1,7 +1,8 @@
 import { take, call, put, putResolve, select } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import * as actions from './actions'
-import { dataPost } from '../../dataPost'
+import { getActiveUser, updateAvatar, updateUser } from './api'
 
 export function* getUserSaga() {
   while (true) {
@@ -16,63 +17,6 @@ export function* getUserSaga() {
   }
 }
 
-const userQuery = 
-`{
-  _id
-  login
-  nick
-  createdAt
-  avatar{
-    _id, url
-  }
-  chats{
-    _id
-    createdAt
-    title
-    owner{
-      _id login nick
-      avatar{
-        _id, url
-      }
-    }
-    members{
-      _id login nick
-      avatar{
-        _id, url
-      }
-    }
-    messages{
-      _id createdAt text
-      owner{
-        _id login nick
-        avatar{
-          _id, url
-        }
-      }
-    }
-    avatar{
-      _id, url
-    }
-  }
-}`
-
-const getActiveUserQuery = `query getUsers($activeUserQuery: String){
-  UserFindOne(query: $activeUserQuery)
-  ${userQuery}
-}`
-
-const getActiveUser = async (userId: string) => {
-  const activeUserQuery = `[{"_id": "${userId}"}]`
-  let userContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
-    `Bearer ${localStorage.authToken}`,
-    getActiveUserQuery,
-    {
-      "activeUserQuery": activeUserQuery
-    }
-  )
-  return userContent.data.UserFindOne
-}
-
 export function* updateAvatarSaga() {
   while (true) {
     const { payload } = yield take(actions.updateAvatar.request)
@@ -85,19 +29,24 @@ export function* updateAvatarSaga() {
   }
 }
 
-const updateAvatarQuery = `mutation updateAvatar($user_id: ID, $image_id: ID) {
-  UserUpsert(user: {_id: $user_id, 
-    avatar: {_id: $image_id}}) ${userQuery}
-}`
-
-const updateAvatar = async (user_id: string, image_id: string) => {
-  let userContent = await dataPost('http://chat.fs.a-level.com.ua/graphql', 
-    `Bearer ${localStorage.authToken}`,
-    updateAvatarQuery,
-    {
-      "user_id": user_id,
-      "image_id": image_id
-    }
-  )
-  return userContent.data.UserUpsert
+export function* updateUserSaga() {
+  while (true) {
+      const { payload } = yield take(actions.updateUser.request)
+      try {
+          const prevAvatar = yield select(state => state.user.userData.avatar)
+          const prevAvatar_id = prevAvatar ? prevAvatar._id : null
+          const prevNick = yield select(state => state.user.userData.nick)
+          const prevLogin = yield select(state => state.user.userData.login)
+          const prevPassword = yield select(state => state.user.userData.password)            
+          const image_id = payload.image_id === null ? prevAvatar_id : payload.image_id        
+          const nick = payload.nick === "" ? prevNick : payload.nick       
+          const login = payload.login === "" ? prevLogin : payload.login           
+          const password = payload.password === "" ? prevPassword: payload.password
+          const user = yield call(updateUser, payload.user_id, image_id, nick, login, password)
+          yield putResolve(actions.updateUser.success(user))
+          yield put(push('/profile'))
+      } catch (error) {
+          yield put(actions.updateUser.failure(error.message))
+      }
+  }
 }

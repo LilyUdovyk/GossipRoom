@@ -42,6 +42,17 @@ export default (state: UserState = initialState, action: UserAction): UserState 
                 ...state,
                 error: action.payload,
             }    
+        case getType(actions.updateUser.success):
+            return {
+                ...state,
+                error: null,
+                userData: action.payload
+            }
+        case getType(actions.updateUser.failure):
+            return {
+                ...state,
+                error: action.payload,
+            }    
         default:
             return state
     }

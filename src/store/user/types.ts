@@ -22,11 +22,19 @@ export interface UserData {
 export interface ContactData {
     readonly _id: string
     readonly login: string
-    readonly nick : string | null
+    readonly nick: string | null
     readonly avatar: AvatarData | null
 }
 
 export interface UpdateAvatarCreds {
     readonly user_id: string
     readonly image_id: string | null
+}
+
+export interface UpdateUserCreds {
+    readonly user_id: string
+    readonly image_id: string | null
+    readonly login: string
+    readonly nick: string
+    readonly password: string
 }
