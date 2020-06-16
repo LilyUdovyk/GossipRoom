@@ -1,5 +1,5 @@
 import { createAsyncAction } from "typesafe-actions";
-import { ChatSuccessData, AddChatSuccessData, AddGroupCreds } from "./types";
+import { ChatData, ChatSuccessData, AddChatSuccessData, AddGroupCreds, UpdateChatCreds } from "./types";
 
 export const getActiveChat = createAsyncAction(
     "chat/GET_ACTIVE_CHAT_REQUEST",
@@ -18,3 +18,9 @@ export const addGroup = createAsyncAction(
     "chat/ADD_GROUP_SUCCESS",
     "chat/ADD_GROUP_FAILURE"
 )<AddGroupCreds, AddChatSuccessData, string>();
+
+export const updateChat = createAsyncAction(
+    "chat/UPDATE_GROUP_REQUEST",
+    "chat/UPDATE_GROUP_SUCCESS",
+    "chat/UPDATE_GROUP_FAILURE"
+)<UpdateChatCreds, ChatData, string>();

@@ -13,6 +13,8 @@ import userAvatar from '../../img/user_avatar.png'
 const mapStateToProps = (state: IRootState) =>
  ({
   activeUserId: state.auth.authData.id,
+  nick: state.user.userData.nick,
+  login: state.user.userData.login,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
   imageId: state.media.fileData._id,
   imageUrl: `http://chat.fs.a-level.com.ua/${state.media.fileData.url}`
@@ -31,8 +33,8 @@ type SettingsProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
 const Settings: React.FC<SettingsProps> = props => {
-  const [nick, setNick] = React.useState("");
-  const [login, setLogin] = React.useState("");
+  const [nick, setNick] = React.useState(props.nick);
+  const [login, setLogin] = React.useState(props.login);
   const [password, setPassword] = React.useState("");
 
   const uploadRef = React.useRef<HTMLFormElement>(null);

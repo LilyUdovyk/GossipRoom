@@ -98,7 +98,10 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
           <div ref={this.myRef} className={style.dialogContainer}>
             <header className={style.dialogHeader}>
               <h4>Upload a file</h4>
-              <button onClick={() => this.setState({ isOpenedFileUpload: false })}>
+              <button 
+                className={style.uploadButton} 
+                onClick={() => this.setState({ isOpenedFileUpload: false })}
+              >
                 <FontAwesomeIcon icon="times" />
               </button>
             </header>
@@ -188,7 +191,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithFileUpload
 //     setFileMessage("")
 //   }
 
-//     // const { isOpenedFileUpload, fileMessage } = this.state;
 //   return (
 //     <div className={style.buttonWithFileUpload}>
 //       <button onClick={toggleFileUpload} className={style.paperclipButton} >
@@ -198,7 +200,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithFileUpload
 //         <div ref={myRef} className={style.dialogContainer}>
 //           <header className={style.dialogHeader}>
 //             <h4>Upload a file</h4>
-//             <button onClick={() => setIsOpenedFileUpload(false)}>
+//             <button 
+//               className={style.uploadButton} 
+//               onClick={() => setIsOpenedFileUpload(false)}
+//             >
 //               <FontAwesomeIcon icon="times" />
 //             </button>
 //           </header>
@@ -218,11 +223,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithFileUpload
 //               ref={fileAttachmentRef}
 //               onChange={() => { if (myFormRef.current) uploadFile(myFormRef.current) }}
 //             />
-//             <label className={style.dialogLabel} htmlFor="new-message">
+//             <label className={style.dialogLabel} htmlFor="fileMessage">
 //               Add a message about the file
-//           </label>
+//             </label>
 //             <input
-//               id="new-message"
+//               id="fileMessage"
 //               className={style.dialogInput}
 //               autoFocus
 //               type="text"
@@ -240,4 +245,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithFileUpload
 //     </div>
 //   )
 // }
-// export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithFileUpload);
+// export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ButtonWithFileUpload));

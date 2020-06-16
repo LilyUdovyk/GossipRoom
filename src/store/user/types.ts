@@ -35,6 +35,6 @@ export interface UpdateUserCreds {
     readonly user_id: string
     readonly image_id: string | null
     readonly login: string
-    readonly nick: string
+    readonly nick: string | null
     readonly password: string
 }

@@ -1,0 +1,99 @@
+.container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(32,32,35,1);
+}
+
+.card {
+	background-color: #f7f7f7;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	width: 25rem;
+	max-width: 96%;
+	margin: auto;
+	max-height: 100vh;
+}
+
+.header {
+	border-bottom: 1px solid #f0f0f0;
+	background-color: #66676c;
+	padding: 1.2rem 2.5rem;
+}
+
+.header h2 {
+    text-align: center;
+    margin: 0;
+    color: #fff;
+}
+
+.formControl {
+	margin-bottom: 0.7rem;
+	padding: 1.2rem 2.5rem;
+	position: relative;
+}
+
+.formControl label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.formControl input {
+	border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-family: inherit;
+	font-size: 0.9rem;
+	padding: 0.7rem;
+	width: 100%;
+}
+
+.formControl input:focus {
+	outline: 0;
+	border-color: #777;
+}
+
+.formControl small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: -0.5rem;
+	left: 1rem;
+	font-size: 0.9rem;
+	font-weight: bold;
+}
+
+.buttonBlock {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 12%;
+	border-top: 1px solid #f0f0f0;
+}
+
+.buttonBlock button {
+	width: 5rem;
+	color: #fff;
+	background-color: #66676c;
+	border: none;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 1rem;
+	padding: 0.6rem 0.5rem;
+	margin: 1rem;
+  	cursor: pointer;
+}
+
+.buttonBlock button:hover {
+	background-color: #4b4c50;
+}
+
+.buttonBlock button:focus {
+	outline: none;
+}
+
+.buttonBlock a {
+	color: #fff;
+}

@@ -103,4 +103,4 @@ const Chat: React.FC<ChatProps> = props => {
     </div>
   );
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Chat));

@@ -30,14 +30,12 @@ type ButtonWithPopupProps = ReturnType<typeof mapStateToProps> &
 
 interface State {
   isOpenedPopup: boolean
-  isAvatarUpload: boolean
 }
 
 class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
 
   state = {
     isOpenedPopup: false,
-    isAvatarUpload: false
   };
 
   myRef = React.createRef<HTMLDivElement>()
@@ -72,7 +70,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
   }
 
   render() {
-    const { isOpenedPopup, isAvatarUpload } = this.state;
+    const { isOpenedPopup } = this.state;
     return (
       <div className={style.buttonWithPopup}>
         <button onClick={this.togglePopup} className={style.navOpener}>
@@ -89,7 +87,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
                 <li
                   className={style.navItem}
                 >
-                  <Link to="/new_group">
+                  <Link to="/new-group">
                     <FontAwesomeIcon icon="comments" />
                     New group
                   </Link>
@@ -97,7 +95,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
                 <li
                   className={style.navItem}
                 >
-                  <Link to="/settings">
+                  <Link to="/user's-settings">
                     <FontAwesomeIcon icon="cogs" />
                     Settings
                   </Link>
@@ -118,3 +116,81 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithPopup);
+
+
+
+// const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {  
+
+//   const [isOpenedPopup, setIsOpenedPopup] = React.useState(false);
+//   const [isAvatarUpload, setIsAvatarUpload] = React.useState(false);
+
+
+
+//   const myRef = React.useRef<HTMLDivElement>(null);
+
+//   const closePopup = (event: any) => {
+//     if (myRef.current && !(myRef.current.contains(event.target))) {
+//       setIsOpenedPopup(false)
+//     }
+//   }
+
+//   React.useEffect(() => {
+//     if (isOpenedPopup) {
+//       document.addEventListener("click", closePopup);
+//     } else {
+//       document.removeEventListener("click", closePopup);
+//     }
+//   }, [isOpenedPopup])
+
+//   const togglePopup = () => {
+//     setIsOpenedPopup(!isOpenedPopup)
+//   }
+
+//   const logoutHandler = () => {
+//     props.logout()
+//   }
+
+//   return (
+//     <div className={style.buttonWithPopup}>
+//       <button onClick={togglePopup} className={style.navOpener}>
+//         <FontAwesomeIcon icon="bars" />
+//       </button>
+//       {isOpenedPopup &&
+//         <div ref={myRef} className={style.popup}>
+//           <div className={style.popupHeader}>
+//             <img src={props.avatar} />
+//             <p>{ props.nick || props.login}</p>
+//           </div>
+//           <nav className={style.navSidebar}>
+//             <ul className={style.navList}>
+//               <li
+//                 className={style.navItem}
+//               >
+//                 <Link to="/new_group">
+//                   <FontAwesomeIcon icon="comments" />
+//                   New group
+//                 </Link>
+//               </li>
+//               <li
+//                 className={style.navItem}
+//               >
+//                 <Link to="/settings">
+//                   <FontAwesomeIcon icon="cogs" />
+//                   Settings
+//                 </Link>
+//               </li>
+//               <li 
+//                 className={style.navItem}
+//                 onClick={() => logoutHandler()}
+//               >
+//                 <FontAwesomeIcon icon="sign-out-alt" />
+//                 Exit
+//               </li>
+//             </ul>
+//           </nav>
+//         </div>
+//       }
+//     </div>
+//   )
+// }
+// export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ButtonWithPopup));

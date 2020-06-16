@@ -68,6 +68,17 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
                 ...state,
                 error: action.payload,
             }
+        case getType(actions.updateChat.success):
+            return {
+                ...state,
+                error: null,
+                chatData: action.payload
+            }
+        case getType(actions.updateChat.failure):
+            return {
+                ...state,
+                error: action.payload,
+            }
         default:
             return state
     }

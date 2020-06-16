@@ -11,8 +11,9 @@
 }
 
 .settingsButton {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.1rem;
   border-radius: 50%;
   border: none;
   background-color: rgba(0,0,0,0.2);
@@ -21,6 +22,7 @@
 
 .settingsButton:hover {
   background-color: #2b2c33;
+  color: white;
 }
 
 .settingsButton:focus {

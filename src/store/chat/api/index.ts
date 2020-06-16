@@ -43,7 +43,7 @@ export const addNewChat = async (firstMember_id: string, secondMember_id: string
 const addNewGroupQuery = `mutation addNewGroup ($chat_title:String, $members:[UserInput]) {
     ChatUpsert(chat: {
       title: $chat_title,
-          members: $members
+      members: $members
     }) ${chatQuery}
 }`
   
@@ -56,8 +56,29 @@ export const addNewGroup = async (chatTitle: string, members: UserData[]) => {
       addNewGroupQuery,
       {
           "chat_title": chatTitle,
-            "members": membersQuery
+          "members": membersQuery
       }
     )
     return newGroupContent.data.ChatUpsert
+}
+
+const updateChatQuery = `mutation changeChatTitle ($chat_id:ID, $chat_title: String) {
+  ChatUpsert(chat: { 
+    _id: $chat_id, 
+    title: $chat_title
+  }) ${chatQuery}
+}`
+
+export const updateChat = async (chat_id: string, chatTitle: string) => {
+  console.log('chat_id', chat_id, 'chat_title', chatTitle)
+  let chatContent = await dataPost(
+    `Bearer ${localStorage.authToken}`,
+    updateChatQuery,
+    {
+      "chat_id": chat_id,
+      "chat_title": chatTitle
+    }
+  )
+  console.log("chatContent.data.ChatUpsert", chatContent.data)
+  return chatContent.data.ChatUpsert
 }

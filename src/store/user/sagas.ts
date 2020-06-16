@@ -35,14 +35,10 @@ export function* updateUserSaga() {
       try {
           const prevAvatar = yield select(state => state.user.userData.avatar)
           const prevAvatar_id = prevAvatar ? prevAvatar._id : null
-          const prevNick = yield select(state => state.user.userData.nick)
-          const prevLogin = yield select(state => state.user.userData.login)
           const prevPassword = yield select(state => state.user.userData.password)            
           const image_id = payload.image_id === null ? prevAvatar_id : payload.image_id        
-          const nick = payload.nick === "" ? prevNick : payload.nick       
-          const login = payload.login === "" ? prevLogin : payload.login           
           const password = payload.password === "" ? prevPassword: payload.password
-          const user = yield call(updateUser, payload.user_id, image_id, nick, login, password)
+          const user = yield call(updateUser, payload.user_id, image_id, payload.nick, payload.login, password)
           yield putResolve(actions.updateUser.success(user))
           yield put(push('/profile'))
       } catch (error) {

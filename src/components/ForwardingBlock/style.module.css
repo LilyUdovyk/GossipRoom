@@ -16,14 +16,16 @@ button:focus {
   flex-direction: column;
   color: black;
   background-color: white;
-  border-radius: 5px;
 }
 
 .containerHeader {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1rem 0;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  background: inherit;
 }
 
 .containerTitle {

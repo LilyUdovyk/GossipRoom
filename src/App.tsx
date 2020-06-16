@@ -21,7 +21,9 @@ import { faSmile,
          faExclamationCircle,
          faReply,
          faShare,
-         faCogs
+         faCogs,
+         faCommentDots,
+         faUserPlus
        } from '@fortawesome/free-solid-svg-icons'
 
 import rootReducer from './store/rootReducer';
@@ -46,7 +48,9 @@ library.add(faSmile,
             faExclamationCircle,
             faReply,
             faShare,
-            faCogs
+            faCogs,
+            faCommentDots,
+            faUserPlus
           )
 
 const sagaMiddleware = createSagaMiddleware()

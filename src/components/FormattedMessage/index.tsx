@@ -128,7 +128,9 @@ const FormattedMessage = (props: Props) => {
         return (
             <>
               <p>{ props.message && props.message.text }</p>
-              { props.message && props.message.text && <Linkify>{parseURLs(props.message.text)}</Linkify> }
+              { props.message && props.message.text && 
+                <Linkify>{ parseURLs(props.message.text) }</Linkify> 
+              }
             </>
         )
     }

@@ -11,16 +11,16 @@ button:focus {
   outline: none;
 }
 
-button:hover {
-  color: black;
-}
-
 .paperclipButton {
   border: none;
   background: none;
   font-size: 1.2rem;
   border-radius: 8px;
   color: grey;
+}
+
+.uploadButton:hover {
+  color: black;
 }
 
 .dialogContainer {

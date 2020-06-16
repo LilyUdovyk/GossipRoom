@@ -38,3 +38,8 @@ export interface AddGroupCreds {
     readonly chatTitle: string
     readonly members: UserData[]
 }
+
+export interface UpdateChatCreds {
+    readonly chat_id: string
+    readonly title: string
+}
