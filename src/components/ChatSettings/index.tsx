@@ -10,8 +10,8 @@ import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) =>
  ({
-  activeChat: state.chat.chatData,
-  activeChatName: state.chat.activeChatName,
+  activeChat: state.chat.chatSuccessData.activeChat,
+  activeChatName: state.chat.chatSuccessData.activeChatName,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>

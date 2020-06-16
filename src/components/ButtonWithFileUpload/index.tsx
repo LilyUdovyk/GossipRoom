@@ -10,7 +10,7 @@ import * as mediaActions from "../../store/media/actions";
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
-  activeChatId: state.chat.activeChatId,
+  activeChatId: state.chat.chatSuccessData.activeChat._id,
   fileId: state.media.fileData._id
 });
 

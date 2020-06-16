@@ -25,7 +25,7 @@ export function* onMessageSaga() {
     if (payload.owner._id !== activeUserId) {
       playSound()
     }
-    const activeChatId = yield select(state => state.chat.activeChatId)
+    const activeChatId = yield select(state => state.chat.chatSuccessData.activeChat._id)
     if (activeChatId === payload.chat._id) {
       yield put(getActiveChat.request(activeChatId))
     }

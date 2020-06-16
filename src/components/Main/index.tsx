@@ -14,8 +14,8 @@ const mapStateToProps = (state: IRootState) => ({
   nick: state.user.userData.nick,
   login: state.user.userData.login,
   avatar: state.user.userData.avatar ? `http://chat.fs.a-level.com.ua/${state.user.userData.avatar.url}` : userAvatar,
-  activeChatId: state.chat.chatData._id,
-  activeChatName: state.chat.activeChatName
+	activeChatId: state.chat.chatSuccessData.activeChat._id,
+  activeChatName: state.chat.chatSuccessData.activeChatName
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>

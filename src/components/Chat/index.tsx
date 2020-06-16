@@ -14,9 +14,9 @@ import style from './style.module.css'
 const mapStateToProps = (state: IRootState) => ({
   activeUserId: state.user.userData._id,
   nick: state.user.userData.nick,
-  activeChat: state.chat.chatData,
-  activeChatName: state.chat.activeChatName,
-  messages: state.chat.chatData ? state.chat.chatData.messages : [],
+  activeChat: state.chat.chatSuccessData.activeChat,
+  activeChatName: state.chat.chatSuccessData.activeChatName,
+  messages: state.chat.chatSuccessData.activeChat ? state.chat.chatSuccessData.activeChat.messages : [],
   media: state.message.messageData.media,
   mediaUrl: state.media.fileData.url,
   originalMessage: state.message.savedMessage.originalMessage,

@@ -7,10 +7,13 @@ import { AvatarData } from "../media/types";
 export type ChatAction = ActionType<typeof actions>
 
 export interface ChatState {
-    readonly chatData: ChatData
-    readonly activeChatId: string | null
-    readonly activeChatName: string
+    readonly chatSuccessData: ChatSuccessData
     readonly error: string | null
+}
+
+export interface ChatSuccessData {
+    readonly activeChat: ChatData
+    readonly activeChatName: string
 }
 
 export interface ChatData {
@@ -21,17 +24,6 @@ export interface ChatData {
     readonly members: ContactData[]
     readonly messages: MessageData[] | null
     readonly avatar: AvatarData | null
-}
-
-export interface ChatSuccessData {
-    readonly activeChat: ChatData
-    readonly activeChatId: string
-    readonly activeChatName: string
-}
-
-export interface AddChatSuccessData {
-    readonly newChat: ChatData
-    readonly activeChatId: string
 }
 
 export interface AddGroupCreds {

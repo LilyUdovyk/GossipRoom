@@ -15,7 +15,7 @@ const mapStateToProps = (state: IRootState) =>
  ({
   activeUser: state.user.userData,
   contacts: state.contacts.contactsData,
-  chatAvatar: state.chat.chatData.avatar ? `http://chat.fs.a-level.com.ua/${state.chat.chatData.avatar.url}` : userAvatar,
+  chatAvatar: state.chat.chatSuccessData.activeChat.avatar ? `http://chat.fs.a-level.com.ua/${state.chat.chatSuccessData.activeChat.avatar.url}` : userAvatar,
   imageId: state.media.fileData._id,
   imageUrl: `http://chat.fs.a-level.com.ua/${state.media.fileData.url}`
 });

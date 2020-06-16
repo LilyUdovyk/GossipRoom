@@ -11,9 +11,8 @@ export function* getActiveChatSaga() {
     try {
       const activeUserId = yield select(state => state.auth.authData.id)
       const activeChat = yield call(getActiveChat, payload)
-      const activeChatId = activeChat._id
       const activeChatName = yield call(getNameOfChat, activeChat, activeUserId)
-      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatId, activeChatName }))
+      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatName }))
     } catch (error) {
       yield put(actions.getActiveChat.failure(error.message))
     }
@@ -21,10 +20,12 @@ export function* getActiveChatSaga() {
 }
 
 const getNameOfChat = (activeChat: ChatData, activeUserId: string) => {
-  if (activeChat.members.length === 1) {
-    return "You"
-  } else if (activeChat.title) {
+  if (activeChat.title) {
     return activeChat.title
+  } else if (activeChat.members.length === 1) {
+    return "You"
+  } else if (activeChat.members.length > 2) {
+    return "Group"
   } else {
     let member = activeChat.members.find(member => {
       return member._id !== activeUserId
@@ -39,11 +40,8 @@ export function* addChatSaga() {
     try {
       const activeUserId = yield select(state => state.auth.authData.id)
       const newChat = yield call(addNewChat, activeUserId,  payload)
-      const activeChatId = newChat._id
-      yield putResolve(actions.addChat.success({ newChat, activeChatId }))
-      const activeChat = yield call(getActiveChat, activeChatId)
-      const activeChatName = yield call(getNameOfChat, activeChat, activeUserId)
-      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatId, activeChatName }))
+      const activeChatName = yield call(getNameOfChat, newChat, activeUserId)
+      yield putResolve(actions.addChat.success({ activeChat: newChat, activeChatName }))
     } catch (error) {
       yield put(actions.addChat.failure(error.message))
     }
@@ -55,12 +53,9 @@ export function* addGroupSaga() {
     const { payload } = yield take(actions.addGroup.request)
     try {
       const newChat = yield call(addNewGroup, payload.chatTitle,  payload.members)
-      const activeChatId = newChat._id
-      yield putResolve(actions.addGroup.success({ newChat, activeChatId }))
-      const activeChat = yield call(getActiveChat, activeChatId)
       const activeUserId = yield select(state => state.auth.authData.id)
-      const activeChatName = yield call(getNameOfChat, activeChat, activeUserId)
-      yield putResolve(actions.getActiveChat.success({ activeChat, activeChatId, activeChatName }))
+      const activeChatName = yield call(getNameOfChat, newChat, activeUserId)
+      yield putResolve(actions.addGroup.success({ activeChat: newChat, activeChatName }))
       yield put(push('/profile'))
     } catch (error) {
       yield put(actions.addGroup.failure(error.message))
@@ -75,7 +70,10 @@ export function* updateChatSaga() {
     try {
       const chatData = yield call(updateChat, payload.chat_id, payload.title)
       console.log("saga chatData ", chatData )
-      yield putResolve(actions.updateChat.success(chatData))
+      const activeUserId = yield select(state => state.auth.authData.id)
+      const activeChatName = yield call(getNameOfChat, chatData, activeUserId)
+      yield putResolve(actions.updateChat.success({ activeChat: chatData, activeChatName }))
+      yield put(push('/profile'))
     } catch (error) {
       yield put(actions.updateChat.failure(error.message))
     }

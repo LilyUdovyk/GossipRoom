@@ -12,7 +12,7 @@ import OriginalMessageBlock from "../OriginalMessageBlock"
 import style from './style.module.css'
 
 const mapStateToProps = (state: IRootState) => ({
-  activeChatId: state.chat.activeChatId,
+  activeChatId: state.chat.chatSuccessData.activeChat._id,
   originalMessage: state.message.savedMessage.originalMessage,
   isReply: state.message.savedMessage.isReply,
   isForward: state.message.savedMessage.isForward

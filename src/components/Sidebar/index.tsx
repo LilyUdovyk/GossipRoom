@@ -20,7 +20,8 @@ const mapStateToProps = (state: IRootState) => ({
 	activeUserId: state.user.userData._id,
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
-	activeChatId: state.chat.chatData._id,
+	activeChatId: state.chat.chatSuccessData.activeChat._id,
+	activeChatName: state.chat.chatSuccessData.activeChatName,
 	newMessage: state.message.messageData
 });
 

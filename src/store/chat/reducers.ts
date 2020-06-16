@@ -4,27 +4,28 @@ import { ChatState, ChatAction } from "./types";
 import * as actions from "./actions";
 
 const initialState: ChatState = {
-    activeChatId: null,
-    activeChatName: "Chat",
     error: null,
-    chatData: {
-        _id: '',
-        owner: {
+    chatSuccessData: {
+        activeChatName: "Chat",
+        activeChat: {
             _id: '',
-            login: '',
-            nick : '',
+            owner: {
+                _id: '',
+                login: '',
+                nick : '',
+                avatar: {
+                    _id: '',
+                    url: ''
+                }
+            },
+            title: '',
+            createdAt: '',
+            members: [],
+            messages: [],
             avatar: {
                 _id: '',
                 url: ''
             }
-        },
-        title: '',
-        createdAt: '',
-        members: [],
-        messages: [],
-        avatar: {
-            _id: '',
-            url: ''
         }
     }
 }
@@ -34,10 +35,12 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
         case getType(actions.getActiveChat.success):
             return {
                 ...state,
-                activeChatId: action.payload.activeChatId,
-                activeChatName: action.payload.activeChatName,
                 error: null,
-                chatData: action.payload.activeChat
+                chatSuccessData: {
+                    ...state.chatSuccessData,                   
+                    activeChat: action.payload.activeChat,
+                    activeChatName: action.payload.activeChatName,
+                }
             }
         case getType(actions.getActiveChat.failure):
             return {
@@ -47,9 +50,12 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
         case getType(actions.addChat.success):
             return {
                 ...state,
-                activeChatId: action.payload.activeChatId,
                 error: null,
-                chatData: action.payload.newChat
+                chatSuccessData: {
+                    ...state.chatSuccessData,                   
+                    activeChat: action.payload.activeChat,
+                    activeChatName: action.payload.activeChatName,
+                }
             }
         case getType(actions.addChat.failure):
             return {
@@ -59,9 +65,12 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
         case getType(actions.addGroup.success):
             return {
                 ...state,
-                activeChatId: action.payload.activeChatId,
                 error: null,
-                chatData: action.payload.newChat
+                chatSuccessData: {
+                    ...state.chatSuccessData,                   
+                    activeChat: action.payload.activeChat,
+                    activeChatName: action.payload.activeChatName,
+                }
             }
         case getType(actions.addGroup.failure):
             return {
@@ -72,7 +81,11 @@ export default (state: ChatState = initialState, action: ChatAction): ChatState 
             return {
                 ...state,
                 error: null,
-                chatData: action.payload
+                chatSuccessData: {
+                    ...state.chatSuccessData,                   
+                    activeChat: action.payload.activeChat,
+                    activeChatName: action.payload.activeChatName,
+                }
             }
         case getType(actions.updateChat.failure):
             return {

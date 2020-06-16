@@ -14,7 +14,7 @@ import chatAvatar from '../../img/chat_avatar.png'
 
 const mapStateToProps = (state: IRootState) =>
  ({
-  activeChat: state.chat.chatData,
+  activeChat: state.chat.chatSuccessData.activeChat,
   activeUserId: state.user.userData._id,
 });
 
