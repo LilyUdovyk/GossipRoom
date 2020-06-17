@@ -32,6 +32,6 @@ export interface AddGroupCreds {
 }
 
 export interface UpdateChatCreds {
-    readonly chat_id: string
+    readonly chatId: string
     readonly title: string
 }

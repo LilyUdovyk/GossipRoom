@@ -24,8 +24,8 @@ const Routes: React.FC<RoutesProps> = ({ authToken }) => (
         {!authToken && <Redirect from="/" to="/sign-in" />}
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/new-group" component={CreationNewChat} />
-        <Route exact path="/user's-settings" component={UserSettings} />
-        <Route exact path="/chat's-settings" component={ChatSettings} />
+        <Route exact path="/user-settings" component={UserSettings} />
+        <Route exact path="/chat-settings" component={ChatSettings} />
         {authToken && <Redirect from="/" to="/profile" />}
         <Route path="/" render={() => <p>Page Not Found</p>} />
     </Switch>

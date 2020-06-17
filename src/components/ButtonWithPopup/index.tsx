@@ -95,7 +95,7 @@ class ButtonWithPopup extends React.PureComponent<ButtonWithPopupProps> {
                 <li
                   className={style.navItem}
                 >
-                  <Link to="/user's-settings">
+                  <Link to="/user-settings">
                     <FontAwesomeIcon icon="cogs" />
                     Settings
                   </Link>
@@ -166,7 +166,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithPopup);
 //               <li
 //                 className={style.navItem}
 //               >
-//                 <Link to="/new_group">
+//                 <Link to="/new-group">
 //                   <FontAwesomeIcon icon="comments" />
 //                   New group
 //                 </Link>

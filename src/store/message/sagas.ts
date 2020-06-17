@@ -2,7 +2,7 @@ import { take, call, put, putResolve, select } from 'redux-saga/effects';
 
 import * as actions from './actions'
 import { getActiveChat } from '../chat/actions'
-import { sendMessage, sendMessageacWithAtthment, replyToMessage, forwardMessage } from './api'
+import { sendMessage, sendMessageacWithAtthment, replyToMessage, forwardMessage } from './utils'
 
 export function* sendMessageSaga() {
   while (true) {

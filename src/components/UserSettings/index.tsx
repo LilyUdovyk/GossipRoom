@@ -33,15 +33,21 @@ type SettingsProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
 const Settings: React.FC<SettingsProps> = props => {
-  const [nick, setNick] = React.useState(props.nick);
-  const [login, setLogin] = React.useState(props.login);
-  const [password, setPassword] = React.useState("");
+  const [newNick, setNewNick] = React.useState(props.nick);
+  const [newLogin, setNewLogin] = React.useState(props.login);
+  const [newPassword, setNewPassword] = React.useState("");
 
   const uploadRef = React.useRef<HTMLFormElement>(null);
   
   const settingsHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    props.updateUser({ user_id: props.activeUserId, image_id: props.imageId, nick, login, password })
+    props.updateUser({ 
+      userId: props.activeUserId, 
+      imageId: props.imageId, 
+      nick: newNick, 
+      login: newLogin, 
+      password: newPassword 
+    })
   }
 
   const uploadAvatar = (form: HTMLFormElement) => {
@@ -83,8 +89,8 @@ const Settings: React.FC<SettingsProps> = props => {
             <input
               type="text"
               id="login"
-              value={login}
-              onChange={e => setLogin(e.target.value)}
+              value={newLogin}
+              onChange={e => setNewLogin(e.target.value)}
             />
           </div>
           <div className={style.formControl}>
@@ -92,8 +98,8 @@ const Settings: React.FC<SettingsProps> = props => {
             <input
               type="text"
               id="nick"
-              value={nick}
-              onChange={e => setNick(e.target.value)}
+              value={newNick}
+              onChange={e => setNewNick(e.target.value)}
             />
           </div>
           <div className={style.formControl}>
@@ -101,8 +107,8 @@ const Settings: React.FC<SettingsProps> = props => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
             />
           </div>
           <div className={style.buttonBlock}>

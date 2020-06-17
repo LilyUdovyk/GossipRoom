@@ -4,7 +4,7 @@ import { MessageData } from '../../store/message/types'
 import style from "./style.module.css"
 
 interface Props {
-  chat_id?: string,
+  chatId?: string,
   newMessage?: MessageData,
   activeChatId?: string | null,
 }
@@ -15,11 +15,11 @@ const NewMessageCounter = (props: Props) => {
   let chatIdWithNewMessage = props.newMessage && props.newMessage.chat ? props.newMessage.chat._id : null
   
   React.useEffect(() => {
-    if (props.newMessage && chatIdWithNewMessage === props.chat_id && props.chat_id !== props.activeChatId) {
+    if (props.newMessage && chatIdWithNewMessage === props.chatId && props.chatId !== props.activeChatId) {
       setCounter(counter + 1)
     }
 
-    if (props.chat_id === props.activeChatId) {
+    if (props.chatId === props.activeChatId) {
       setCounter(0)
     }
   }, [props.newMessage, props.activeChatId])

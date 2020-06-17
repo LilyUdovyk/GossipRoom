@@ -26,14 +26,10 @@ export interface ContactData {
     readonly avatar: AvatarData | null
 }
 
-export interface UpdateAvatarCreds {
-    readonly user_id: string
-    readonly image_id: string | null
-}
 
 export interface UpdateUserCreds {
-    readonly user_id: string
-    readonly image_id: string | null
+    readonly userId: string
+    readonly imageId: string | null
     readonly login: string
     readonly nick: string | null
     readonly password: string

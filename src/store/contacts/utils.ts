@@ -1,4 +1,4 @@
-import { dataPost } from '../../../services/api'
+import { dataPost } from '../../services/api'
 
 const getContactsListQuery = `query users {
     UserFind(query:"[{}]"){

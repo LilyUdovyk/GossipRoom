@@ -2,7 +2,7 @@ import { take, call, put, putResolve, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 
 import * as actions from './actions'
-import { getActiveChat, addNewChat, addNewGroup, updateChat } from './api'
+import { getActiveChat, addNewChat, addNewGroup, updateChat } from './utils'
 import { ChatData } from '../chat/types';
 
 export function* getActiveChatSaga() {
@@ -68,7 +68,7 @@ export function* updateChatSaga() {
     const { payload } = yield take(actions.updateChat.request)
     console.log('saga', payload)
     try {
-      const chatData = yield call(updateChat, payload.chat_id, payload.title)
+      const chatData = yield call(updateChat, payload.chatId, payload.title)
       console.log("saga chatData ", chatData )
       const activeUserId = yield select(state => state.auth.authData.id)
       const activeChatName = yield call(getNameOfChat, chatData, activeUserId)

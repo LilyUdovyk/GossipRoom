@@ -26,11 +26,11 @@ type ChatSettingsProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
 const ChatSettings: React.FC<ChatSettingsProps> = props => {
-  const [title, setTitle] = React.useState(props.activeChatName);
+  const [newTitle, setNewTitle] = React.useState(props.activeChatName);
 
   const settingsHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    props.updateChat({ chat_id: props.activeChat._id, title })
+    props.updateChat({ chatId: props.activeChat._id, title: newTitle })
   }
 
   return (
@@ -45,8 +45,8 @@ const ChatSettings: React.FC<ChatSettingsProps> = props => {
             <input
               type="text"
               id="title"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
+              value={newTitle}
+              onChange={e => setNewTitle(e.target.value)}
             />
           </div>
           <div className={style.buttonBlock}>

@@ -1,5 +1,3 @@
-import { dataPost } from '../../../services/api'
-  
 export let getFileData = async (form: HTMLFormElement) => {
   try {
       const response = await fetch('http://chat.fs.a-level.com.ua/upload', 

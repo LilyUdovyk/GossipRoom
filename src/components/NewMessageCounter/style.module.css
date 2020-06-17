@@ -1,12 +1,23 @@
 .counter {
-  color: rgba(255, 255, 255, 0.8);
-  padding: 1rem;
-  background-color: #ff000052;
-  border-radius: 50%;
-  margin-left: auto;
-  width: 2.5rem;
-  height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.8rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: rgba(255,0,0,0.62);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 0.1rem;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .counter {
+    width: 2.5rem;
+    height: 2.5rem; 
+    position: static;
+  }
 }

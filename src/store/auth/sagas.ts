@@ -3,7 +3,7 @@ import { push } from 'connected-react-router';
 import jwtDecode from "jwt-decode";
 
 import * as actions from './actions'
-import { getAuthToken , regUser } from './api'
+import { getAuthToken , regUser } from './utils'
 import { DecodedToken } from './types'
 
 export function* authByCredsSaga() {

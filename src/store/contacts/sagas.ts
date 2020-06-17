@@ -1,7 +1,7 @@
 import { take, call, put, putResolve } from 'redux-saga/effects';
 
 import * as actions from './actions'
-import { getContactsList } from './api'
+import { getContactsList } from './utils'
 
 export function* getContactsSaga() {
   while (true) {

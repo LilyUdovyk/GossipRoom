@@ -102,7 +102,7 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
           return (
             <User
               key={chat._id}
-              chat_id={chat._id}
+              chatId={chat._id}
               name={getDetailsOfChat(chat).name}
               avatarSrc={getDetailsOfChat(chat).avatar}
               onClick={() => forwardMessage(chat._id)}

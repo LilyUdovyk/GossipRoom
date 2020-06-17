@@ -1,7 +1,7 @@
 import { take, call, put, putResolve } from 'redux-saga/effects';
 
 import * as actions from './actions'
-import { getFileData } from './api'
+import { getFileData } from './utils'
 
 export function* uploadFileSaga() {
   while (true) {

@@ -30,18 +30,7 @@ export default (state: UserState = initialState, action: UserAction): UserState 
             return {
                 ...state,
                 error: action.payload,
-            }
-        case getType(actions.updateAvatar.success):
-            return {
-                ...state,
-                error: null,
-                userData: action.payload
-            }
-        case getType(actions.updateAvatar.failure):
-            return {
-                ...state,
-                error: action.payload,
-            }    
+            }  
         case getType(actions.updateUser.success):
             return {
                 ...state,

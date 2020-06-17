@@ -7,7 +7,7 @@ import style from './style.module.css'
 
 interface Props {
   name: string | undefined,
-  chat_id?: string,
+  chatId?: string,
   avatarSrc: string,
   newMessage?: MessageData,
   activeChatId?: string | null,
@@ -30,7 +30,7 @@ const User = (props: Props) => {
         <p className={style.useDetailsName}>{props.name}</p>
       </div >
       <NewMessageCounter
-        chat_id={props.chat_id}
+        chatId={props.chatId}
         newMessage={props.newMessage}
         activeChatId={props.activeChatId}
       />

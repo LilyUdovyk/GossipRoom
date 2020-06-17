@@ -15,6 +15,7 @@ import chatAvatar from '../../img/chat_avatar.png'
 const mapStateToProps = (state: IRootState) =>
  ({
   activeChat: state.chat.chatSuccessData.activeChat,
+  activeChatName: state.chat.chatSuccessData.activeChatName,
   activeUserId: state.user.userData._id,
 });
 
@@ -66,30 +67,20 @@ class ButtonWithChatDetails extends React.PureComponent<ButtonWithChatDetailsPro
     })
   }
 
-  getDetailsOfChat = (chat: ChatData) => {
-		let details
+  getAvatarOfChat = (chat: ChatData) => {
+    let avatar
 		if (chat.members.length === 1) {
-			details = {
-				name: chat.title || "You",
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
-			}
+				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
 		} else if (chat.members.length > 2) {
-			details = {
-				name: chat.title || "Group",
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
-			}
+				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
 		} else {
 			let member = chat.members.find(member => {
 				return member._id !== this.props.activeUserId
 			})
-			let nameFromMember = member && (member.nick || member.login)
 			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
-			details = {
-				name: chat.title || nameFromMember,
-				avatar: chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
-			}
+				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
 		}
-		return details
+		return avatar
 	}
 
 
@@ -103,21 +94,21 @@ class ButtonWithChatDetails extends React.PureComponent<ButtonWithChatDetailsPro
         {isOpenedChatDetails &&
           <div ref={this.myRef} className={style.chatDetails}>
             <div className={style.chatDetailsHeader}>
-              <img src={this.getDetailsOfChat(this.props.activeChat).avatar} />
-              <p>{ this.getDetailsOfChat(this.props.activeChat).name }</p>
+              <img src={this.getAvatarOfChat(this.props.activeChat)} />
+              <p>{ this.props.activeChatName }</p>
             </div>
             <nav className={style.navSidebar}>
               <ul className={style.navList}>
-                <li
+                {/* <li
                   className={style.navItem}
                 >
                   <FontAwesomeIcon icon="user-plus" />
                   Add member
-                </li>
+                </li> */}
                 <li
                   className={style.navItem}
                 >
-                  <Link to="/chat's-settings">
+                  <Link to="/chat-settings">
                     <FontAwesomeIcon icon="cogs" />
                     Settings
                   </Link>

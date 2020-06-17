@@ -21,7 +21,6 @@ const mapStateToProps = (state: IRootState) => ({
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
 	activeChatId: state.chat.chatSuccessData.activeChat._id,
-	activeChatName: state.chat.chatSuccessData.activeChatName,
 	newMessage: state.message.messageData
 });
 
@@ -118,7 +117,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 						return (
 							<User
 								key={chat._id}
-								chat_id={chat._id}
+								chatId={chat._id}
 								name={getDetailsOfChat(chat).name}
 								avatarSrc={getDetailsOfChat(chat).avatar}
 								newMessage={props.newMessage}

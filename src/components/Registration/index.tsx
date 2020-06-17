@@ -28,12 +28,12 @@ const Registration: React.FC<RegistrationProps> = props => {
   const [nick, setNick] = React.useState("");
   const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [password2, setPassword2] = React.useState("");
+  const [confirmedPassword, setConfirmedPassword] = React.useState("");
   const [passwordError, setPasswordError] = React.useState("");
   
   const signUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (password !== password2) {
+    if (password !== confirmedPassword) {
       setPasswordError("Passwords does not match")
       return
     }
@@ -83,8 +83,8 @@ const Registration: React.FC<RegistrationProps> = props => {
               type="password"
               id="password2"
               required={true}
-              value={password2}
-              onChange={e => setPassword2(e.target.value)}
+              value={confirmedPassword}
+              onChange={e => setConfirmedPassword(e.target.value)}
             />
             { (passwordError || props.authError) &&
               <small>{passwordError || props.authError}</small>
