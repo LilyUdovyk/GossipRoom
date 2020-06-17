@@ -80,10 +80,9 @@ span a {
   margin-top: 0.4rem;
 }
 
-.hZbuWw {
-  max-width: 100%;
-}
-
+/* .hZbuWw {
+  max-width: 100% !important;
+} */
 
 
 @media (min-width: 576px) {

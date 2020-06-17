@@ -28,7 +28,7 @@ export interface MessageData {
 export interface MessageCreds {
     readonly activeChatId: string
     readonly text?: string
-    readonly mediaId?: any | null
+    readonly mediaId?: string | null
 }
 
 export interface ReplyCreds {

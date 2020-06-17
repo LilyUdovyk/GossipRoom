@@ -32,7 +32,7 @@ button:focus {
   flex-direction: column;
   color: black;
   background-color: white;
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 .dialogHeader {

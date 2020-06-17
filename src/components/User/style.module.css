@@ -2,7 +2,8 @@
   display: flex;
   position: relative;
   align-items: center;
-  padding: 1rem 0.7rem;
+  flex-direction: column;
+  padding: 0.5rem 0.7rem;
 }
 
 .user:hover {
@@ -18,16 +19,18 @@
 }
 
 .userDetails {
-	display: none;
+	text-overflow: ellipsis;
+  overflow: auto;
+  word-wrap: break-word;
 }
 
 @media (min-width: 576px) {
   .user {
+    flex-direction: row;
     padding: 1rem;
   }
 
   .userDetails {
-    display: block;
     padding: 0 0 0 1rem;
   }
   

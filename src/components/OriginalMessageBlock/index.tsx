@@ -7,7 +7,7 @@ import style from"./style.module.css";
 
 interface Props {
     originalMessage: MessageData | null,
-    deleteOriginalMessage: any
+    deleteOriginalMessage: ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void) | undefined
 }
 
 const OriginalMessageBlock = (props: Props) => {
@@ -19,7 +19,7 @@ const OriginalMessageBlock = (props: Props) => {
                 </p>
                 <FormattedMessage message={props.originalMessage} />
                 <button 
-                    onClick = {() => props.deleteOriginalMessage()}
+                    onClick = {props.deleteOriginalMessage}
                     className={style.deleteOriginalMessage}
                 >
                     <FontAwesomeIcon icon="times" />

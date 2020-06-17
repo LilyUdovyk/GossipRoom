@@ -58,7 +58,9 @@ const FormattedMessage = (props: Props) => {
                   alt="Attachment"
                 />
               )
-            } else if (attachment.type === "video/mp4" || attachment.type === "video/webm" || attachment.type === "video/ogg") {
+            } else if (attachment.type === "video/mp4" 
+                  || attachment.type === "video/webm" 
+                  || attachment.type === "video/ogg") {
               return (
                 <>
                   <AttachmentLink
