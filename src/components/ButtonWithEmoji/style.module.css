@@ -7,7 +7,7 @@
 .emojiBlock {
     position: absolute;
     top: -27rem;
-    left: 0;
+    left: -5.5rem;
 }
 
 .button {
@@ -26,3 +26,8 @@
     color: black;
 }
 
+@media (min-width: 576px) {
+    .emojiBlock {
+        left: 0;
+    }
+}

@@ -22,7 +22,7 @@ a {
 .chat {
   margin: 1rem 0;
   color: #fff;
-  padding: 1rem;
+  padding: 0.5rem;
   background: #2b2c33;
   max-width: 90%;
   border-top-right-radius: 10px;
@@ -43,8 +43,7 @@ a {
 }
 
 .chat p {
-  max-width: 100%;
-  /* width: 13rem; */
+  max-width: 11rem;
 }
 
 .replyBlock {
@@ -75,30 +74,10 @@ a {
 
 /* MicrolinkCard */
 span a {
-  width: 15rem;
   max-width: 100%;
   margin-top: 0.4rem;
 }
 
-/* .hZbuWw {
-  max-width: 100% !important;
-} */
-
-
-@media (min-width: 576px) {
-  .chat {
-    max-width: 60%;
-  }
-
-  /* .chat p {
-    width: 25rem;
-  } */
-
-/* MicrolinkCard */
-  /* .span a {
-		width: 10rem;
-	} */
-}
 
 /* width */
 .chats::-webkit-scrollbar {
@@ -121,4 +100,16 @@ span a {
 .chats::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/*not small devices*/
+
+
+@media (min-width: 576px) {
+  .chat {
+    max-width: 60%;
+    padding: 1rem;
+  }
+
+  .chat p {
+    max-width: 25rem;
+  }
+
+}
