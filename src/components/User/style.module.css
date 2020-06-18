@@ -24,6 +24,10 @@
   word-wrap: break-word;
 }
 
+.userDetails p {
+  text-align: center;
+}
+
 @media (min-width: 576px) {
   .user {
     flex-direction: row;

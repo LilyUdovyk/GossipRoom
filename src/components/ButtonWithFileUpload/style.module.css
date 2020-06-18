@@ -19,6 +19,10 @@ button:focus {
   color: grey;
 }
 
+.uploadButton {
+  color: grey;
+}
+
 .uploadButton:hover {
   color: black;
 }
@@ -43,13 +47,14 @@ button:focus {
 }
 
 .dialogHeader button {
+  color: grey;
   border: none;
   background: none;
   font-size: 0.9rem;
 }
 
 .dialogHeader button:hover {
-   color: grey;
+   color: black;
 }
 
 .dialogForm {

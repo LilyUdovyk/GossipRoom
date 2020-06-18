@@ -99,7 +99,6 @@ class ButtonWithFileUpload extends React.PureComponent<ButtonWithFileUploadProps
             <header className={style.dialogHeader}>
               <h4>Upload a file</h4>
               <button 
-                className={style.uploadButton} 
                 onClick={() => this.setState({ isOpenedFileUpload: false })}
               >
                 <FontAwesomeIcon icon="times" />
