@@ -1,5 +1,5 @@
 .container {
-	width: 100%;
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -8,14 +8,14 @@
 }
 
 .card {
+	width: 25rem;
+	max-width: 96%;
 	height: 95%;
+	max-height: 100vh;
 	background-color: #f7f7f7;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	width: 25rem;
-	max-width: 96%;
 	margin: auto;
-	max-height: 100vh;
 }
 
 .header {
