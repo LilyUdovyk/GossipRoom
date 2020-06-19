@@ -8,6 +8,7 @@
     position: absolute;
     top: -27rem;
     left: -5.5rem;
+    z-index: 15;
 }
 
 .button {
