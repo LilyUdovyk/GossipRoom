@@ -13,7 +13,7 @@ export function* authByCredsSaga() {
         const id = decoded.sub.id
         const login = decoded.sub.login
         yield putResolve(actions.authByCreds.success({authToken, id, login}))
-        yield put(push(process.env.PUBLIC_URL + '/profile')
+        yield put(push(process.env.PUBLIC_URL + '/profile'))
     }
     while (true) {
         const { payload } = yield take(actions.authByCreds.request)
