@@ -49,7 +49,7 @@
   "homepage": "http://gossip-room.surge.sh/",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject",
