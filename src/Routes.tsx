@@ -21,15 +21,16 @@ type RoutesProps = ReturnType<typeof mapStateToProps>
 const Routes: React.FC<RoutesProps> = ({ authToken }) => (
     <React.Suspense fallback={<div>Загрузка...</div>}>
         <Switch>
-            <Route exact path={process.env.PUBLIC_URL + '/sign-in'} component={Authorization} />
-            <Route exact path={process.env.PUBLIC_URL + '/registration'} component={Registration} />
-            {!authToken && <Redirect from="/" to={process.env.PUBLIC_URL + '/sign-in'} />}
-            <Route exact path={process.env.PUBLIC_URL + '/profile'} component={Profile} />
-            <Route exact path={process.env.PUBLIC_URL + '/new-group'} component={CreationNewChat} />
-            <Route exact path={process.env.PUBLIC_URL + '/user-settings'} component={UserSettings} />
-            <Route exact path={process.env.PUBLIC_URL + '/chat-settings'} component={ChatSettings} />
-            {authToken && <Redirect from="/" to={process.env.PUBLIC_URL + '/profile'} />}
+            <Route exact path='/sign-in' component={Authorization} />
+            <Route exact path='/registration' component={Registration} />
+            {!authToken && <Redirect from="/" to='/sign-in' />}
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/new-group' component={CreationNewChat} />
+            <Route exact path='/user-settings' component={UserSettings} />
+            <Route exact path='/chat-settings' component={ChatSettings} />
+            {authToken && <Redirect from="/" to='/profile' />}
             <Route path="/" render={() => <div>Page Not Found</div>} />
+
         </Switch>
     </React.Suspense>
 )

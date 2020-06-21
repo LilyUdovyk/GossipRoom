@@ -78,7 +78,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
               <li
                 className={style.navItem}
               >
-                <Link to={process.env.PUBLIC_URL + '/new-group'}>
+                <Link to='/new-group'>
                   <FontAwesomeIcon icon="comments" />
                   New group
                 </Link>
@@ -86,7 +86,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
               <li
                 className={style.navItem}
               >
-                <Link to={process.env.PUBLIC_URL + '/user-settings'}>
+                <Link to='/user-settings'>
                   <FontAwesomeIcon icon="cogs" />
                   Settings
                 </Link>

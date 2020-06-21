@@ -28,7 +28,7 @@ export function* updateUserSaga() {
           const password = payload.password === "" ? prevPassword: payload.password
           const user = yield call(updateUser, payload.userId, imageId, payload.nick, payload.login, password)
           yield putResolve(actions.updateUser.success(user))
-          yield put(push(process.env.PUBLIC_URL + '/profile'))
+          yield put(push('/profile'))
       } catch (error) {
           yield put(actions.updateUser.failure(error.message))
       }

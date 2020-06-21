@@ -37,7 +37,7 @@ button:focus {
   color: black;
   background-color: white;
   border-radius: 5px;
-  z-index: 15;
+  z-index: 20;
 }
 
 .dialogHeader {

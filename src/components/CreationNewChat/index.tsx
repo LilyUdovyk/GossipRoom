@@ -105,7 +105,7 @@ const CreationNewChat: React.FC<CreationNewChatProps> = props => {
             Create
           </button>
           <button>
-            <Link to={process.env.PUBLIC_URL + '/profile'}>Cancel</Link>
+            <Link to='/profile'>Cancel</Link>
           </button>
         </div>
       </div>

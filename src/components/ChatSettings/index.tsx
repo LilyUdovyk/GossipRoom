@@ -52,7 +52,7 @@ const ChatSettings: React.FC<ChatSettingsProps> = props => {
           <div className={style.buttonBlock}>
             <button type="submit" className={style.submitBtn}>Save</button>
             <button className={style.submitBtn}>
-              <Link to={process.env.PUBLIC_URL + '/profile'}>Cancel</Link>
+              <Link to='/profile'>Cancel</Link>
             </button>
           </div>
         </form>
