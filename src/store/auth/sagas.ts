@@ -13,7 +13,7 @@ export function* authByCredsSaga() {
         const id = decoded.sub.id
         const login = decoded.sub.login
         yield putResolve(actions.authByCreds.success({authToken, id, login}))
-        yield put(push('/profile'))
+        yield put(push(process.env.PUBLIC_URL + '/profile')
     }
     while (true) {
         const { payload } = yield take(actions.authByCreds.request)
@@ -25,7 +25,7 @@ export function* authByCredsSaga() {
                 const login = decoded.sub.login
                 localStorage.setItem('authToken', authToken)
                 yield putResolve(actions.authByCreds.success({ authToken, id, login }))
-                yield put(push('/profile'))
+                yield put(push(process.env.PUBLIC_URL + '/profile'))
             } else {
                 yield put(actions.authByCreds.failure('Wrong login or password'))
             }
@@ -47,7 +47,7 @@ export function* regByCredsSaga() {
                 const login = decoded.sub.login
                 localStorage.setItem('authToken', authToken)
                 yield putResolve(actions.authByCreds.success({ authToken, id, login }))
-                yield put(push('/profile'))
+                yield put(push(process.env.PUBLIC_URL + '/profile'))
             } 
             else {
                 yield put(actions.authByCreds.failure(`User ${payload.login} already exists`))
@@ -62,6 +62,6 @@ export function* logoutSaga() {
     while (true) {
         yield take(actions.logout)
         localStorage.clear();
-        yield put(push('/sign-in'))
+        yield put(push(process.env.PUBLIC_URL + '/sign-in'))
     }
 }

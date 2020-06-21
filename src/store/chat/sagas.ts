@@ -56,7 +56,7 @@ export function* addGroupSaga() {
       const activeUserId = yield select(state => state.auth.authData.id)
       const activeChatName = yield call(getNameOfChat, newChat, activeUserId)
       yield putResolve(actions.addGroup.success({ activeChat: newChat, activeChatName }))
-      yield put(push('/profile'))
+      yield put(push(process.env.PUBLIC_URL + '/profile'))
     } catch (error) {
       yield put(actions.addGroup.failure(error.message))
     }
@@ -73,7 +73,7 @@ export function* updateChatSaga() {
       const activeUserId = yield select(state => state.auth.authData.id)
       const activeChatName = yield call(getNameOfChat, chatData, activeUserId)
       yield putResolve(actions.updateChat.success({ activeChat: chatData, activeChatName }))
-      yield put(push('/profile'))
+      yield put(push(process.env.PUBLIC_URL + '/profile'))
     } catch (error) {
       yield put(actions.updateChat.failure(error.message))
     }
