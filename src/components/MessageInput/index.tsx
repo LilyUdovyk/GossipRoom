@@ -10,6 +10,7 @@ import ButtonWithEmoji from "../ButtonWithEmoji"
 import ButtonWithFileUpload from "../ButtonWithFileUpload"
 import OriginalMessageBlock from "../OriginalMessageBlock"
 import style from './style.module.css'
+import { EmojiData } from "emoji-mart";
 
 const mapStateToProps = (state: IRootState) => ({
   activeChatId: state.chat.chatSuccessData.activeChat._id,

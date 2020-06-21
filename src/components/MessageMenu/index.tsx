@@ -36,18 +36,24 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
   
   React.useEffect(() => {
 		if (props.originalMessage) {
-      document.addEventListener("click", closeForwardBlock);
+      document.addEventListener("click", closeMessageMenu);
     } else {
-      document.removeEventListener("click", closeForwardBlock);
+      document.removeEventListener("click", closeMessageMenu);
     }
   }, [props.originalMessage])
-  
-  const closeForwardBlock = (event: any) => {
-    if (myRef.current && !(myRef.current.contains(event.target))) {
-      setIsVisibleMenu(false)
-    }
-  };
 
+  const closeMessageMenu = React.useCallback(
+    (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+      if (myRef.current && !myRef.current.contains(event.target)) {
+        setIsVisibleMenu(false);
+      }
+    },
+    [setIsVisibleMenu]
+  )
+  
   const replyToMessage = () => {
     props.saveOriginalMessage({originalMessage: props.originalMessage, isReply: true})
     setIsVisibleMenu(false)

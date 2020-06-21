@@ -2,68 +2,54 @@ import React from 'react'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { EmojiData } from "emoji-mart";
 
 import style from './style.module.css'
-
 interface Props {
-  addEmoji: any
+  addEmoji: ((emoji: EmojiData) => void) | undefined
 }
 
-interface State {
-  isOpenedEmoji: boolean,
-  emojiObj: string
-}
+const ButtonWithEmoji: React.FC<Props> = (props) => {  
 
-class ButtonWithEmoji extends React.PureComponent<Props, State> {
-  constructor(props: never) {
-    super(props);
-    this.state = {
-      isOpenedEmoji: false,
-      emojiObj: ""
-    }
-  }
+  const [isOpenedEmoji, setIsOpenedEmoji] = React.useState(false);
 
-  myRef = React.createRef<HTMLDivElement>()
+  const myRef = React.useRef<HTMLDivElement>(null);
 
-  closeEmoji = (event: any) => {
-    if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
-      this.setState({
-        isOpenedEmoji: false
-      })
-    }
-  };
+  const closeEmoji = React.useCallback(
+    (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+      if (myRef.current && !myRef.current.contains(event.target)) {
+        setIsOpenedEmoji(false);
+      }
+    },
+    [setIsOpenedEmoji]
+  )
 
-  componentDidUpdate(prevProps: {}, prevState: State) {
-    if (prevState.isOpenedEmoji === this.state.isOpenedEmoji) {
-      return;
-    }
-    if (this.state.isOpenedEmoji) {
-      document.addEventListener("click", this.closeEmoji);
+  React.useEffect(() => {
+    if (isOpenedEmoji) {
+      document.addEventListener("click", closeEmoji);
     } else {
-      document.removeEventListener("click", this.closeEmoji);
+      document.removeEventListener("click", closeEmoji);
     }
+  }, [isOpenedEmoji])
+
+  const toggleEmoji = () => {
+    setIsOpenedEmoji(!isOpenedEmoji)
   }
 
-  toggleEmoji = () => {
-    this.setState({
-      isOpenedEmoji: !this.state.isOpenedEmoji
-    })
-  }
-
-  render() {
-    const { isOpenedEmoji } = this.state;
-    return (
-      <div className={style.buttonWithEmoji}>
-        <button onClick={ this.toggleEmoji } className={style.button}>
-          <FontAwesomeIcon icon="smile" />
-        </button>
-        { isOpenedEmoji && 
-          <div ref={this.myRef} className={style.emojiBlock}>
-            <Picker set='google' onSelect={emoji => {this.props.addEmoji(emoji)}} />
-          </div>
-        }
-      </div>
-    )
-  }
+  return (
+    <div className={style.buttonWithEmoji}>
+      <button onClick={ toggleEmoji } className={style.button}>
+        <FontAwesomeIcon icon="smile" />
+      </button>
+      { isOpenedEmoji && 
+        <div ref={myRef} className={style.emojiBlock}>
+          <Picker set='google' onSelect={props.addEmoji} />
+        </div>
+      }
+    </div>
+  )
 }
-export default ButtonWithEmoji;
+export default React.memo(ButtonWithEmoji);

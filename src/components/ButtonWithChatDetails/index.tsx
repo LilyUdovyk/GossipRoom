@@ -30,95 +30,79 @@ const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
 type ButtonWithChatDetailsProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
-interface State {
-  isOpenedChatDetails: boolean
-}
+const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {  
 
-class ButtonWithChatDetails extends React.PureComponent<ButtonWithChatDetailsProps> {
+  const [isOpenedChatDetails, setIsOpenedChatDetails] = React.useState(false);
 
-  state = {
-    isOpenedChatDetails: false,
-  };
+  const myRef = React.useRef<HTMLDivElement>(null);
 
-  myRef = React.createRef<HTMLDivElement>()
+  const closeChatDetails = React.useCallback(
+    (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+      if (myRef.current && !myRef.current.contains(event.target)) {
+        setIsOpenedChatDetails(false);
+      }
+    },
+    [setIsOpenedChatDetails]
+  )
 
-  closeChatDetails = (event: any) => {
-    if (this.myRef.current && !(this.myRef.current.contains(event.target))) {
-      this.setState({
-        isOpenedChatDetails: false
-      })
-    }
-  };
-
-  componentDidUpdate(prevProps: {}, prevState: State) {
-    if (prevState.isOpenedChatDetails === this.state.isOpenedChatDetails) {
-      return;
-    }
-    if (this.state.isOpenedChatDetails) {
-      document.addEventListener("click", this.closeChatDetails);
+  React.useEffect(() => {
+    if (isOpenedChatDetails) {
+      document.addEventListener("click", closeChatDetails);
     } else {
-      document.removeEventListener("click", this.closeChatDetails);
+      document.removeEventListener("click", closeChatDetails);
     }
+  }, [isOpenedChatDetails])
+
+  const toggleChatDetails = () => {
+    setIsOpenedChatDetails(!isOpenedChatDetails)
   }
 
-  toggleChatDetails = () => {
-    this.setState({
-      isOpenedChatDetails: !this.state.isOpenedChatDetails
-    })
-  }
-
-  getAvatarOfChat = (chat: ChatData) => {
+  const getAvatarOfChat = (chat: ChatData) => {
     let avatar
-		if (chat.members.length === 1) {
-				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
-		} else if (chat.members.length > 2) {
-				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
-		} else {
-			let member = chat.members.find(member => {
-				return member._id !== this.props.activeUserId
-			})
-			let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
-				avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
-		}
-		return avatar
-	}
-
-
-  render() {
-    const { isOpenedChatDetails } = this.state;
-    return (
-      <div className={style.buttonWithChatDetails}>
-        <button onClick={this.toggleChatDetails} className={style.navOpener}>
-        <FontAwesomeIcon icon="comment-dots" />
-        </button>
-        {isOpenedChatDetails &&
-          <div ref={this.myRef} className={style.chatDetails}>
-            <div className={style.chatDetailsHeader}>
-              <img src={this.getAvatarOfChat(this.props.activeChat)} />
-              <p>{ this.props.activeChatName }</p>
-            </div>
-            <nav className={style.navSidebar}>
-              <ul className={style.navList}>
-                {/* <li
-                  className={style.navItem}
-                >
-                  <FontAwesomeIcon icon="user-plus" />
-                  Add member
-                </li> */}
-                <li
-                  className={style.navItem}
-                >
-                  <Link to="/chat-settings">
-                    <FontAwesomeIcon icon="cogs" />
-                    Settings
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        }
-      </div>
-    )
+    if (chat.members.length === 1) {
+        avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : userAvatar
+    } else if (chat.members.length > 2) {
+        avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : chatAvatar
+    } else {
+      let member = chat.members.find(member => {
+        return member._id !== props.activeUserId
+      })
+      let memberAvatar = member && member.avatar && `http://chat.fs.a-level.com.ua/${member.avatar.url}`
+        avatar = chat.avatar ? `http://chat.fs.a-level.com.ua/${chat.avatar.url}` : (memberAvatar || userAvatar)
+    }
+    return avatar
   }
+
+
+  return (
+    <div className={style.buttonWithChatDetails}>
+      <button onClick={toggleChatDetails} className={style.navOpener}>
+      <FontAwesomeIcon icon="comment-dots" />
+      </button>
+      {isOpenedChatDetails &&
+        <div ref={myRef} className={style.chatDetails}>
+          <div className={style.chatDetailsHeader}>
+            <img src={getAvatarOfChat(props.activeChat)} />
+            <p>{ props.activeChatName }</p>
+          </div>
+          <nav className={style.navSidebar}>
+            <ul className={style.navList}>
+              <li
+                className={style.navItem}
+              >
+                <Link to="/chat-settings">
+                  <FontAwesomeIcon icon="cogs" />
+                  Settings
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      }
+    </div>
+  )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ButtonWithChatDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ButtonWithChatDetails));

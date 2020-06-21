@@ -44,8 +44,11 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
       document.removeEventListener("click", closeForwardBlock);
     }
   }, [props.isForward])
-  
-  const closeForwardBlock = (event: any) => {
+ 
+  const closeForwardBlock = (event: MouseEvent) => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
     if (myRef.current && !(myRef.current.contains(event.target))) {
       deleteOriginalMessage()
     }
