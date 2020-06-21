@@ -46,7 +46,7 @@
     "typesafe-actions": "^5.1.0",
     "typescript": "~3.7.2"
   },
-  "homepage": "./",
+  "homepage": "http://gossip-room.surge.sh/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

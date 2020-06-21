@@ -114,7 +114,7 @@ const Settings: React.FC<SettingsProps> = props => {
           <div className={style.buttonBlock}>
             <button type="submit" className={style.submitBtn}>Save</button>
             <button className={style.submitBtn}>
-              <Link to="/profile">Cancel</Link>
+              <Link to={process.env.PUBLIC_URL + '/profile'}>Cancel</Link>
             </button>
           </div>
         </form>

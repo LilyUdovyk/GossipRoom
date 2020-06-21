@@ -93,7 +93,7 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
               <li
                 className={style.navItem}
               >
-                <Link to="/chat-settings">
+                <Link to={process.env.PUBLIC_URL + '/chat-settings'}>
                   <FontAwesomeIcon icon="cogs" />
                   Settings
                 </Link>
