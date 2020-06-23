@@ -37,7 +37,7 @@ const ChatSettings: React.FC<ChatSettingsProps> = props => {
     <div className={style.container}>
       <div className={style.card}>
         <div className={style.header}>
-          <h2>Chat's Settings</h2>
+          <h2>Chat Settings</h2>
         </div>
         <form action="" onSubmit={settingsHandler} id="form" className={style.form}>
           <div className={style.formControl}>

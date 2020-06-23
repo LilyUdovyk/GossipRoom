@@ -58,11 +58,11 @@ const Settings: React.FC<SettingsProps> = props => {
     <div className={style.container}>
       <div className={style.card}>
         <div className={style.header}>
-          <h2>User's Settings</h2>
+          <h2>User Settings</h2>
         </div>
         <form action="" onSubmit={settingsHandler} id="form" className={style.form}>
           <div className={style.avatarBlock}>
-            <img src={props.imageId ? props.imageUrl : props.avatar} />
+            <img src={props.imageId ? props.imageUrl : props.avatar} alt={"User's avatar"} />
             <form className={style.uploadForm}
               ref={uploadRef}
               method="post"

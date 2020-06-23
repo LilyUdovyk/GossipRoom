@@ -33,14 +33,6 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
   const [isVisibleMenu, setIsVisibleMenu] = React.useState(true);
 
   const myRef = React.useRef<HTMLDivElement>(null);
-  
-  React.useEffect(() => {
-		if (props.originalMessage) {
-      document.addEventListener("click", closeMessageMenu);
-    } else {
-      document.removeEventListener("click", closeMessageMenu);
-    }
-  }, [props.originalMessage])
 
   const closeMessageMenu = React.useCallback(
     (event: MouseEvent) => {
@@ -53,6 +45,14 @@ const MessageMenu: React.FC<MessageMenuProps> = props => {
     },
     [setIsVisibleMenu]
   )
+  
+  React.useEffect(() => {
+		if (props.originalMessage) {
+      document.addEventListener("click", closeMessageMenu);
+    } else {
+      document.removeEventListener("click", closeMessageMenu);
+    }
+  }, [props.originalMessage, closeMessageMenu])
   
   const replyToMessage = () => {
     props.saveOriginalMessage({originalMessage: props.originalMessage, isReply: true})

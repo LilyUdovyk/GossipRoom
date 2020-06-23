@@ -33,7 +33,7 @@ const ButtonWithEmoji: React.FC<Props> = (props) => {
     } else {
       document.removeEventListener("click", closeEmoji);
     }
-  }, [isOpenedEmoji])
+  }, [isOpenedEmoji, closeEmoji])
 
   const toggleEmoji = () => {
     setIsOpenedEmoji(!isOpenedEmoji)

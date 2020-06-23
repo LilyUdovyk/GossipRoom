@@ -52,7 +52,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
     } else {
       document.removeEventListener("click", closePopup);
     }
-  }, [isOpenedPopup])
+  }, [isOpenedPopup, closePopup])
 
   const togglePopup = () => {
     setIsOpenedPopup(!isOpenedPopup)
@@ -70,7 +70,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
       {isOpenedPopup &&
         <div ref={myRef} className={style.popup}>
           <div className={style.popupHeader}>
-            <img src={props.avatar} />
+            <img src={props.avatar} alt={"User's avatar"} />
             <p>{ props.nick || props.login}</p>
           </div>
           <nav className={style.navSidebar}>
@@ -88,7 +88,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
               >
                 <Link to='/user-settings'>
                   <FontAwesomeIcon icon="cogs" />
-                  Settings
+                  User Settings
                 </Link>
               </li>
               <li 

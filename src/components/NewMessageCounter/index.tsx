@@ -22,7 +22,7 @@ const NewMessageCounter = (props: Props) => {
     if (props.chatId === props.activeChatId) {
       setCounter(0)
     }
-  }, [props.newMessage, props.activeChatId])
+  }, [props.newMessage, props.activeChatId, chatIdWithNewMessage, counter, props.chatId])
 
   return (  
     <>

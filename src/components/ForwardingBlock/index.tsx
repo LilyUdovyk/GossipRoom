@@ -36,6 +36,15 @@ type ForwardingBlockProps = ReturnType<typeof mapStateToProps> &
 const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
 
   const myRef = React.useRef<HTMLDivElement>(null);
+
+  const closeForwardBlock = (event: MouseEvent) => {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+    if (myRef.current && !(myRef.current.contains(event.target))) {
+      deleteOriginalMessage()
+    }
+  }
   
   React.useEffect(() => {
 		if (props.isForward) {
@@ -44,15 +53,6 @@ const ForwardingBlock: React.FC<ForwardingBlockProps> = props => {
       document.removeEventListener("click", closeForwardBlock);
     }
   }, [props.isForward])
- 
-  const closeForwardBlock = (event: MouseEvent) => {
-    if (!(event.target instanceof Element)) {
-      return;
-    }
-    if (myRef.current && !(myRef.current.contains(event.target))) {
-      deleteOriginalMessage()
-    }
-  };
 
   const deleteOriginalMessage = () => {
     props.saveOriginalMessage({originalMessage: null, isReply: false, isForward: false})

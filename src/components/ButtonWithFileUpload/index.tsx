@@ -53,7 +53,7 @@ const ButtonWithFileUpload: React.FC<ButtonWithFileUploadProps> = props => {
     } else {
       document.removeEventListener("click", closeFileUpload);
     }
-  }, [isOpenedFileUpload])
+  }, [isOpenedFileUpload, closeFileUpload])
 
   const toggleFileUpload = () => {
     setIsOpenedFileUpload(!isOpenedFileUpload)

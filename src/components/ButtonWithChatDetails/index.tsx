@@ -54,7 +54,7 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
     } else {
       document.removeEventListener("click", closeChatDetails);
     }
-  }, [isOpenedChatDetails])
+  }, [isOpenedChatDetails, closeChatDetails])
 
   const toggleChatDetails = () => {
     setIsOpenedChatDetails(!isOpenedChatDetails)
@@ -85,7 +85,7 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
       {isOpenedChatDetails &&
         <div ref={myRef} className={style.chatDetails}>
           <div className={style.chatDetailsHeader}>
-            <img src={getAvatarOfChat(props.activeChat)} />
+            <img src={getAvatarOfChat(props.activeChat)} alt={"Chat's avatar"} />
             <p>{ props.activeChatName }</p>
           </div>
           <nav className={style.navSidebar}>
@@ -95,7 +95,7 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
               >
                 <Link to='/chat-settings'>
                   <FontAwesomeIcon icon="cogs" />
-                  Settings
+                  Chat Settings
                 </Link>
               </li>
             </ul>

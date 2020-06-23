@@ -1,4 +1,4 @@
-import { createAsyncAction, createAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 import { UserData } from "../user/types";
 
 export const getContacts = createAsyncAction(
