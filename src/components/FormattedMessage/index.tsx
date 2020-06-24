@@ -16,7 +16,11 @@ const parseURLs = (text: string) => {
     const urls = getUrls(text);
     const parsedUrls = Array.from(urls).map((url, idx: number) => {
         return (
-            <MicrolinkCard url={url} key={idx}/>
+          <MicrolinkCard 
+            url={url} 
+            key={idx} 
+            media={['audio', 'video', 'image', 'logo']}
+          />
         )
     })
     return (
@@ -129,10 +133,12 @@ const FormattedMessage = (props: Props) => {
     } else {
         return (
             <>
-              <p>{ props.message && props.message.text }</p>
-              { props.message && props.message.text && 
-                <Linkify>{ parseURLs(props.message.text) }</Linkify> 
-              }
+              <Linkify>
+                <p>{ props.message && props.message.text }</p>
+                { props.message && props.message.text && 
+                  <p> { parseURLs(props.message.text) } </p>
+                }
+              </Linkify>
             </>
         )
     }
