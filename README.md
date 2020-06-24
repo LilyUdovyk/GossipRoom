@@ -24,7 +24,7 @@
 
 ## Deploy
 
-I chose to deploy Surge, but you can choose any other resource
+For deploy was chosen Surge, but you can choose any other resource.
 
 1. Getting Surge ```npm install -g surge``` or ```yarn global add  surge```
 2. Add a new value to *package.json* at the top level ```"homepage": "./"```

@@ -37,7 +37,7 @@ const Authorization: React.FC<AuthorizationProps> = props => {
     <div className={style.container}>
       <div className={style.card}>
         <div className={style.header}>
-          <h2>Authorization</h2>
+          <h2>Log in</h2>
         </div>
         <form action="" onSubmit={signInHandler} id="form" className={style.form}>
           <div className={style.formControl}>
@@ -63,7 +63,7 @@ const Authorization: React.FC<AuthorizationProps> = props => {
               <small>Wrong login or password</small>
             }
           </div>
-          <button type="submit" className={style.submitBtn}>Sign In</button>
+          <button type="submit" className={style.submitBtn}>Log in</button>
           <p>New to Gossip Room? <Link to="/registration">Join now</Link></p>
         </form>
       </div>
