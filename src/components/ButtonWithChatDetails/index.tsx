@@ -85,7 +85,7 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
       {isOpenedChatDetails &&
         <div ref={myRef} className={style.chatDetails}>
           <div className={style.chatDetailsHeader}>
-            <img src={getAvatarOfChat(props.activeChat)} alt={"Chat's avatar"} />
+            <img src={getAvatarOfChat(props.activeChat)} alt={"Chat avatar"} />
             <p>{ props.activeChatName }</p>
           </div>
           <nav className={style.navSidebar}>

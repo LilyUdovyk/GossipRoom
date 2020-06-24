@@ -5,6 +5,7 @@ import * as actions from "./actions";
 
 const initialState: MessageState = {
     error: null,
+    newMessage: null,
     savedMessage: {
         originalMessage: null,
         isReply: false,
@@ -86,6 +87,10 @@ export default (state: MessageState = initialState, action: MessageAction): Mess
             return {
                 ...state,
                 error: null,
+                newMessage: {
+                    newMessageId: action.payload._id,
+                    newMessageChatId: action.payload.chat._id,
+                },
                 messageData: action.payload,
             }
         case getType(actions.saveOriginalMessage):

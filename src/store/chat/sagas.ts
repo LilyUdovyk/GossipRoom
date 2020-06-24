@@ -66,10 +66,8 @@ export function* addGroupSaga() {
 export function* updateChatSaga() {
   while (true) {
     const { payload } = yield take(actions.updateChat.request)
-    console.log('saga', payload)
     try {
       const chatData = yield call(updateChat, payload.chatId, payload.title)
-      console.log("saga chatData ", chatData )
       const activeUserId = yield select(state => state.auth.authData.id)
       const activeChatName = yield call(getNameOfChat, chatData, activeUserId)
       yield putResolve(actions.updateChat.success({ activeChat: chatData, activeChatName }))

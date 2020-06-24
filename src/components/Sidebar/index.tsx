@@ -21,7 +21,8 @@ const mapStateToProps = (state: IRootState) => ({
 	contacts: state.contacts.contactsData,
 	chats: state.user.userData.chats,
 	activeChatId: state.chat.chatSuccessData.activeChat._id,
-	newMessage: state.message.messageData
+	newMessageId: state.message.newMessage ? state.message.newMessage.newMessageId : null,
+	newMessageChatId: state.message.newMessage ? state.message.newMessage.newMessageChatId : null
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
@@ -50,10 +51,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 			return
 		}
 		props.getUser()
-		// console.log("props.chats,props.chats.length", props.chats, props.chats.length)
-		// if (props.chats && props.chats.length) {
-		// 	setSidebarView("contacts")
-		// }
 		props.getContacts()
 	}, [])
 
@@ -120,7 +117,8 @@ const Sidebar: React.FC<SidebarProps> = props => {
 								chatId={chat._id}
 								name={getDetailsOfChat(chat).name}
 								avatarSrc={getDetailsOfChat(chat).avatar}
-								newMessage={props.newMessage}
+								newMessageId={props.newMessageId}
+								newMessageChatId={props.newMessageChatId}
 								activeChatId={props.activeChatId}
 								onClick={() => activeChatHandler(chat._id)}
 							/>

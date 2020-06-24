@@ -1,7 +1,5 @@
 import React from "react";
 
-import { MessageData } from '../../store/message/types'
-
 import NewMessageCounter from "../NewMessageCounter"
 import style from './style.module.css'
 
@@ -9,7 +7,8 @@ interface Props {
   name: string | undefined,
   chatId?: string,
   avatarSrc: string,
-  newMessage?: MessageData,
+  newMessageId?: string | null,
+  newMessageChatId?: string | null,
   activeChatId?: string | null,
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
@@ -31,7 +30,8 @@ const User = (props: Props) => {
       </div >
       <NewMessageCounter
         chatId={props.chatId}
-        newMessage={props.newMessage}
+        newMessageId={props.newMessageId}
+        newMessageChatId={props.newMessageChatId}
         activeChatId={props.activeChatId}
       />
     </div>

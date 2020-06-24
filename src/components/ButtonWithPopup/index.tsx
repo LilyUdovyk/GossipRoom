@@ -70,7 +70,7 @@ const ButtonWithPopup: React.FC<ButtonWithPopupProps> = props => {
       {isOpenedPopup &&
         <div ref={myRef} className={style.popup}>
           <div className={style.popupHeader}>
-            <img src={props.avatar} alt={"User's avatar"} />
+            <img src={props.avatar} alt={"User avatar"} />
             <p>{ props.nick || props.login}</p>
           </div>
           <nav className={style.navSidebar}>

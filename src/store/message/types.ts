@@ -9,6 +9,7 @@ export type MessageAction = ActionType<typeof actions>
 export interface MessageState {
     readonly messageData: MessageData
     readonly savedMessage: SavedMessageData
+    readonly newMessage: NewMessageData | null
     readonly error: string | null
 }
 
@@ -29,6 +30,11 @@ export interface MessageCreds {
     readonly activeChatId: string
     readonly text?: string
     readonly mediaId?: string | null
+}
+
+export interface NewMessageData {
+    readonly newMessageId: string | null
+    readonly newMessageChatId: string | null
 }
 
 export interface ReplyCreds {

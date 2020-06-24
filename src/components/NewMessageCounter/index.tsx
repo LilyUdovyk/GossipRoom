@@ -1,37 +1,38 @@
 import React from "react";
 
-import { MessageData } from '../../store/message/types'
 import style from "./style.module.css"
 
 interface Props {
   chatId?: string,
-  newMessage?: MessageData,
+  newMessageId?: string | null,
+  newMessageChatId?: string | null,
   activeChatId?: string | null,
 }
 
 const NewMessageCounter = (props: Props) => {
   const [counter, setCounter] = React.useState(0)
 
-  let chatIdWithNewMessage = props.newMessage && (props.newMessage.chat ? props.newMessage.chat._id : null)
-  
   React.useEffect(() => {
-    if (props.newMessage && (chatIdWithNewMessage === props.chatId) && (props.chatId !== props.activeChatId)) {
+    if (props.newMessageId && (props.newMessageChatId === props.chatId)) {
       setCounter(counter + 1)
     }
+  }, [props.newMessageId])
 
+  React.useEffect(() => {
     if (props.chatId === props.activeChatId) {
       setCounter(0)
     }
-  }, [props.newMessage, props.activeChatId, chatIdWithNewMessage, counter, props.chatId])
+  }, [props.activeChatId])
+
 
   return (  
     <>
-      { counter > 0 && 
+      { counter > 0 && (props.newMessageChatId !== props.activeChatId) && 
         <div className={style.counter}>
           {counter}
         </div>
       }
     </>
-  );
-};
+  )
+}
 export default React.memo(NewMessageCounter);
