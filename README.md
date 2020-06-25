@@ -21,20 +21,20 @@ For registration fill in fields:
 * Login
 * Nick
 * Password
-* Password check <br>
-Password and Password check must match in another case user will see the message «Passwords does not match».
-![]()
+* Password check
+Password and Password check must match in another case user will see the message «Passwords does not match».  <br>
+![](./image/registration.png)
 
 ### Log in
 For log in fill in fields:
 * Login
-* Password <br>
-If login or password was incorrect, user will see the message «Wrong login or password».
-![]()
+* Password 
+If login or password was incorrect, user will see the message «Wrong login or password».  <br>
+![](./image/login.png)
 
 ### Profile
 The Profile tab is displayed after registration or login. <br>
-![]() ![]()
+![](./image/profile.png) ![](./image/profile_mob.png)
 A greeting is displayed on the main part of the tab before choosing an active chat.<br>
 A sidebar has two states: a list of contacts or a list of user chats.
 ![]()
@@ -46,17 +46,17 @@ A “   ” button opens the user menu, which includes following options:
 * New group
 * User Settings
 * Exit <br>
-![]()
+![](./image/user_menu.png)
 #### User settings
 User settings дает пользователю возможность установить: 
 * Avatar
 * Login
 * Nick
-* Password
-![]()
+* Password <br>
+![](./image/user_settings.png)
 #### New group
-A Create New Chat tab allows to create a chat group of users. For creating such a chat user needs to set a chat name and select users from the contact list.
-![]()
+A Create New Chat tab allows to create a chat group of users. For creating such a chat user needs to set a chat name and select users from the contact list. <br>
+![](./image/new_group.png)
 
 ### Messaging
 In addition to simple text messages a chat functionality also allows to send and receive emoji, images, video, audio and any other types of files. <br>
@@ -66,13 +66,14 @@ Also implemented Reply and  Forward Message functionality. <br>
 Messages are displayed in real time. <br>
 When user receives or sends new messages, the chat window automatically scrolls down. <br>
 A sound signal informs about a new message. <br>
-Also was  implemented an unread message counter, which is displayed next to the name of a chat in the sidebar.
-![]()
+Also was  implemented an unread message counter, which is displayed next to the name of a chat in the sidebar. <br>
+![](./image/chat.png)
 
 ### Chat settings
 A “  ” button opens a chat menu. <br>
-A name of a chat can be set in the “Chat Settings” tab.
-![]()
+![](./image/chat_menu.png)
+A name of a chat can be set in the “Chat Settings” tab. <br>
+![](./image/chat_settings.png)
 
 
 ## Install
