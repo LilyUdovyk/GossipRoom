@@ -14,6 +14,67 @@
 - Socket.IO
 
 
+## Usage
+
+### Registration
+For registration fill in fields:
+* Login
+* Nick
+* Password
+* Password check <br>
+Password and Password check must match in another case user will see the message «Passwords does not match».
+![]()
+
+### Log in
+For log in fill in fields:
+* Login
+* Password <br>
+If login or password was incorrect, user will see the message «Wrong login or password».
+![]()
+
+### Profile
+The Profile tab is displayed after registration or login. <br>
+![]() ![]()
+A greeting is displayed on the main part of the tab before choosing an active chat.<br>
+A sidebar has two states: a list of contacts or a list of user chats.
+![]()
+After click on a contact the main part of the tab displays a chat with the message history or a new chat will be created.
+![]()
+
+### User menu
+A “   ” button opens the user menu, which includes following options:
+* New group
+* User Settings
+* Exit <br>
+![]()
+#### User settings
+User settings дает пользователю возможность установить: 
+* Avatar
+* Login
+* Nick
+* Password
+![]()
+#### New group
+A Create New Chat tab allows to create a chat group of users. For creating such a chat user needs to set a chat name and select users from the contact list.
+![]()
+
+### Messaging
+In addition to simple text messages a chat functionality also allows to send and receive emoji, images, video, audio and any other types of files. <br>
+User can see image, video, YouTube link preview and listen to audio directly in the chat. <br>
+Messages with links are displayed as a block with a link to a resource, description and poster. <br>
+Also implemented Reply and  Forward Message functionality. <br>
+Messages are displayed in real time. <br>
+When user receives or sends new messages, the chat window automatically scrolls down. <br>
+A sound signal informs about a new message. <br>
+Also was  implemented an unread message counter, which is displayed next to the name of a chat in the sidebar.
+![]()
+
+### Chat settings
+A “  ” button opens a chat menu. <br>
+A name of a chat can be set in the “Chat Settings” tab.
+![]()
+
+
 ## Install
 
 1.	Clone the repo ```git clone git@github.com:LilyUdovyk/GossipRoom.git```
