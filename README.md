@@ -42,7 +42,7 @@ After click on a contact the main part of the tab displays a chat with the messa
 ![]()
 
 ### User menu
-A “   ” button opens the user menu, which includes following options:
+User menu includes following options:
 * New group
 * User Settings
 * Exit <br>
@@ -70,8 +70,9 @@ Also was  implemented an unread message counter, which is displayed next to the 
 ![](./image/chat.png)
 
 ### Chat settings
-A “  ” button opens a chat menu. <br>
-![](./image/chat_menu.png)
+Chat has menu with next option:
+* Chat Settings <br>
+![](./image/chat_menu.png) <br>
 A name of a chat can be set in the “Chat Settings” tab. <br>
 ![](./image/chat_settings.png)
 
