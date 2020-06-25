@@ -22,19 +22,19 @@ For registration fill in fields:
 * Nick
 * Password
 * Password check
-Password and Password check must match in another case user will see the message «Passwords does not match».  <br>
+Password and Password check must match in another case user will see the message «Passwords does not match». <br>
 ![](./image/registration.png)
 
 ### Log in
 For log in fill in fields:
 * Login
-* Password 
-If login or password was incorrect, user will see the message «Wrong login or password».  <br>
+* Password <br>
+If login or password was incorrect, user will see the message «Wrong login or password». <br>
 ![](./image/login.png)
 
 ### Profile
 The Profile tab is displayed after registration or login. <br>
-![](./image/profile.png) ![](./image/profile_mob.png)
+![](./image/profile.png) ![](./image/profile_mob.png) <br>
 A greeting is displayed on the main part of the tab before choosing an active chat.<br>
 A sidebar has two states: a list of contacts or a list of user chats.
 ![]()
