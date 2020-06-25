@@ -40,11 +40,11 @@ export function* regByCredsSaga() {
         const { payload } = yield take(actions.regByCreds.request)
         try {
             const user = yield call(regUser, payload.nick, payload.login, payload.password)
-            yield put(actions.authByCreds.request({login: payload.login, password: payload.password}))
-            yield put(push('/profile'))
         } catch (error) {
             yield put(actions.regByCreds.failure(error.message))
         }
+        yield put(actions.authByCreds.request({login: payload.login, password: payload.password}))
+        yield put(push('/profile'))
     }
 }
 
