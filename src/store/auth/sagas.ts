@@ -40,18 +40,8 @@ export function* regByCredsSaga() {
         const { payload } = yield take(actions.regByCreds.request)
         try {
             const user = yield call(regUser, payload.nick, payload.login, payload.password)
-            const authToken = yield call(getAuthToken, payload.login, payload.password)
-            if (authToken) {
-                const decoded: DecodedToken = jwtDecode(authToken)
-                const id = decoded.sub.id
-                const login = decoded.sub.login
-                localStorage.setItem('authToken', authToken)
-                yield putResolve(actions.authByCreds.success({ authToken, id, login }))
-                yield put(push('/profile'))
-            } 
-            else {
-                yield put(actions.authByCreds.failure(`User ${payload.login} already exists`))
-            }
+            yield put(actions.authByCreds.request({login: payload.login, password: payload.password}))
+            yield put(push('/profile'))
         } catch (error) {
             yield put(actions.regByCreds.failure(error.message))
         }

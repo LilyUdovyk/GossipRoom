@@ -7,6 +7,12 @@
 	overflow-y: scroll;
 }
 
+.emptyChatList {
+	text-align: justify;
+    margin: 1rem;
+	color: rgba(255, 255, 255, 0.9);
+}
+
 .buttonBlock {
 	display: flex;
 	flex-wrap: wrap;

@@ -43,7 +43,7 @@ type SidebarView = "contacts" | "chats"
 
 const Sidebar: React.FC<SidebarProps> = props => {
 
-	const [sidebarView, setSidebarView] = React.useState<SidebarView>("chats")
+	const [sidebarView, setSidebarView] = React.useState<SidebarView>("contacts")
 
 	React.useEffect(() => {
 		const authToken = localStorage.getItem('authToken')
@@ -53,6 +53,15 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		props.getUser()
 		props.getContacts()
 	}, [])
+
+	React.useEffect(() => {
+		if (!props.chats || !props.chats.length) {
+			return
+		} else {
+			console.log("props.chats", props.chats)
+			setSidebarView("chats")
+		}
+	}, [props.chats])
 
 	const getDetailsOfChat = (chat: ChatData) => {
 		let details
@@ -107,7 +116,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	};
 
 	const renderSidebarContent = () => {
-			if (sidebarView === "chats") {
+			if (sidebarView === "chats" && props.chats) {
 			return (
 				<>
 					{ props.chats.map(chat => {
@@ -126,7 +135,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					})}
 				</>
 			)
-		} else {
+		} else if (sidebarView === "chats") {
 			return (
 				<>
 					{ props.contacts.map((contact: UserData) => {
@@ -140,6 +149,12 @@ const Sidebar: React.FC<SidebarProps> = props => {
 						)
 					})}
 				</>
+			)
+		} else {
+			return (
+				<div className={style.emptyChatList}>
+					Your chat list is empty, please, select a contact to start messaging
+				</div>
 			)
 		}
 	}
