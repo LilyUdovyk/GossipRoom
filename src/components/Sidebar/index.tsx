@@ -116,26 +116,34 @@ const Sidebar: React.FC<SidebarProps> = props => {
 	};
 
 	const renderSidebarContent = () => {
-			if (sidebarView === "chats" && props.chats) {
-			return (
-				<>
-					{ props.chats.map(chat => {
-						return (
-							<User
-								key={chat._id}
-								chatId={chat._id}
-								name={getDetailsOfChat(chat).name}
-								avatarSrc={getDetailsOfChat(chat).avatar}
-								newMessageId={props.newMessageId}
-								newMessageChatId={props.newMessageChatId}
-								activeChatId={props.activeChatId}
-								onClick={() => activeChatHandler(chat._id)}
-							/>
-						)
-					})}
-				</>
-			)
-		} else if (sidebarView === "chats") {
+		if (sidebarView === "chats") {
+			if (props.chats) {
+				return (
+					<>
+						{ props.chats.map(chat => {
+							return (
+								<User
+									key={chat._id}
+									chatId={chat._id}
+									name={getDetailsOfChat(chat).name}
+									avatarSrc={getDetailsOfChat(chat).avatar}
+									newMessageId={props.newMessageId}
+									newMessageChatId={props.newMessageChatId}
+									activeChatId={props.activeChatId}
+									onClick={() => activeChatHandler(chat._id)}
+								/>
+							)
+						})}
+					</>
+				)
+			} else {
+				return (
+					<div className={style.emptyChatList}>
+						Your chat list is empty, please, select a contact to start messaging
+					</div>
+				)
+			} 
+		} else {
 			return (
 				<>
 					{ props.contacts.map((contact: UserData) => {
@@ -149,12 +157,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 						)
 					})}
 				</>
-			)
-		} else {
-			return (
-				<div className={style.emptyChatList}>
-					Your chat list is empty, please, select a contact to start messaging
-				</div>
 			)
 		}
 	}

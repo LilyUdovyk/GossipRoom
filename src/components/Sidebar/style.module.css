@@ -8,9 +8,7 @@
 }
 
 .emptyChatList {
-	text-align: justify;
-    margin: 1rem;
-	color: rgba(255, 255, 255, 0.9);
+	display: none;
 }
 
 .buttonBlock {
@@ -64,5 +62,12 @@
 @media (min-width:576px){
 	.sidebar{
 		width: 15rem;
+	}
+
+	.emptyChatList {
+		display: block;
+		text-align: justify;
+		margin: 1rem;
+		color: rgba(255, 255, 255, 0.9);
 	}
 }
