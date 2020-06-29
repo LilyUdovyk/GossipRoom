@@ -39,7 +39,9 @@ If login or password was incorrect, user will see the message «Wrong login or p
 ### Profile
 The Profile tab is displayed after registration or login.
 
-<img src="./image/profile.png" width="640"> <img src="./image/profile_mob.png" width="185">
+<p align="center">
+  <img src="./image/profile.png" width="615"> <img src="./image/profile_mob.png" width="177">
+</p>
 
 A greeting is displayed on the main part of the tab before choosing an active chat.
 
@@ -96,7 +98,9 @@ A sound signal informs about a new message.
 
 Also was  implemented an unread message counter, which is displayed next to the name of a chat in the sidebar.
 
-<img src="./image/message_counter.png" width="638"> <img src="./image/message_counter_mob.png" width="188">
+<p align="center">
+  <img src="./image/message_counter.png" width="615"> <img src="./image/message_counter_mob.png" width="180">
+</p>
 
 ### Chat settings
 Chat has menu with next option:
