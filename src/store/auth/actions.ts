@@ -1,4 +1,4 @@
-import { createAction, createAsyncAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 import { AuthCreds, RegCreds, AuthSuccessData } from "./types";
 
 export const authByCreds = createAsyncAction(
@@ -12,7 +12,3 @@ export const regByCreds = createAsyncAction(
     "auth/REG_BY_CREDS_SUCCESS",
     "auth/REG_BY_CREDS_FAILURE"
 )<RegCreds, AuthSuccessData, string>();
-
-export const logout = createAction(
-    "auth/LOGOUT"
-)();

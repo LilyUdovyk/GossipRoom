@@ -4,7 +4,9 @@ import jwtDecode from "jwt-decode";
 
 import * as actions from './actions'
 import { getAuthToken , regUser } from './utils'
+import { getActiveUser } from '../user/utils'
 import { DecodedToken } from './types'
+import * as userActions from "../../store/user/actions";
 
 export function* authByCredsSaga() {
     const authToken = localStorage.getItem('authToken')
@@ -25,6 +27,8 @@ export function* authByCredsSaga() {
                 const login = decoded.sub.login
                 localStorage.setItem('authToken', authToken)
                 yield putResolve(actions.authByCreds.success({ authToken, id, login }))
+                const user = yield call(getActiveUser, id)
+                yield putResolve(userActions.getUser.success(user))
                 yield put(push('/profile'))
             } else {
                 yield put(actions.authByCreds.failure('Wrong login or password'))
@@ -45,13 +49,5 @@ export function* regByCredsSaga() {
         }
         yield put(actions.authByCreds.request({login: payload.login, password: payload.password}))
         yield put(push('/profile'))
-    }
-}
-
-export function* logoutSaga() {
-    while (true) {
-        yield take(actions.logout)
-        localStorage.clear();
-        yield put(push('/sign-in'))
     }
 }

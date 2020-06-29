@@ -31,7 +31,7 @@ const Profile: React.FC<ProfileProps> = props => {
     if (!authToken) {
       return
     }
-
+  
     const socket = io('http://chat.fs.a-level.com.ua/');
     socket.emit('jwt', localStorage.authToken)
     socket.on('jwt_ok', (data: DecodedToken) => console.log(data))

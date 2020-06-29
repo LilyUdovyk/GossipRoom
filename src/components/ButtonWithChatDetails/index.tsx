@@ -1,11 +1,9 @@
 import React from "react";
-import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as authActions from "../../store/auth/actions";
+import { IRootState } from "../../store/rootReducer";
 import { ChatData } from '../../store/chat/types'
 
 import style from './style.module.css'
@@ -19,18 +17,7 @@ const mapStateToProps = (state: IRootState) =>
   activeUserId: state.user.userData._id,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
-  bindActionCreators(
-    {
-      logout: authActions.logout,
-    },
-    dispatch
-  );
-
-type ButtonWithChatDetailsProps = ReturnType<typeof mapStateToProps> &
-  ReturnType<typeof mapDispatchToProps>
-
-const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {  
+const  ButtonWithChatDetails: React.FC<any> = props => {  
 
   const [isOpenedChatDetails, setIsOpenedChatDetails] = React.useState(false);
 
@@ -105,4 +92,4 @@ const  ButtonWithChatDetails: React.FC<ButtonWithChatDetailsProps> = props => {
     </div>
   )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ButtonWithChatDetails));
+export default connect(mapStateToProps, null)(React.memo(ButtonWithChatDetails));

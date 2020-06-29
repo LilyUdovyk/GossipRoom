@@ -41,7 +41,23 @@ export default (state: UserState = initialState, action: UserAction): UserState 
             return {
                 ...state,
                 error: action.payload,
-            }    
+            }  
+        case getType(actions.logout):
+            return {
+                ...state,
+                error: null,
+                userData: {
+                    _id: '',
+                    createdAt: '',
+                    login: '',
+                    nick : '',
+                    avatar: {
+                        _id: '',
+                        url: ''
+                    },
+                    chats: []
+                }
+            }  
         default:
             return state
     }

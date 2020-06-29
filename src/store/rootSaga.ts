@@ -1,6 +1,6 @@
 import { all, spawn } from "redux-saga/effects";
-import { authByCredsSaga, regByCredsSaga, logoutSaga } from "./auth/sagas";
-import { getUserSaga, updateUserSaga } from "./user/sagas";
+import { authByCredsSaga, regByCredsSaga } from "./auth/sagas";
+import { getUserSaga, updateUserSaga, logoutSaga } from "./user/sagas";
 import { getContactsSaga } from "./contacts/sagas";
 import { getActiveChatSaga, addChatSaga, addGroupSaga, updateChatSaga } from "./chat/sagas";
 import { sendMessageSaga, onMessageSaga, replyToMessageSaga, forwardMessageSaga } from "./message/sagas";

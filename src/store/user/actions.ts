@@ -1,4 +1,4 @@
-import { createAsyncAction } from "typesafe-actions";
+import { createAsyncAction, createAction } from "typesafe-actions";
 import { UserData, UpdateUserCreds } from "../user/types";
 
 export const getUser = createAsyncAction(
@@ -12,3 +12,7 @@ export const updateUser = createAsyncAction(
     "user/UPDATE_USER_SUCCESS",
     "user/UPDATE_USER_FAILURE"
 )<UpdateUserCreds, UserData, string>();
+
+export const logout = createAction(
+    "user/LOGOUT"
+)();

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { IRootAction, IRootState } from "../../store/rootReducer";
-import * as authActions from "../../store/auth/actions";
+import * as userActions from "../../store/user/actions";
 
 import style from './style.module.css'
 import userAvatar from '../../img/user_avatar.png'
@@ -20,7 +20,7 @@ const mapStateToProps = (state: IRootState) =>
 const mapDispatchToProps = (dispatch: Dispatch<IRootAction>) =>
   bindActionCreators(
     {
-      logout: authActions.logout,
+      logout: userActions.logout,
     },
     dispatch
   );

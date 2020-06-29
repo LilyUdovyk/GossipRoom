@@ -58,7 +58,6 @@ const Sidebar: React.FC<SidebarProps> = props => {
 		if (!props.chats || !props.chats.length) {
 			return
 		} else {
-			console.log("props.chats", props.chats)
 			setSidebarView("chats")
 		}
 	}, [props.chats])
