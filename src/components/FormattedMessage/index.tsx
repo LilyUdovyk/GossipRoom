@@ -31,6 +31,7 @@ const parseURLs = (text: string) => {
 }
 
 const FormattedMessage = (props: Props) => {
+    
     let videoArray =  props.message && props.message.text && props.message.text.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌ [\w\?‌ =]*)?/)
     if (videoArray) {
       let videoId = videoArray && videoArray[1]

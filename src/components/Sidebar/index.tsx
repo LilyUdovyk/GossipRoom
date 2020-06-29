@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 
 	const checkMemberInChats = (contactId: string) => {
 		let contactsChats: string[] = []
-		props.chats.map(chat => {
+		props.chats && props.chats.map(chat => {
 			if (chat.members.length === 2) {
 				chat.members.forEach(member => {
 					if (member._id === contactId) {
@@ -168,7 +168,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					<button 
 						className={style.navButton}
 						title="Contacts"
-						onClick={() => setSidebarView("contacts")}
+						onClick={() => {
+							setSidebarView("contacts")
+							props.getContacts()
+						}}
 					>
 						<FontAwesomeIcon icon="user-friends" />
 					</button>
@@ -177,7 +180,10 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					<button 
 						className={style.navButton}
 						title="Chats"
-						onClick={() => setSidebarView("chats")}
+						onClick={() => {
+							setSidebarView("chats")
+							props.getUser()
+						}}
 					>
 						<FontAwesomeIcon icon="comments" />
 					</button>
