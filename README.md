@@ -23,7 +23,7 @@ For registration fill in fields:
 * Password
 * Password check
 
-Password and Password check must match in another case user will see the message «Passwords does not match».
+Password and Password check must match, in another case user will see the message «Passwords does not match».
 
 ![](./image/registration.gif)
 
@@ -62,7 +62,7 @@ User menu includes following options:
 </p>
 
 #### User settings
-User settings дает пользователю возможность установить: 
+User settings allow to set:
 * Avatar
 * Login
 * Nick
@@ -113,7 +113,7 @@ Chat has menu with next option:
 A name of a chat can be set in the “Chat Settings” tab.
 
 ![](./image/chat_settings.gif)
-
+User settings дает пользователю возможность установить: 
 
 ## Install
 
