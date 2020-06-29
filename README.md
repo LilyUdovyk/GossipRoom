@@ -25,7 +25,7 @@ For registration fill in fields:
 
 Password and Password check must match in another case user will see the message «Passwords does not match».
 
-![](./image/registration.png)
+![](./image/registration.gif)
 
 ### Log in
 For log in fill in fields:
