@@ -1,7 +1,7 @@
 # Gossip Room
 
 **Gossip Room** – Messaging App  
-**Live demo** [gossip-room.surge.sh](http://gossip-room.surge.sh/)
+## **Live demo** [gossip-room.surge.sh](http://gossip-room.surge.sh/)
 
 ## Technologies
 
@@ -34,7 +34,7 @@ For log in fill in fields:
 
 If login or password was incorrect, user will see the message «Wrong login or password».
 
-![](./image/login.png)
+![](./image/login.gif)
 
 ### Profile
 The Profile tab is displayed after registration or login.
@@ -45,9 +45,9 @@ A greeting is displayed on the main part of the tab before choosing an active ch
 
 A sidebar has two states: a list of contacts or a list of user chats.
 
-![]()
 After click on a contact the main part of the tab displays a chat with the message history or a new chat will be created.
-![]()
+
+![](./image/sidebar.gif)
 
 ### User menu
 User menu includes following options:
@@ -66,12 +66,12 @@ User settings дает пользователю возможность уста�
 * Nick
 * Password
 
-![](./image/user_settings.png)
+![](./image/user_settings.gif)
 
 #### New group
 A Create New Chat tab allows to create a chat group of users. For creating such a chat user needs to set a chat name and select users from the contact list.
 
-![](./image/new_group.png)
+![](./image/new_group.gif)
 
 ### Messaging
 In addition to simple text messages a chat functionality also allows to send and receive emoji, images, video, audio and any other types of files.
@@ -80,7 +80,13 @@ User can see image, video, YouTube link preview and listen to audio directly in 
 
 Messages with links are displayed as a block with a link to a resource, description and poster.
 
+![](./image/message.gif)
+
+![](./image/message_media.gif)
+
 Also implemented Reply and  Forward Message functionality.
+
+![](./image/message_reply_forward.gif)
 
 Messages are displayed in real time.
 
@@ -90,7 +96,7 @@ A sound signal informs about a new message.
 
 Also was  implemented an unread message counter, which is displayed next to the name of a chat in the sidebar.
 
-![](./image/chat.png)
+<img src="./image/message_counter.png" width="700"> <img src="./image/message_counter_mob.png" width="200">
 
 ### Chat settings
 Chat has menu with next option:
@@ -102,7 +108,7 @@ Chat has menu with next option:
 
 A name of a chat can be set in the “Chat Settings” tab.
 
-![](./image/chat_settings.png)
+![](./image/chat_settings.gif)
 
 
 ## Install
