@@ -142,7 +142,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					</div>
 				)
 			} 
-		} else {
+		} else if (sidebarView === "contacts")  {
 			return (
 				<>
 					{ props.contacts.map((contact: UserData) => {
@@ -168,10 +168,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					<button 
 						className={style.navButton}
 						title="Contacts"
-						onClick={() => {
-							setSidebarView("contacts")
-							props.getContacts()
-						}}
+						onClick={() => setSidebarView("contacts")}
 					>
 						<FontAwesomeIcon icon="user-friends" />
 					</button>
@@ -180,10 +177,7 @@ const Sidebar: React.FC<SidebarProps> = props => {
 					<button 
 						className={style.navButton}
 						title="Chats"
-						onClick={() => {
-							setSidebarView("chats")
-							props.getUser()
-						}}
+						onClick={() => setSidebarView("chats")}
 					>
 						<FontAwesomeIcon icon="comments" />
 					</button>

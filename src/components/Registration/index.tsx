@@ -91,7 +91,7 @@ const Registration: React.FC<RegistrationProps> = props => {
             }
           </div>
           <button type="submit" className={style.submitBtn}>Sign Up</button>
-          <p>Have an account?  <Link to="/sign-in">Sign In</Link></p>
+          <p>Have an account?  <Link to="/log-in">Sign In</Link></p>
         </form>
       </div>
     </div>

@@ -39,6 +39,6 @@ export function* logoutSaga() {
   while (true) {
     yield take(actions.logout)
     localStorage.clear();
-    yield put(push('/sign-in'))
+    yield put(push('/log-in'))
   }
 }

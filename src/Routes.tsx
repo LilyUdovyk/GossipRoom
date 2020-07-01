@@ -21,9 +21,9 @@ type RoutesProps = ReturnType<typeof mapStateToProps>
 const Routes: React.FC<RoutesProps> = ({ authToken }) => (
     <React.Suspense fallback={<div>Загрузка...</div>}>
         <Switch>
-            <Route exact path='/sign-in' component={Authorization} />
+            <Route exact path='/log-in' component={Authorization} />
             <Route exact path='/registration' component={Registration} />
-            {!authToken && <Redirect from="/" to='/sign-in' />}
+            {!authToken && <Redirect from="/" to='/log-in' />}
             <Route exact path='/profile' component={Profile} />
             <Route exact path='/new-group' component={CreationNewChat} />
             <Route exact path='/user-settings' component={UserSettings} />
