@@ -112,8 +112,7 @@ Chat has menu with next option:
 
 A name of a chat can be set in the “Chat Settings” tab.
 
-![](./image/chat_settings.gif)
-User settings дает пользователю возможность установить: 
+![](./image/chat_settings.gif) 
 
 ## Install
 
