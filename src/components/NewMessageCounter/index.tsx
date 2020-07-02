@@ -27,7 +27,7 @@ const NewMessageCounter = (props: Props) => {
 
   return (  
     <>
-      { counter > 0 && (props.newMessageChatId !== props.activeChatId) && 
+      { counter > 0 && (props.chatId !== props.activeChatId) && 
         <div className={style.counter}>
           {counter}
         </div>
