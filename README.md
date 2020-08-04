@@ -1,6 +1,6 @@
 # Gossip Room
 
-**Gossip Room** – Messaging App  
+**Gossip Room** – a messaging application 
 ## **Live demo** [gossip-room.surge.sh](http://gossip-room.surge.sh/)
 
 ## Technologies
